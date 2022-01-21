@@ -1,14 +1,22 @@
 package controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
-public class HelloController {
-    @FXML
-    private Label welcomeText;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+public class HelloController implements Initializable {
+
+    public Button btnHello;
+
+
+    public void btnHelloClicked() {
+        System.out.println("Button fired");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        btnHello.setOnAction(actionEvent -> btnHelloClicked());
     }
 }
