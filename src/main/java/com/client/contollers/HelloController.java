@@ -1,4 +1,4 @@
-package com.client.client;
+package com.client.contollers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
