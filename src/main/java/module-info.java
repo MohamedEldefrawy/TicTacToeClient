@@ -6,4 +6,6 @@ module com.client.client {
 
     opens com.client.client to javafx.fxml;
     exports com.client.client;
+    exports controllers;
+    opens controllers to javafx.fxml;
 }
