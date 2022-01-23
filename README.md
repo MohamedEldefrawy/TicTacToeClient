@@ -34,7 +34,7 @@ We are using normal java naming convention for declaring
 - constants will be **UPPERCASE**
   - Example ```int final CONSTANT = 10;```
 
-###For UI fields
+### For UI fields
 
 - **Button** field will start its name with btn
   - Example ```Button btnClick;```
