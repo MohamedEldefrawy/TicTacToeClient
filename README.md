@@ -27,7 +27,7 @@ When developing make sure you are using your local Development branch and when p
 ## Naming convention of project
 We are using normal java naming convention for declaring
 - Classes,interfaces and Enums declaration **PascalCase** 
-  - Example : ```class ExampleCale {}```
+  - Example : ```class ClassName {}```
 - methods , local variable and instance variable **camelCase**
   - Example : ```int localVariable = 10;
   public void methodName(){} ```
