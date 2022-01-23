@@ -15,7 +15,7 @@ When developing make sure you are using your local Development branch and when p
 
 
 ## To run the project
-1. Install **[intelij](https://www.jetbrains.com/idea/download/#section=windows)**
+1. Install **[IntelliJ](https://www.jetbrains.com/idea/download/#section=windows)**
 2. Install **[Maven](https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip)**
    1. Unzip downloaded file and copy unzipped folder to **C:\Program Files**
    2. **Edit** Environment variable path add **new**  **C:\Program Files\apache-maven-3.8.2\bin**
@@ -23,3 +23,23 @@ When developing make sure you are using your local Development branch and when p
    4. open cmd and type ```mvn --version``` to test maven
 3. open terminal in intellij and use ```mvn install```
 4. make sure you are using JDK17
+
+## Naming convention of project
+We are using normal java naming convention for declaring
+- Classes,interfaces and Enums declaration **PascalCase** 
+  - Example : ```class ExampleCale {}```
+- methods , local variable and instance variable **camelCase**
+  - Example : ```int localVariable = 10;
+  public void methodName(){} ```
+- constants will be **UPPERCASE**
+  - Example ```int final CONSTANT = 10;```
+
+###For UI fields
+
+- **Button** field will start its name with btn
+  - Example ```Button btnClick;```
+- different **Text** fields will start its name with txt
+  - Example ```TextArea txtChatArea;```
+  ***
+ And so on.
+  
