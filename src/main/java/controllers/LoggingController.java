@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoggingController implements Initializable {
-    public Button btnLogging;
+    public Button btnSignIn;
     public Button btnSignUp;
     public TextField userTextField;
     public PasswordField passTextField;
@@ -24,11 +24,11 @@ public class LoggingController implements Initializable {
     String psswd = "12345";
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnLogging.setOnAction(actionEvent -> btnLoggingClicked(actionEvent));
+        btnSignIn.setOnAction(actionEvent -> btnSignInClicked(actionEvent));
         btnSignUp.setOnAction(actionEvent -> btnSignUpClicked(actionEvent));
     }
 
-    public void btnLoggingClicked(ActionEvent e) {
+    public void btnSignInClicked(ActionEvent e) {
       String userText =userTextField.getText();
       String psswdText = passTextField.getText();
       checkLabel.setTextFill(Color.RED);

@@ -25,7 +25,7 @@ public class HelloApplication extends Application {
 
     }
     public void switchToLoginScene(ActionEvent e) throws IOException{
-        FXMLLoader loginFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/login.fxml"));
+        FXMLLoader loginFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/sign_in.fxml"));
         Scene loginScene = new Scene(loginFxmlLoader.load(), 400, 400);
         Stage st = (Stage)((Node)e.getSource()).getScene().getWindow();
         st.setScene(loginScene);
