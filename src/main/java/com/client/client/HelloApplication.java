@@ -46,6 +46,13 @@ public class HelloApplication extends Application {
         Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
         st.setScene(onlineMenuScene);
     }
+    public void switchToDifficulty(ActionEvent e) throws IOException{
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/difficulty.fxml"));
+        Scene difiicultScene = new Scene(difficultFxmlLoader.load());
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        st.setScene(difiicultScene);
+        st.show();
+    }
 
 
     public static void main(String[] args) {
