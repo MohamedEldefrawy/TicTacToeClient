@@ -32,13 +32,19 @@ public class HelloApplication extends Application {
         Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
         st.setScene(gameFirstScene);
     }
-    public  void switchToSignUpScene(ActionEvent e) throws IOException{
+
+    public void switchToSignUpScene(ActionEvent e) throws IOException {
         FXMLLoader signUpFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/signUp.fxml"));
         Scene signUpScene = new Scene(signUpFxmlLoader.load());
         Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        st.setScene(signUpScene );
+        st.setScene(signUpScene);
+    }
 
-
+    public void switchToOnlineMenuScene(ActionEvent e) throws IOException {
+        FXMLLoader onlineMenuFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/OnlinePlayingMenu.fxml"));
+        Scene onlineMenuScene = new Scene(onlineMenuFxmlLoader.load());
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        st.setScene(onlineMenuScene);
     }
 
 
