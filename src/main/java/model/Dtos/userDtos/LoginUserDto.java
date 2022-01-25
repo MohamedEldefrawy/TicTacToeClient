@@ -1,6 +1,7 @@
 package model.Dtos.userDtos;
 
 public class LoginUserDto {
+    private String requestType;
     private String userName;
     private String password;
 
@@ -18,5 +19,13 @@ public class LoginUserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(String requestType) {
+        this.requestType = requestType;
     }
 }

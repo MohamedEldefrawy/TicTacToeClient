@@ -2,6 +2,7 @@ package model.Dtos.userDtos;
 
 public class UserDto {
 
+    private String requestType;
     private String userName;
     private int wins;
     private int losses;
@@ -57,5 +58,13 @@ public class UserDto {
 
     public void setLoggedIn(boolean loggedIn) {
         isLoggedIn = loggedIn;
+    }
+
+    public String getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(String requestType) {
+        this.requestType = requestType;
     }
 }
