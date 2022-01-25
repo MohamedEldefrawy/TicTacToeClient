@@ -1,6 +1,6 @@
 package services;
 
-import model.UserDto;
+import model.Dtos.userDtos.UserDto;
 
 public class UserService {
     public String createPlayerIdCard(UserDto dto) {
