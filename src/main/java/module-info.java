@@ -3,6 +3,8 @@ module com.client.client {
     requires javafx.fxml;
 
     requires org.kordamp.bootstrapfx.core;
+    requires java.desktop;
+    requires com.google.gson;
 
     opens com.client.client to javafx.fxml;
     exports com.client.client;
