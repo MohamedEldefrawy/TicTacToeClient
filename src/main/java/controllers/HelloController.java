@@ -2,13 +2,9 @@ package controllers;
 
 import com.client.client.HelloApplication;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
-
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,7 +17,7 @@ public class HelloController implements Initializable {
 
 
     public void btnHelloClicked(ActionEvent e) {
-       // welcomeText.setText("Hello World !!!!");
+        // welcomeText.setText("Hello World !!!!");
         HelloApplication obj = new HelloApplication();
         try {
             obj.switchToLoginScene(e);
