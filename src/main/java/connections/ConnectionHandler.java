@@ -1,11 +1,11 @@
 package connections;
 
+import com.google.gson.JsonObject;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
 import model.Dtos.userDtos.RegisterUserDto;
 import services.UserService;
 import utilities.JsonBuilder;
-import utilities.RequestTypes;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -55,19 +55,16 @@ public class ConnectionHandler {
         }
     }
 
-    private void responseHandler(String response) {
-        String[] requestsType = response.split(",");
-        for (String type : requestsType) {
-            if (type.split(":")[1].equals(RequestTypes.login.toString())) {
-                JsonBuilder.deSerializeObject(response, LoginUserDto.class);
-                // login() scenario
-            } else if (type.split(":")[1].equals(RequestTypes.logout.toString())) {
-                JsonBuilder.deSerializeObject(response, LogoutUserDto.class);
-                // logout() scenario
-            } else if (type.split(":")[1].equals(RequestTypes.register.toString())) {
-                JsonBuilder.deSerializeObject(response, RegisterUserDto.class);
-                // register() scenario
-            }
+
+    private void responseHandler(String jsonString) {
+        JsonObject response = JsonBuilder.toJsonObject(jsonString);
+        switch (response.get("operation").toString()) {
+            case "login":  // Handle logic after login
+                break;
+            case "regiset":// handle login after register
+                break;
+            case "logout": // handle logic after logout
+                break;
         }
     }
 

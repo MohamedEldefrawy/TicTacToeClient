@@ -12,10 +12,12 @@ import java.io.IOException;
 public class UserService {
     public String createPlayerIdCard(UserDto dto) {
         StringBuilder card = new StringBuilder();
-        card.append(dto.getUserName() + "\t");
-        card.append("Wins:   " + dto.getWins() + "\t");
-        card.append("Losses: " + dto.getLosses() + "\t");
-        card.append("Draws:  " + dto.getDraws() + "\t");
+
+        card.append(dto.getUserName()).append("\t");
+        card.append("Wins:").append(dto.getWins()).append("\t");
+        card.append("Losses:").append(dto.getLosses()).append("\t");
+        card.append("Draws:").append(dto.getDraws()).append("\t");
+
         if (dto.isLoggedIn()) {
             card.append("online");
         } else {
@@ -27,7 +29,7 @@ public class UserService {
 
     // User Auth requests
     public void loginRequest(LoginUserDto loginUserDto, BufferedWriter writer) {
-        String request = JsonBuilder.serializeObject(loginUserDto);
+        String request = JsonBuilder.loginRequest(loginUserDto);
         try {
             writer.write(request);
             writer.flush();
@@ -37,7 +39,7 @@ public class UserService {
     }
 
     public void registerRequest(RegisterUserDto registerUserDto, BufferedWriter writer) {
-        String request = JsonBuilder.serializeObject(registerUserDto);
+        String request = JsonBuilder.registerRequest(registerUserDto);
         try {
             writer.write(request);
             writer.flush();
@@ -47,7 +49,7 @@ public class UserService {
     }
 
     public void logoutRequest(LogoutUserDto logoutUserDto, BufferedWriter writer) {
-        String request = JsonBuilder.serializeObject(logoutUserDto);
+        String request = JsonBuilder.logoutRequest(logoutUserDto);
         try {
             writer.write(request);
             writer.flush();
