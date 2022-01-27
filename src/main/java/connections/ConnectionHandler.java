@@ -87,7 +87,6 @@ public class ConnectionHandler {
                     System.out.println(response);
                     responseHandler(response);
                 } catch (SocketException e) {
-                    e.printStackTrace();
                     break;
                 } catch (IOException e) {
                     e.printStackTrace();
