@@ -1,7 +1,6 @@
 package controllers;
 
 import com.client.client.HelloApplication;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
@@ -10,7 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class MainMenu  implements Initializable
+public class MainMenuController implements Initializable
 {
     public Button btnSinglePlayer;
     public Button btnMultiPlayer;
@@ -30,7 +29,7 @@ public class MainMenu  implements Initializable
         btnMultiPlayer.setOnAction(actionEvent -> {
            HelloApplication obj = new HelloApplication();
            try{
-               obj.switchToOnlineMenuScene(actionEvent);
+               obj.switchToDifficulty(actionEvent);
            } catch (IOException e) {
                e.printStackTrace();
            }

@@ -1,21 +1,24 @@
 package connections;
 
+import com.google.gson.JsonObject;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
 import model.Dtos.userDtos.RegisterUserDto;
 import services.UserService;
 import utilities.JsonBuilder;
-import utilities.RequestTypes;
+import utilities.Singleton;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 
 public class ConnectionHandler {
     private Socket socket;
-    private BufferedReader reader;
-    private BufferedWriter writer;
+    private DataInputStream reader;
+    private DataOutputStream writer;
     private UserService userService;
 
     public ConnectionHandler() {
@@ -27,9 +30,9 @@ public class ConnectionHandler {
     // Helpers
     private void establishConnection() {
         try {
-            socket = new Socket(InetAddress.getLocalHost(), 2022);
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            socket = new Socket(InetAddress.getLocalHost(), 5005);
+            reader = new DataInputStream(socket.getInputStream());
+            writer = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,10 +46,13 @@ public class ConnectionHandler {
         }
     }
 
-    public void sendRegisterRequest(RegisterUserDto registerUserDto) {
+    public boolean sendRegisterRequest(RegisterUserDto registerUserDto) {
+        boolean result = false;
         if (socket.isConnected()) {
             userService.registerRequest(registerUserDto, writer);
+            result = true;
         }
+        return result;
     }
 
     public void sendLogoutRequest(LogoutUserDto logoutUserDto) {
@@ -55,36 +61,32 @@ public class ConnectionHandler {
         }
     }
 
-    private void responseHandler(String response) {
-        String[] requestsType = response.split(",");
-        for (String type : requestsType) {
-            if (type.split(":")[1].equals(RequestTypes.login.toString())) {
-                JsonBuilder.deSerializeObject(response, LoginUserDto.class);
-                // login() scenario
-            } else if (type.split(":")[1].equals(RequestTypes.logout.toString())) {
-                JsonBuilder.deSerializeObject(response, LogoutUserDto.class);
-                // logout() scenario
-            } else if (type.split(":")[1].equals(RequestTypes.register.toString())) {
-                JsonBuilder.deSerializeObject(response, RegisterUserDto.class);
-                // register() scenario
-            }
+
+    private void responseHandler(String jsonString) {
+        JsonObject response = JsonBuilder.toJsonObject(jsonString);
+        Singleton singleton = Singleton.getInstance();
+        switch (response.get("operation").getAsString()) {
+            case "login":
+                singleton.setLoginStatus(response.get("result").getAsBoolean());
+                System.out.println(singleton.getLoginStatus());
+                break;
+            case "register":// handle login after register
+                break;
+            case "logout": // handle logic after logout
+                break;
         }
     }
 
     // Client listener thread
     public class ServerListener extends Thread {
-        public ServerListener() {
-            start();
-        }
-
         @Override
         public void run() {
             while (socket.isConnected()) {
                 try {
-                    String response = reader.readLine();
+                    String response = reader.readUTF();
+                    System.out.println(response);
                     responseHandler(response);
                 } catch (SocketException e) {
-                    e.printStackTrace();
                     break;
                 } catch (IOException e) {
                     e.printStackTrace();

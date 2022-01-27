@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a0049; -fx-border-radius: 80%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a0049; -fx-border-radius: 80%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainMenu">
    <children>
       <JFXButton fx:id="btnSinglePlayer" layoutX="169.0" layoutY="56.0" prefHeight="51.0" prefWidth="263.0" ripplerFill="#821919" style="-fx-background-color: ebe121; -fx-background-radius: 10;" text="Single Player">
          <font>
