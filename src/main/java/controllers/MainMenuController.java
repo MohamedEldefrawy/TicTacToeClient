@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class MainMenu  implements Initializable
+public class MainMenuController implements Initializable
 {
     public Button btnSinglePlayer;
     public Button btnMultiPlayer;

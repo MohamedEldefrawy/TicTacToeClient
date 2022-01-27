@@ -12,16 +12,16 @@ public class JsonBuilder {
     public static String loginRequest(LoginUserDto loginUserDto) {
         JsonObject loginRequest = new JsonObject();
         loginRequest.addProperty("operation", RequestTypes.login.toString());
-        loginRequest.addProperty("username", loginUserDto.getUserName());
-        loginRequest.addProperty("password", loginUserDto.getPassword());
+        loginRequest.addProperty("user", loginUserDto.getUserName());
+        loginRequest.addProperty("pass", loginUserDto.getPassword());
         return loginRequest.toString();
     }
 
     public static String registerRequest(RegisterUserDto registerUserDto) {
         JsonObject registerRequest = new JsonObject();
         registerRequest.addProperty("operation", RequestTypes.register.toString());
-        registerRequest.addProperty("username", registerUserDto.getUseName());
-        registerRequest.addProperty("password", registerUserDto.getPassword());
+        registerRequest.addProperty("user", registerUserDto.getUseName());
+        registerRequest.addProperty("pass", registerUserDto.getPassword());
         registerRequest.addProperty("confirmPassword", registerUserDto.getConfirmPassword());
         return registerRequest.toString();
     }
