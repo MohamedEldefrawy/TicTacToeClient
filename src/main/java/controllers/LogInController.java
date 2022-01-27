@@ -58,7 +58,7 @@ public class LogInController implements Initializable {
         }
 
         singleton.getConnectionHandler().sendLoginRequest(loginUserDto);
-        System.out.println("What the fuck :: " + singleton.getLoginStatus());
+
         while (singleton.getLoginStatus() == null) {
         }
         if (singleton.getLoginStatus()) {
