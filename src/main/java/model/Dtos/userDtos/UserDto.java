@@ -1,9 +1,12 @@
-package model;
+package model.Dtos.userDtos;
 
 public class UserDto {
-    private String userName;
 
+    private String userName;
     private int wins;
+    private int losses;
+    private int draws;
+    private boolean isLoggedIn;
 
     public UserDto(String userName, int wins, int losses, int draws, boolean isLoggedIn) {
         this.userName = userName;
@@ -55,10 +58,4 @@ public class UserDto {
     public void setLoggedIn(boolean loggedIn) {
         isLoggedIn = loggedIn;
     }
-
-    private int losses;
-
-    private int draws;
-
-    private boolean isLoggedIn;
 }
