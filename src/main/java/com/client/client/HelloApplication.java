@@ -53,6 +53,13 @@ public class HelloApplication extends Application {
         st.setScene(difiicultScene);
         st.show();
     }
+    public void switchToGameboard(ActionEvent e) throws IOException{
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/gameboard.fxml"));
+        Scene gameboardScene = new Scene(difficultFxmlLoader.load());
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        st.setScene(gameboardScene);
+        st.show();
+    }
 
 
     public static void main(String[] args) {

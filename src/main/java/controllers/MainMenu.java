@@ -29,7 +29,7 @@ public class MainMenu  implements Initializable
         btnMultiPlayer.setOnAction(actionEvent -> {
            HelloApplication obj = new HelloApplication();
            try{
-               obj.switchToOnlineMenuScene(actionEvent);
+               obj.switchToDifficulty(actionEvent);
            } catch (IOException e) {
                e.printStackTrace();
            }
