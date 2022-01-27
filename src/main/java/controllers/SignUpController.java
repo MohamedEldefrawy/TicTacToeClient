@@ -25,28 +25,30 @@ public class SignUpController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         Singleton singleton = Singleton.getInstance();
+
         // create register Dto
         RegisterUserDto registerUserDto = new RegisterUserDto();
         registerUserDto.setUseName(txtUserName.getText());
         registerUserDto.setPassword(txtPassword.getText());
         registerUserDto.setConfirmPassword(txtConfirmPassword.getText());
+
         btnSignup.setOnAction(event -> {
-            if (registerUserDto.getPassword().equals(registerUserDto.getConfirmPassword())) {
-                boolean result = singleton.connectionHandler.sendRegisterRequest(registerUserDto);
-                if (result) {
-                    System.out.println("user has been created.");
-                    HelloApplication obj = new HelloApplication();
-                    try {
-                        obj.switchToLoginScene(event);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                } else {
-                    System.out.println("Failed to create user");
-                }
-            } else {
-                System.out.println("please make sure password and confirm password are the same");
-            }
+//            if (registerUserDto.getPassword().equals(registerUserDto.getConfirmPassword())) {
+////                boolean result = singleton.connectionHandler.sendRegisterRequest(registerUserDto);
+//                if (result) {
+//                    System.out.println("user has been created.");
+//                    HelloApplication obj = new HelloApplication();
+//                    try {
+//                        obj.switchToLoginScene(event);
+//                    } catch (IOException ex) {
+//                        ex.printStackTrace();
+//                    }
+//                } else {
+//                    System.out.println("Failed to create user");
+//                }
+//            } else {
+//                System.out.println("please make sure password and confirm password are the same");
+//            }
 
         });
 

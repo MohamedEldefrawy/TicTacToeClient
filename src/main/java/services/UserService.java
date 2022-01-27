@@ -6,7 +6,7 @@ import model.Dtos.userDtos.RegisterUserDto;
 import model.Dtos.userDtos.UserDto;
 import utilities.JsonBuilder;
 
-import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class UserService {
@@ -28,31 +28,28 @@ public class UserService {
     }
 
     // User Auth requests
-    public void loginRequest(LoginUserDto loginUserDto, BufferedWriter writer) {
+    public void loginRequest(LoginUserDto loginUserDto, DataOutputStream writer) {
         String request = JsonBuilder.loginRequest(loginUserDto);
         try {
-            writer.write(request);
-            writer.flush();
+            writer.writeUTF(request);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void registerRequest(RegisterUserDto registerUserDto, BufferedWriter writer) {
+    public void registerRequest(RegisterUserDto registerUserDto, DataOutputStream writer) {
         String request = JsonBuilder.registerRequest(registerUserDto);
         try {
-            writer.write(request);
-            writer.flush();
+            writer.writeUTF(request);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void logoutRequest(LogoutUserDto logoutUserDto, BufferedWriter writer) {
+    public void logoutRequest(LogoutUserDto logoutUserDto, DataOutputStream writer) {
         String request = JsonBuilder.logoutRequest(logoutUserDto);
         try {
-            writer.write(request);
-            writer.flush();
+            writer.writeUTF(request);
         } catch (IOException e) {
             e.printStackTrace();
         }

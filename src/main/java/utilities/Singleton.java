@@ -4,16 +4,33 @@ import connections.ConnectionHandler;
 
 public class Singleton {
     private static Singleton singleton = null;
-    public ConnectionHandler connectionHandler;
+
+    private ConnectionHandler connectionHandler;
+    private Boolean loginStatus = null;
+
 
     private Singleton() {
-        connectionHandler = new ConnectionHandler();
     }
 
     public static Singleton getInstance() {
         if (singleton == null)
             singleton = new Singleton();
-
         return singleton;
+    }
+
+    public ConnectionHandler getConnectionHandler() {
+        return connectionHandler;
+    }
+
+    public void setConnectionHandler() {
+        connectionHandler = new ConnectionHandler();
+    }
+
+    public Boolean getLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(Boolean loginStatus) {
+        this.loginStatus = loginStatus;
     }
 }
