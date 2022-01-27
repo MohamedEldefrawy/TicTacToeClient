@@ -27,7 +27,7 @@ public class ConnectionHandler {
     // Helpers
     private void establishConnection() {
         try {
-            socket = new Socket(InetAddress.getLocalHost(), 2022);
+            socket = new Socket(InetAddress.getLocalHost(), 5005);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {
@@ -43,10 +43,13 @@ public class ConnectionHandler {
         }
     }
 
-    public void sendRegisterRequest(RegisterUserDto registerUserDto) {
+    public boolean sendRegisterRequest(RegisterUserDto registerUserDto) {
+        boolean result = false;
         if (socket.isConnected()) {
             userService.registerRequest(registerUserDto, writer);
+            result = true;
         }
+        return result;
     }
 
     public void sendLogoutRequest(LogoutUserDto logoutUserDto) {

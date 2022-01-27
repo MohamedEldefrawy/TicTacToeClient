@@ -1,7 +1,6 @@
 package controllers;
 
 import com.client.client.HelloApplication;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
