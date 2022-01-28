@@ -57,6 +57,7 @@ public class LogInController implements Initializable {
             HelloApplication obj = new HelloApplication();
             try {
                 obj.switchToGameFirstScene(e);
+                singleton.setLoginStatus(null);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
