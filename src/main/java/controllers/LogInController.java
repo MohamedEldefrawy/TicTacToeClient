@@ -68,7 +68,9 @@ public class LogInController implements Initializable {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-
+        } else {
+            System.out.println("Wrong username or password");
+            singleton.setLoginStatus(null);
         }
     }
 }
