@@ -49,10 +49,10 @@ public class LogInController implements Initializable {
         loginUserDto.setPassword(passTextField.getText());
 
         checkLabel.setTextFill(Color.RED);
-        if (loginUserDto.getUserName().isEmpty()) {
+        if (userTextField.getText().isEmpty()) {
             checkLabel.setText("username is left empty");
             checkLabel.setVisible(true);
-        } else if (loginUserDto.getPassword().isEmpty()) {
+        } else if (passTextField.getText().isEmpty()) {
             checkLabel.setText("password is left empty");
             checkLabel.setVisible(true);
         }

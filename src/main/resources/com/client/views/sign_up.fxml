@@ -11,6 +11,8 @@
                   promptText="Password"/>
    <PasswordField fx:id="txtConfirmPassword" layoutX="226.0" layoutY="265.0" opacity="0.6"
                   promptText="Confirm Password"/>
+   <Label fx:id="checkLabel" layoutX="165.0" layoutY="284.0" prefHeight="21.0" prefWidth="178.0" text="Label"
+          visible="false"/>
    <Text fill="#ebe121" layoutX="249.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic "
          wrappingWidth="76.13671875">
       <font>
