@@ -17,7 +17,7 @@ public class SignUpController implements Initializable {
     public PasswordField txtConfirmPassword;
     public Button btnSignup;
     public Hyperlink lnkHaveAccount;
-    public Label checkLabel;
+    public Label txtError;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -33,21 +33,20 @@ public class SignUpController implements Initializable {
 
         btnSignup.setOnAction(event -> {
             if (txtUserName.getText().isEmpty()) {
-                checkLabel.setText("Username is left empty");
-                checkLabel.setVisible(true);
+                txtError.setText("Username is left empty");
+                txtError.setVisible(true);
             } else if (txtPassword.getText().isEmpty()) {
-                checkLabel.setText("Password is left empty");
-                checkLabel.setVisible(true);
+                txtError.setText("Password is left empty");
+                txtError.setVisible(true);
             } else if (txtConfirmPassword.getText().isEmpty()) {
-                checkLabel.setText("Password confirmation is left empty");
-                checkLabel.setVisible(true);
+                txtError.setText("Password confirmation is left empty");
+                txtError.setVisible(true);
             }
 
             if (!txtPassword.getText().equals(txtConfirmPassword.getText())) {
-                checkLabel.setText("Password confirmation must match password");
-                checkLabel.setVisible(true);
+                txtError.setText("Password confirmation must match password");
+                txtError.setVisible(true);
             }
-
             while (singleton.getCreateUserResponse() == null) {
             }
 
@@ -59,7 +58,7 @@ public class SignUpController implements Initializable {
                     ex.printStackTrace();
                 }
             } else {
-                System.out.println("Faild to create new user");
+                System.out.println("Failed to create new user");
                 singleton.setCreateUserResponse(null);
             }
 

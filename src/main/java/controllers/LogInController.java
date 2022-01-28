@@ -16,14 +16,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LogInController implements Initializable {
-    public void btnSignUpClicked(ActionEvent e) {
-        HelloApplication obj = new HelloApplication();
-        try {
-            obj.switchToSignUpScene(e);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     public Button btnSignIn;
     public Button btnSignUp;
@@ -71,6 +63,15 @@ public class LogInController implements Initializable {
         } else {
             System.out.println("Wrong username or password");
             singleton.setLoginStatus(null);
+        }
+    }
+
+    public void btnSignUpClicked(ActionEvent e) {
+        HelloApplication obj = new HelloApplication();
+        try {
+            obj.switchToSignUpScene(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }
