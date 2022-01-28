@@ -24,9 +24,8 @@ public class ConnectionHandler {
 
     public ConnectionHandler() {
         userService = new UserService();
-
-        establishConnection();
         new ServerListener().start();
+        establishConnection();
     }
 
     // Helpers
@@ -46,6 +45,7 @@ public class ConnectionHandler {
 
     public void refreshConnection() {
         establishConnection();
+        new ServerListener().start();
     }
 
     // Auth request
@@ -86,9 +86,12 @@ public class ConnectionHandler {
 
     public void closeConnection() {
         try {
-            socket.close();
-            reader.close();
-            writer.close();
+            if (socket != null)
+                socket.close();
+            if (reader != null)
+                reader.close();
+            if (writer != null)
+                writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,10 +107,11 @@ public class ConnectionHandler {
                         String response = reader.readUTF();
                         System.out.println(response);
                         responseHandler(response);
-                    } catch (SocketException e) {
+                    } catch (SocketException socketException) {
+                        System.out.println("socket has been closed");
                         break;
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
                     }
                 }
             }
