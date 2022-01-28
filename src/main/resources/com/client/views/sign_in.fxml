@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -8,35 +8,33 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a0049;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LogInController">
-   <children>
-      <Text fill="#ebe121" layoutX="249.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic " wrappingWidth="76.13671875">
-         <font>
-            <Font name="Cooper Black" size="48.0" />
-         </font>
-      </Text>
-      <Text fill="#a71347" layoutX="283.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tac">
-         <font>
-            <Font name="Cooper Black" size="48.0" />
-         </font>
-      </Text>
-      <Text fill="#ebe121" layoutX="256.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Toe">
-         <font>
-            <Font name="Cooper Black" size="48.0" />
-         </font>
-      </Text>
-      <TextField fx:id="userTextField" layoutX="226.0" layoutY="188.0" opacity="0.6" promptText="Username" />
-      <Button fx:id="btnSignIn" layoutX="211.0" layoutY="320.0" mnemonicParsing="false" onAction="#btnSignInClicked" prefHeight="43.0" prefWidth="76.0" style="-fx-background-color: ebe121;" text="Sign in">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnSignUp" layoutX="344.0" layoutY="320.0" mnemonicParsing="false" onAction="#btnSignUpClicked" prefHeight="43.0" prefWidth="76.0" style="-fx-background-color: ebe121;" text="Sign up">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <PasswordField fx:id="passTextField" layoutX="226.0" layoutY="244.0" promptText="password" />
-      <Label fx:id="checkLabel" layoutX="226.0" layoutY="285.0" prefHeight="21.0" prefWidth="178.0" text="Label" visible="false" />
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="478.0" style="-fx-background-color: #2a0049;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LogInController">
+   <Text fill="#ebe121" layoutX="179.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic " wrappingWidth="76.13671875">
+      <font>
+         <Font name="Cooper Black" size="48.0" />
+      </font>
+   </Text>
+   <Text fill="#a71347" layoutX="213.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tac">
+      <font>
+         <Font name="Cooper Black" size="48.0" />
+      </font>
+   </Text>
+   <Text fill="#ebe121" layoutX="186.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Toe">
+      <font>
+         <Font name="Cooper Black" size="48.0" />
+      </font>
+   </Text>
+   <TextField fx:id="userTextField" layoutX="165.0" layoutY="214.0" opacity="0.6" promptText="Username" />
+   <PasswordField fx:id="passTextField" layoutX="165.0" layoutY="270.0" opacity="0.6" promptText="password" />
+   <Label fx:id="checkLabel" layoutX="165.0" layoutY="284.0" prefHeight="21.0" prefWidth="178.0" text="Label" visible="false" />
+   <JFXButton fx:id="btnSignIn" layoutX="143.0" layoutY="334.0" prefHeight="43.0" prefWidth="86.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Sign in">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+   </JFXButton>
+   <JFXButton fx:id="btnSignUp" layoutX="271.0" layoutY="334.0" prefHeight="43.0" prefWidth="86.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Sign up">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+   </JFXButton>
 </Pane>

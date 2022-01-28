@@ -34,7 +34,7 @@ public class HelloApplication extends Application {
     }
 
     public void switchToSignUpScene(ActionEvent e) throws IOException {
-        FXMLLoader signUpFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/signUp.fxml"));
+        FXMLLoader signUpFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/sign_up.fxml"));
         Scene signUpScene = new Scene(signUpFxmlLoader.load());
         Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
         st.setScene(signUpScene);

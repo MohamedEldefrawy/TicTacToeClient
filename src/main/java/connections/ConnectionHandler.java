@@ -68,9 +68,10 @@ public class ConnectionHandler {
         switch (response.get("operation").getAsString()) {
             case "login":
                 singleton.setLoginStatus(response.get("result").getAsBoolean());
-                System.out.println(singleton.getLoginStatus());
                 break;
-            case "register":// handle login after register
+            case "signUp":
+                singleton.setCreateUserResponse(response.get("result").getAsBoolean());
+                System.out.println(response.getAsString());
                 break;
             case "logout": // handle logic after logout
                 break;

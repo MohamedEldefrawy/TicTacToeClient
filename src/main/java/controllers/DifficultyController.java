@@ -18,7 +18,7 @@ public class DifficultyController implements Initializable {
     {
         HelloApplication obj=new HelloApplication();
         try {
-        obj.switchToGameboard(e);
+            obj.switchToGameboard(e);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

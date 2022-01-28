@@ -16,14 +16,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LogInController implements Initializable {
-    public void btnSignUpClicked(ActionEvent e) {
-        HelloApplication obj = new HelloApplication();
-        try {
-            obj.switchToSignUpScene(e);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     public Button btnSignIn;
     public Button btnSignUp;
@@ -49,16 +41,16 @@ public class LogInController implements Initializable {
         loginUserDto.setPassword(passTextField.getText());
 
         checkLabel.setTextFill(Color.RED);
-        if (loginUserDto.getUserName().isEmpty()) {
+        if (userTextField.getText().isEmpty()) {
             checkLabel.setText("username is left empty");
             checkLabel.setVisible(true);
-        } else if (loginUserDto.getPassword().isEmpty()) {
+        } else if (passTextField.getText().isEmpty()) {
             checkLabel.setText("password is left empty");
             checkLabel.setVisible(true);
         }
 
         singleton.getConnectionHandler().sendLoginRequest(loginUserDto);
-        System.out.println("What the fuck :: " + singleton.getLoginStatus());
+
         while (singleton.getLoginStatus() == null) {
         }
         if (singleton.getLoginStatus()) {
@@ -68,7 +60,18 @@ public class LogInController implements Initializable {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+        } else {
+            System.out.println("Wrong username or password");
+            singleton.setLoginStatus(null);
+        }
+    }
 
+    public void btnSignUpClicked(ActionEvent e) {
+        HelloApplication obj = new HelloApplication();
+        try {
+            obj.switchToSignUpScene(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

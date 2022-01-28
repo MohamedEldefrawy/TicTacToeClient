@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.*?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" style="-fx-background-color: #2a0049;" xmlns="http://javafx.com/javafx/17"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
-   <TextField fx:id="txtUserName" layoutX="226.0" layoutY="188.0" opacity="0.6" promptText="Username"/>
-   <PasswordField fx:id="txtPassword" layoutX="226.0" layoutY="230.0" opacity="0.6"
-                  promptText="Password"/>
-   <PasswordField fx:id="txtConfirmPassword" layoutX="226.0" layoutY="265.0" opacity="0.6"
-                  promptText="Confirm Password"/>
-   <Text fill="#ebe121" layoutX="249.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic "
-         wrappingWidth="76.13671875">
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a0049;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
+   <TextField fx:id="txtUserName" layoutX="226.0" layoutY="188.0" opacity="0.6" promptText="Username" />
+   <PasswordField fx:id="txtPassword" layoutX="225.0" layoutY="219.0" opacity="0.6" promptText="Password" />
+   <PasswordField fx:id="txtConfirmPassword" layoutX="226.0" layoutY="250.0" opacity="0.6" promptText="Confirm Password" />
+   <Text fill="#ebe121" layoutX="249.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic " wrappingWidth="76.13671875">
       <font>
-         <Font name="Cooper Black" size="48.0"/>
+         <Font name="Cooper Black" size="48.0" />
       </font>
    </Text>
    <Text fill="#a71347" layoutX="283.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tac">
       <font>
-         <Font name="Cooper Black" size="48.0"/>
+         <Font name="Cooper Black" size="48.0" />
       </font>
    </Text>
    <Text fill="#ebe121" layoutX="256.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Toe">
       <font>
-         <Font name="Cooper Black" size="48.0"/>
+         <Font name="Cooper Black" size="48.0" />
       </font>
    </Text>
-   <Button fx:id="btnSignup" layoutX="262.0" layoutY="302.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="76.0"
-           style="-fx-background-color: ebe121;" text="Sign up">
-      <font>
-         <Font name="System Bold" size="14.0"/>
-      </font>
-   </Button>
    <Hyperlink fx:id="lnkHaveAccount" layoutX="198.0" layoutY="359.0" text="I already have an existing account">
       <font>
-         <Font size="13.0"/>
+         <Font size="13.0" />
       </font>
    </Hyperlink>
+   <JFXButton fx:id="btnSignup" layoutX="242.0" layoutY="310.0" prefHeight="49.0" prefWidth="114.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Sign up">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </JFXButton>
+   <Label fx:id="txtError" layoutX="200.0" layoutY="283.0" prefHeight="17.0" prefWidth="201.0" text="Wrong input please enter valid input" textFill="#e80a0a" visible="false" />
 </Pane>
