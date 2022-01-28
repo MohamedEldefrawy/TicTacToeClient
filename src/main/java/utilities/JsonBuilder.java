@@ -28,6 +28,7 @@ public class JsonBuilder {
     public static String logoutRequest(LogoutUserDto logoutUserDto) {
         JsonObject logoutRequest = new JsonObject();
         logoutRequest.addProperty("operation", RequestTypes.logout.toString());
+        logoutRequest.addProperty("user", logoutUserDto.getUserName());
         logoutRequest.addProperty("status", logoutUserDto.getStatus());
         return logoutRequest.toString();
     }

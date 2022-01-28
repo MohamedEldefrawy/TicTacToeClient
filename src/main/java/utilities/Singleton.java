@@ -8,6 +8,7 @@ public class Singleton {
     private ConnectionHandler connectionHandler;
     private Boolean loginStatus = null;
     private Boolean createUserResponse = null;
+    private String currentUser;
 
 
     private Singleton() {
@@ -43,5 +44,13 @@ public class Singleton {
 
     public void setCreateUserResponse(Boolean createUserResponse) {
         this.createUserResponse = createUserResponse;
+    }
+
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
     }
 }

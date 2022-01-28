@@ -49,6 +49,7 @@ public class UserService {
     public void logoutRequest(LogoutUserDto logoutUserDto, DataOutputStream writer) {
         String request = JsonBuilder.logoutRequest(logoutUserDto);
         try {
+            System.out.println(request.toString());
             writer.writeUTF(request);
         } catch (IOException e) {
             e.printStackTrace();

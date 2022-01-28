@@ -58,7 +58,9 @@ public class SignUpController implements Initializable {
 
             while (singleton.getCreateUserResponse() == null) {
                 // Show Spinner
+                System.out.println("Stuck!!!!");
             }
+
 
             if (singleton.getCreateUserResponse()) {
                 HelloApplication obj = new HelloApplication();

@@ -27,6 +27,7 @@ public class ConnectionHandler {
         new ServerListener().start();
     }
 
+
     // Helpers
     private void establishConnection() {
         try {
@@ -72,6 +73,16 @@ public class ConnectionHandler {
                 break;
             case "logout": // handle logic after logout
                 break;
+        }
+    }
+
+    public void closeConnection() {
+        try {
+            socket.close();
+            reader.close();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

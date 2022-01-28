@@ -36,6 +36,10 @@ public class LogInController implements Initializable {
     }
 
     public void btnSignInClicked(ActionEvent e) {
+        if (singleton.getConnectionHandler() != null)
+            System.out.println("Singleton status from login" + singleton.getConnectionHandler());
+        else
+            System.out.println("connectionHandler is null");
         LoginUserDto loginUserDto = new LoginUserDto();
         loginUserDto.setUserName(userTextField.getText());
         loginUserDto.setPassword(passTextField.getText());
@@ -53,11 +57,14 @@ public class LogInController implements Initializable {
 
         while (singleton.getLoginStatus() == null) {
             // Show Spinner
+            System.out.println("Stuck!!!!!!");
         }
+
         if (singleton.getLoginStatus()) {
             HelloApplication obj = new HelloApplication();
             try {
                 obj.switchToGameFirstScene(e);
+                singleton.setCurrentUser(loginUserDto.getUserName());
                 singleton.setLoginStatus(null);
             } catch (IOException ex) {
                 ex.printStackTrace();
