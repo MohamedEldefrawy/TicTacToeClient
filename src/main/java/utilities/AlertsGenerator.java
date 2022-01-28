@@ -20,4 +20,12 @@ public class AlertsGenerator {
 
         return alertDialog;
     }
+
+    public static Alert createWarningDialog() {
+        Alert alertDialog = new Alert(Alert.AlertType.WARNING);
+        alertDialog.setContentText("");
+        alertDialog.setTitle("Warning");
+        alertDialog.setHeaderText("Cannot connect to the server.....");
+        return alertDialog;
+    }
 }

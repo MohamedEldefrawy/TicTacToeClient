@@ -20,13 +20,13 @@ public class ConnectionHandler {
     private DataInputStream reader;
     private DataOutputStream writer;
     private final UserService userService;
+    private final Singleton singleton = Singleton.getInstance();
 
     public ConnectionHandler() {
         userService = new UserService();
         establishConnection();
         new ServerListener().start();
     }
-
 
     // Helpers
     private void establishConnection() {
@@ -35,9 +35,9 @@ public class ConnectionHandler {
             reader = new DataInputStream(socket.getInputStream());
             writer = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            singleton.setServerStatus(false);
+//            e.printStackTrace();
         }
-
     }
 
     // Auth request
@@ -90,17 +90,20 @@ public class ConnectionHandler {
     public class ServerListener extends Thread {
         @Override
         public void run() {
-            while (socket.isConnected()) {
-                try {
-                    String response = reader.readUTF();
-                    System.out.println(response);
-                    responseHandler(response);
-                } catch (SocketException e) {
-                    break;
-                } catch (IOException e) {
-                    e.printStackTrace();
+            if (socket != null) {
+                while (socket.isConnected()) {
+                    try {
+                        String response = reader.readUTF();
+                        System.out.println(response);
+                        responseHandler(response);
+                    } catch (SocketException e) {
+                        break;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
         }
     }
 }
