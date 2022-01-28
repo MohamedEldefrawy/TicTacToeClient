@@ -9,7 +9,7 @@ public class Singleton {
     private Boolean loginStatus = null;
     private Boolean createUserResponse = null;
     private String currentUser;
-    private boolean serverStatus = true;
+    private Boolean serverStatus = null;
 
 
     private Singleton() {
@@ -55,11 +55,11 @@ public class Singleton {
         this.currentUser = currentUser;
     }
 
-    public boolean getServerStatus() {
+    public Boolean getServerStatus() {
         return serverStatus;
     }
 
-    public void setServerStatus(boolean serverStatus) {
+    public void setServerStatus(Boolean serverStatus) {
         this.serverStatus = serverStatus;
     }
 }

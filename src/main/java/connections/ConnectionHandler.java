@@ -24,6 +24,7 @@ public class ConnectionHandler {
 
     public ConnectionHandler() {
         userService = new UserService();
+
         establishConnection();
         new ServerListener().start();
     }
@@ -34,10 +35,17 @@ public class ConnectionHandler {
             socket = new Socket(InetAddress.getLocalHost(), 5005);
             reader = new DataInputStream(socket.getInputStream());
             writer = new DataOutputStream(socket.getOutputStream());
+            singleton.setServerStatus(true);
+            System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
         } catch (IOException e) {
-            singleton.setServerStatus(false);
 //            e.printStackTrace();
+            singleton.setServerStatus(false);
+            System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
         }
+    }
+
+    public void refreshConnection() {
+        establishConnection();
     }
 
     // Auth request

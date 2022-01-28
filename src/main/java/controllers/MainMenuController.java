@@ -1,6 +1,7 @@
 package controllers;
 
 import com.client.client.HelloApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,20 +28,7 @@ public class MainMenuController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         singleton = Singleton.getInstance();
-
-        btnSinglePlayer.setOnAction(actionEvent -> {
-            singleton.setConnectionHandler();
-            if (singleton.getServerStatus()) {
-                HelloApplication obj = new HelloApplication();
-                try {
-                    obj.switchToLoginScene(actionEvent);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            } else {
-                AlertsGenerator.createWarningDialog().show();
-            }
-        });
+        btnSinglePlayer.setOnAction(this::btnSinglePlayerClicked);
 
         btnMultiPlayer.setOnAction(actionEvent -> {
             HelloApplication obj = new HelloApplication();
@@ -90,5 +78,27 @@ public class MainMenuController implements Initializable
             }
         });*/
     }
+
+    public void btnSinglePlayerClicked(ActionEvent actionEvent) {
+        singleton.setConnectionHandler();
+
+        if (singleton.getServerStatus() == null) {
+            singleton.getConnectionHandler().refreshConnection();
+        }
+
+        if (singleton.getServerStatus()) {
+            HelloApplication obj = new HelloApplication();
+            try {
+                obj.switchToLoginScene(actionEvent);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            singleton.setServerStatus(null);
+        } else {
+            AlertsGenerator.createWarningDialog().show();
+            singleton.setServerStatus(null);
+        }
+    }
+
 
 }
