@@ -57,6 +57,7 @@ public class SignUpController implements Initializable {
             singleton.getConnectionHandler().sendRegisterRequest(registerUserDto);
 
             while (singleton.getCreateUserResponse() == null) {
+                // Show Spinner
             }
 
             if (singleton.getCreateUserResponse()) {

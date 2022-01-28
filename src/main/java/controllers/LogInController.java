@@ -52,6 +52,7 @@ public class LogInController implements Initializable {
         singleton.getConnectionHandler().sendLoginRequest(loginUserDto);
 
         while (singleton.getLoginStatus() == null) {
+            // Show Spinner
         }
         if (singleton.getLoginStatus()) {
             HelloApplication obj = new HelloApplication();
