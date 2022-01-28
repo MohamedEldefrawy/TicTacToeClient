@@ -31,8 +31,8 @@ public class LogInController implements Initializable {
         singleton.setConnectionHandler();
 
 
-        btnSignIn.setOnAction(actionEvent -> btnSignInClicked(actionEvent));
-        btnSignUp.setOnAction(actionEvent -> btnSignUpClicked(actionEvent));
+        btnSignIn.setOnAction(this::btnSignInClicked);
+        btnSignUp.setOnAction(this::btnSignUpClicked);
     }
 
     public void btnSignInClicked(ActionEvent e) {

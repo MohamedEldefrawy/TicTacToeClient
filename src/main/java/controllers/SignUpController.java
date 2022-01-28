@@ -1,6 +1,7 @@
 package controllers;
 
 import com.client.client.HelloApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import model.Dtos.userDtos.RegisterUserDto;
@@ -18,20 +19,25 @@ public class SignUpController implements Initializable {
     public Button btnSignup;
     public Hyperlink lnkHaveAccount;
     public Label txtError;
+    private Singleton singleton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Singleton singleton = Singleton.getInstance();
+        singleton = Singleton.getInstance();
         singleton.setConnectionHandler();
 
-        // create register Dto
-        RegisterUserDto registerUserDto = new RegisterUserDto();
-        registerUserDto.setUseName(txtUserName.getText());
-        registerUserDto.setPassword(txtPassword.getText());
-        registerUserDto.setConfirmPassword(txtConfirmPassword.getText());
+        btnSignup.setOnAction(this::btnSignUpClicked);
+    }
 
-        btnSignup.setOnAction(event -> {
+    public void btnSignUpClicked(ActionEvent event) {
+        {
+            // create register Dto
+            RegisterUserDto registerUserDto = new RegisterUserDto();
+            registerUserDto.setUserName(txtUserName.getText());
+            registerUserDto.setPassword(txtPassword.getText());
+
+            // Validation
             if (txtUserName.getText().isEmpty()) {
                 txtError.setText("Username is left empty");
                 txtError.setVisible(true);
@@ -43,17 +49,20 @@ public class SignUpController implements Initializable {
                 txtError.setVisible(true);
             }
 
-            if (!txtPassword.getText().equals(txtConfirmPassword.getText())) {
+            if (!(txtPassword.getText().equals(txtConfirmPassword.getText()))) {
                 txtError.setText("Password confirmation must match password");
                 txtError.setVisible(true);
             }
+
+            singleton.getConnectionHandler().sendRegisterRequest(registerUserDto);
+
             while (singleton.getCreateUserResponse() == null) {
             }
 
             if (singleton.getCreateUserResponse()) {
                 HelloApplication obj = new HelloApplication();
                 try {
-                    obj.switchToGameFirstScene(event);
+                    obj.switchToLoginScene(event);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -62,9 +71,6 @@ public class SignUpController implements Initializable {
                 singleton.setCreateUserResponse(null);
             }
 
-
-        });
-
-
+        }
     }
 }

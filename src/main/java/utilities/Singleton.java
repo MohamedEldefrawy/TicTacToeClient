@@ -24,7 +24,9 @@ public class Singleton {
     }
 
     public void setConnectionHandler() {
-        connectionHandler = new ConnectionHandler();
+
+        if (connectionHandler == null)
+            connectionHandler = new ConnectionHandler();
     }
 
     public Boolean getLoginStatus() {

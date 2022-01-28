@@ -19,10 +19,9 @@ public class JsonBuilder {
 
     public static String registerRequest(RegisterUserDto registerUserDto) {
         JsonObject registerRequest = new JsonObject();
-        registerRequest.addProperty("operation", RequestTypes.register.toString());
-        registerRequest.addProperty("user", registerUserDto.getUseName());
+        registerRequest.addProperty("operation", RequestTypes.signUp.toString());
+        registerRequest.addProperty("user", registerUserDto.getUserName());
         registerRequest.addProperty("pass", registerUserDto.getPassword());
-        registerRequest.addProperty("confirmPassword", registerUserDto.getConfirmPassword());
         return registerRequest.toString();
     }
 
