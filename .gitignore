@@ -4,3 +4,6 @@
 /target/maven-archiver/
 /target/maven-status/
 /target/Client-1.0-SNAPSHOT.jar
+.idea
+.idea
+target/
