@@ -55,7 +55,7 @@ public class LogInController implements Initializable {
 
         singleton.getConnectionHandler().sendLoginRequest(loginUserDto);
 
-        while (singleton.getLoginStatus() == null) {
+        while (!singleton.getLoginStatus()) {
             // Show Spinner
             System.out.println("Stuck!!!!!!");
         }
@@ -65,13 +65,13 @@ public class LogInController implements Initializable {
             try {
                 obj.switchToGameFirstScene(e);
                 singleton.setCurrentUser(loginUserDto.getUserName());
-                singleton.setLoginStatus(null);
+                singleton.setLoginStatus(true);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         } else {
             System.out.println("Wrong username or password");
-            singleton.setLoginStatus(null);
+            singleton.setLoginStatus(false);
         }
     }
 

@@ -82,7 +82,7 @@ public class MainMenuController implements Initializable
     public void btnSinglePlayerClicked(ActionEvent actionEvent) {
         singleton.setConnectionHandler();
 
-        if (singleton.getServerStatus() == null) {
+        if (!singleton.getServerStatus()) {
             singleton.getConnectionHandler().refreshConnection();
         }
 
@@ -93,10 +93,10 @@ public class MainMenuController implements Initializable
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            singleton.setServerStatus(null);
+            singleton.setServerStatus(true);
         } else {
             AlertsGenerator.createWarningDialog().show();
-            singleton.setServerStatus(null);
+            singleton.setServerStatus(false);
         }
     }
 

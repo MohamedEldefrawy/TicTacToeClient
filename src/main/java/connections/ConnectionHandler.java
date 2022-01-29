@@ -24,8 +24,8 @@ public class ConnectionHandler {
 
     public ConnectionHandler() {
         userService = new UserService();
-        new ServerListener().start();
         establishConnection();
+        new ServerListener().start();
     }
 
     // Helpers

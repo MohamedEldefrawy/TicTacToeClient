@@ -56,7 +56,7 @@ public class SignUpController implements Initializable {
 
             singleton.getConnectionHandler().sendRegisterRequest(registerUserDto);
 
-            while (singleton.getCreateUserResponse() == null) {
+            while (!singleton.getCreateUserResponse()) {
                 // Show Spinner
                 System.out.println("Stuck!!!!");
             }
@@ -66,13 +66,13 @@ public class SignUpController implements Initializable {
                 HelloApplication obj = new HelloApplication();
                 try {
                     obj.switchToLoginScene(event);
-                    singleton.setCreateUserResponse(null);
+                    singleton.setCreateUserResponse(true);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             } else {
                 System.out.println("Failed to create new user");
-                singleton.setCreateUserResponse(null);
+                singleton.setCreateUserResponse(false);
             }
 
         }
