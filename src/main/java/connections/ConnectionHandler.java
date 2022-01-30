@@ -67,21 +67,15 @@ public class ConnectionHandler {
         }
     }
 
-
     private void responseHandler(String jsonString) {
         JsonObject response = JsonBuilder.toJsonObject(jsonString);
         Singleton singleton = Singleton.getInstance();
         System.out.println(response.get("operation").getAsString());
-        switch (response.get("operation").getAsString()) {
-            case "login":
-                singleton.setLoginStatus(response.get("result").getAsBoolean());
-                break;
-            case "signUp":
-                singleton.setCreateUserResponse(response.get("result").getAsBoolean());
-                break;
-            case "logout":
 
-                break;
+        switch (response.get("operation").getAsString()) {
+            case "login" -> singleton.setLoginStatus(response.get("result").getAsBoolean());
+            case "signUp" -> singleton.setCreateUserResponse(response.get("result").getAsBoolean());
+            case "logout" -> singleton.setOnlineUsers(JsonBuilder.toList(response.get("result").getAsJsonArray()));
         }
     }
 

@@ -1,10 +1,15 @@
 package utilities;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
 import model.Dtos.userDtos.RegisterUserDto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class JsonBuilder {
 
@@ -38,4 +43,12 @@ public class JsonBuilder {
         return JsonParser.parseString(jsonString).getAsJsonObject();
     }
 
+    // mapping jasonArray to List
+    public static List<Object> toList(JsonArray jsonElements) {
+        List<Object> list = new ArrayList<>();
+        for (JsonElement element : jsonElements) {
+            list.add(element);
+        }
+        return list;
+    }
 }
