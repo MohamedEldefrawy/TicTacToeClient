@@ -32,14 +32,42 @@ We are using normal java naming convention for declaring
   - Example : ```int localVariable = 10;
   public void methodName(){} ```
 - constants will be **UPPERCASE**
-  - Example ```int final CONSTANT = 10;```
+    - Example ```int final CONSTANT = 10;```
 
 ### For UI fields
 
 - **Button** field will start its name with btn
-  - Example ```Button btnClick;```
+    - Example ```Button btnClick;```
 - different **Text** fields will start its name with txt
-  - Example ```TextArea txtChatArea;```
-  ***
- And so on.
-  
+    - Example ```TextArea txtChatArea;```
+      And so on.
+
+## Features
+
+- Client Side Features:
+    - login.
+    - SignUp.
+
+[//]: # (  - play with pc with 3 difficulty levels)
+
+[//]: # (  - play with online friends)
+
+[//]: # (  - chat while playing)
+
+[//]: # (  - have an avatar and score level)
+
+[//]: # (  - see who has the highest score in the game)
+
+[//]: # (  - see who is online offline or busy playing with someone else)
+
+## Stack used
+
+- Material design library **[JFoenix](http://www.jfoenix.com/)**
+- Dependency manger **[Maven](https://maven.apache.org/)**
+- MySql  **[MySql](https://dev.mysql.com/downloads/connector/j/)**
+- Java Serialization/Deserialization library **[Gson](https://github.com/google/gson)**
+
+## Patterns used
+
+- Repository design pattern
+- Singleton
