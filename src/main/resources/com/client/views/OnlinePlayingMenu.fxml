@@ -3,9 +3,13 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.OnlineModeController">
    <center>
       <Pane style="-fx-background-color: #2a0049; -fx-border-radius: 80%;">
@@ -24,11 +28,9 @@
                   <Font name="Cooper Black" size="48.0" />
               </font>
           </Text>
-         <JFXListView fx:id="lstOnlinePlayers" fixedCellSize="50.0" layoutX="323.0" opacity="0.75" prefHeight="561.0"
-                      prefWidth="511.0" scaleShape="false"
-                      style="-fx-background-radius: 10; -fx-background-color: a71347;" verticalGap="5.0">
+         <JFXListView fx:id="lstOnlinePlayers" fixedCellSize="50.0" layoutX="323.0" opacity="0.75" prefHeight="561.0" prefWidth="511.0" scaleShape="false" style="-fx-background-radius: 10; -fx-background-color: a71347;" verticalGap="5.0">
              <cursor>
-                 <Cursor fx:constant="HAND"/>
+                 <Cursor fx:constant="HAND" />
              </cursor>
          </JFXListView>
          <JFXButton fx:id="btnBack" layoutX="66.0" layoutY="460.0" prefHeight="62.0" prefWidth="196.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Back">
@@ -36,6 +38,15 @@
                <Font name="System Bold" size="18.0" />
             </font>
          </JFXButton>
+         <TableView fx:id="users_table" layoutX="333.0" layoutY="11.0" prefHeight="541.0" prefWidth="492.0">
+            <columns>
+               <TableColumn fx:id="col_username" prefWidth="161.0" text="User Name" />
+               <TableColumn fx:id="col_wins" minWidth="0.0" prefWidth="69.0" text="Wins" />
+               <TableColumn fx:id="col_losses" minWidth="0.0" prefWidth="63.0" text="Losses" />
+               <TableColumn fx:id="col_draws" minWidth="0.0" prefWidth="60.0" text="Draws" />
+               <TableColumn fx:id="col_challenge" minWidth="0.0" prefWidth="136.0" text="Challenge" />
+            </columns>
+         </TableView>
       </Pane>
    </center>
 </BorderPane>
