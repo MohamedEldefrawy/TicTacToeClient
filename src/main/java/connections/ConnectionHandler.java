@@ -19,7 +19,8 @@ public class ConnectionHandler {
     private Socket socket;
     private DataInputStream reader;
     private DataOutputStream writer;
-    private UserService userService;
+    private final UserService userService;
+    private final Singleton singleton = Singleton.getInstance();
 
     public ConnectionHandler() {
         userService = new UserService();
@@ -33,10 +34,18 @@ public class ConnectionHandler {
             socket = new Socket(InetAddress.getLocalHost(), 5005);
             reader = new DataInputStream(socket.getInputStream());
             writer = new DataOutputStream(socket.getOutputStream());
+            singleton.setServerStatus(true);
+            System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            singleton.setServerStatus(false);
+            System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
         }
+    }
 
+    public void refreshConnection() {
+        establishConnection();
+        new ServerListener().start();
     }
 
     // Auth request
@@ -46,13 +55,10 @@ public class ConnectionHandler {
         }
     }
 
-    public boolean sendRegisterRequest(RegisterUserDto registerUserDto) {
-        boolean result = false;
+    public void sendRegisterRequest(RegisterUserDto registerUserDto) {
         if (socket.isConnected()) {
             userService.registerRequest(registerUserDto, writer);
-            result = true;
         }
-        return result;
     }
 
     public void sendLogoutRequest(LogoutUserDto logoutUserDto) {
@@ -65,16 +71,29 @@ public class ConnectionHandler {
     private void responseHandler(String jsonString) {
         JsonObject response = JsonBuilder.toJsonObject(jsonString);
         Singleton singleton = Singleton.getInstance();
+        System.out.println(response.get("operation").getAsString());
         switch (response.get("operation").getAsString()) {
             case "login":
                 singleton.setLoginStatus(response.get("result").getAsBoolean());
                 break;
             case "signUp":
                 singleton.setCreateUserResponse(response.get("result").getAsBoolean());
-                System.out.println(response.getAsString());
                 break;
             case "logout": // handle logic after logout
                 break;
+        }
+    }
+
+    public void closeConnection() {
+        try {
+            if (socket != null)
+                socket.close();
+            if (reader != null)
+                reader.close();
+            if (writer != null)
+                writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -82,17 +101,21 @@ public class ConnectionHandler {
     public class ServerListener extends Thread {
         @Override
         public void run() {
-            while (socket.isConnected()) {
-                try {
-                    String response = reader.readUTF();
-                    System.out.println(response);
-                    responseHandler(response);
-                } catch (SocketException e) {
-                    break;
-                } catch (IOException e) {
-                    e.printStackTrace();
+            if (socket != null) {
+                while (socket.isConnected()) {
+                    try {
+                        String response = reader.readUTF();
+                        System.out.println(response);
+                        responseHandler(response);
+                    } catch (SocketException socketException) {
+                        System.out.println("socket has been closed");
+                        break;
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
                 }
             }
+
         }
     }
 }

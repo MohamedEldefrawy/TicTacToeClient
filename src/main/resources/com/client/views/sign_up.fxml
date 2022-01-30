@@ -33,7 +33,7 @@
          <Font size="13.0" />
       </font>
    </Hyperlink>
-   <JFXButton fx:id="btnSignup" layoutX="242.0" layoutY="310.0" prefHeight="49.0" prefWidth="114.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Sign up">
+   <JFXButton fx:id="btnSignup" layoutX="242.0" layoutY="310.0" onAction="#btnSignUpClicked" prefHeight="49.0" prefWidth="114.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Sign up">
       <font>
          <Font name="System Bold" size="18.0" />
       </font>

@@ -6,8 +6,10 @@ public class Singleton {
     private static Singleton singleton = null;
 
     private ConnectionHandler connectionHandler;
-    private Boolean loginStatus = null;
-    private Boolean createUserResponse = null;
+    private boolean loginStatus;
+    private boolean createUserResponse;
+    private boolean serverStatus;
+    private String currentUser;
 
 
     private Singleton() {
@@ -24,14 +26,16 @@ public class Singleton {
     }
 
     public void setConnectionHandler() {
-        connectionHandler = new ConnectionHandler();
+
+        if (connectionHandler == null)
+            connectionHandler = new ConnectionHandler();
     }
 
     public Boolean getLoginStatus() {
         return loginStatus;
     }
 
-    public void setLoginStatus(Boolean loginStatus) {
+    public void setLoginStatus(boolean loginStatus) {
         this.loginStatus = loginStatus;
     }
 
@@ -39,7 +43,23 @@ public class Singleton {
         return createUserResponse;
     }
 
-    public void setCreateUserResponse(Boolean createUserResponse) {
+    public void setCreateUserResponse(boolean createUserResponse) {
         this.createUserResponse = createUserResponse;
+    }
+
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public boolean getServerStatus() {
+        return serverStatus;
+    }
+
+    public void setServerStatus(boolean serverStatus) {
+        this.serverStatus = serverStatus;
     }
 }

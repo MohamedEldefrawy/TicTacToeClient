@@ -31,11 +31,15 @@ public class LogInController implements Initializable {
         singleton.setConnectionHandler();
 
 
-        btnSignIn.setOnAction(actionEvent -> btnSignInClicked(actionEvent));
-        btnSignUp.setOnAction(actionEvent -> btnSignUpClicked(actionEvent));
+        btnSignIn.setOnAction(this::btnSignInClicked);
+        btnSignUp.setOnAction(this::btnSignUpClicked);
     }
 
     public void btnSignInClicked(ActionEvent e) {
+        if (singleton.getConnectionHandler() != null)
+            System.out.println("Singleton status from login" + singleton.getConnectionHandler());
+        else
+            System.out.println("connectionHandler is null");
         LoginUserDto loginUserDto = new LoginUserDto();
         loginUserDto.setUserName(userTextField.getText());
         loginUserDto.setPassword(passTextField.getText());
@@ -51,18 +55,23 @@ public class LogInController implements Initializable {
 
         singleton.getConnectionHandler().sendLoginRequest(loginUserDto);
 
-        while (singleton.getLoginStatus() == null) {
+        while (!singleton.getLoginStatus()) {
+            // Show Spinner
+            System.out.println("Stuck!!!!!!");
         }
+
         if (singleton.getLoginStatus()) {
             HelloApplication obj = new HelloApplication();
             try {
                 obj.switchToGameFirstScene(e);
+                singleton.setCurrentUser(loginUserDto.getUserName());
+                singleton.setLoginStatus(true);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         } else {
             System.out.println("Wrong username or password");
-            singleton.setLoginStatus(null);
+            singleton.setLoginStatus(false);
         }
     }
 

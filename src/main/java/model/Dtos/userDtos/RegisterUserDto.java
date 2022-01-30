@@ -1,17 +1,17 @@
 package model.Dtos.userDtos;
 
 public class RegisterUserDto {
-    private String useName;
+    private String userName;
+
     private String password;
-    private String confirmPassword;
 
 
-    public String getUseName() {
-        return useName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUseName(String useName) {
-        this.useName = useName;
+    public void setUserName(String useName) {
+        this.userName = useName;
     }
 
     public String getPassword() {
@@ -22,11 +22,5 @@ public class RegisterUserDto {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
 }
