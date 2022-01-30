@@ -12,17 +12,13 @@ import model.Dtos.userDtos.UserDto;
 import services.UserService;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class OnlineModeController implements Initializable {
     public ListView<String> lstOnlinePlayers;
 
-    ObservableList<UserDto> userDtoList = FXCollections.observableArrayList();;
+    ObservableList<UserDto> userDtoList = FXCollections.observableArrayList();
 
-    //List<UserDto> userDtoList = new ArrayList<>();
-    List<String> userCards = new ArrayList<>();
     UserService userService;
     public Button btnBack;
 
@@ -42,26 +38,22 @@ public class OnlineModeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userService = new UserService();
-        btnBack.setOnAction(event -> {
-            System.out.println("Clicked");
-        });
-        /*lstOnlinePlayers.getSelectionModel().selectedItemProperty().addListener(observable -> {
-            var selectedPlayer = lstOnlinePlayers.getSelectionModel().getSelectedItem();
-        });*/
+        btnBack.setOnAction(event -> System.out.println("Clicked"));
+
         userDtoList.add(new UserDto("Dafro", 10, 5, 3, true));
         userDtoList.add(new UserDto("MO", 30, 2, 10, true));
         userDtoList.add(new UserDto("Ahmed", 15, 13, 20, true));
         userDtoList.add(new UserDto("mohamed", 15, 13, 20, true));
 
-        col_username.setCellValueFactory(new PropertyValueFactory<UserDto,String>("userName"));
-        col_wins.setCellValueFactory(new PropertyValueFactory<UserDto,Integer>("wins"));
-        col_losses.setCellValueFactory(new PropertyValueFactory<UserDto,Integer>("losses"));
-        col_draws.setCellValueFactory(new PropertyValueFactory<UserDto,Integer>("draws"));
+        col_username.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        col_wins.setCellValueFactory(new PropertyValueFactory<>("wins"));
+        col_losses.setCellValueFactory(new PropertyValueFactory<>("losses"));
+        col_draws.setCellValueFactory(new PropertyValueFactory<>("draws"));
 
-        Callback<TableColumn<UserDto, Void>, TableCell<UserDto, Void>> cellFactory = new Callback<TableColumn<UserDto, Void>, TableCell<UserDto, Void>>() {
+        Callback<TableColumn<UserDto, Void>, TableCell<UserDto, Void>> cellFactory = new Callback<>() {
             @Override
             public TableCell<UserDto, Void> call(final TableColumn<UserDto, Void> param) {
-                final TableCell<UserDto, Void> cell = new TableCell<UserDto, Void>() {
+                return new TableCell<>() {
 
                     private final Button request = new Button("Challenge");
 
@@ -83,19 +75,11 @@ public class OnlineModeController implements Initializable {
                         }
                     }
                 };
-                return cell;
             }
         };
 
         col_challenge.setCellFactory(cellFactory);
         users_table.getColumns().add(col_challenge);
         users_table.setItems(userDtoList);
-
-        /*for (UserDto userDto : userDtoList
-        ) {
-            userCards.add(userService.createPlayerIdCard(userDto));
-        }
-        lstOnlinePlayers.getItems().addAll(userCards);*/
-
     }
 }

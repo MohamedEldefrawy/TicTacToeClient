@@ -9,5 +9,6 @@ module com.client.client {
     opens com.client.client to javafx.fxml;
     exports com.client.client;
     exports controllers;
+    exports model.Dtos.userDtos;
     opens controllers to javafx.fxml;
 }
