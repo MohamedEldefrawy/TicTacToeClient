@@ -1,6 +1,9 @@
 package utilities;
 
 import connections.ConnectionHandler;
+import model.Dtos.userDtos.UserDto;
+
+import java.util.List;
 
 public class Singleton {
     private static Singleton singleton = null;
@@ -10,6 +13,7 @@ public class Singleton {
     private boolean createUserResponse;
     private boolean serverStatus;
     private String currentUser;
+    private List<UserDto> onlineUsers;
 
 
     private Singleton() {
@@ -61,5 +65,13 @@ public class Singleton {
 
     public void setServerStatus(boolean serverStatus) {
         this.serverStatus = serverStatus;
+    }
+
+    public List<UserDto> getOnlineUsers() {
+        return onlineUsers;
+    }
+
+    public void setOnlineUsers(List<UserDto> onlineUsers) {
+        this.onlineUsers = onlineUsers;
     }
 }

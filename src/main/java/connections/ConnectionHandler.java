@@ -79,7 +79,8 @@ public class ConnectionHandler {
             case "signUp":
                 singleton.setCreateUserResponse(response.get("result").getAsBoolean());
                 break;
-            case "logout": // handle logic after logout
+            case "logout":
+
                 break;
         }
     }
