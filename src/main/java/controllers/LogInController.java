@@ -63,7 +63,7 @@ public class LogInController implements Initializable {
         if (singleton.getLoginStatus()) {
             HelloApplication obj = new HelloApplication();
             try {
-                obj.switchToGameFirstScene(e);
+                obj.switchToOnlineMenuScene(e);
                 singleton.setCurrentUser(loginUserDto.getUserName());
                 singleton.setLoginStatus(true);
             } catch (IOException ex) {

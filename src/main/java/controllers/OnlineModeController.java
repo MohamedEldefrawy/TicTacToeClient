@@ -39,17 +39,15 @@ public class OnlineModeController implements Initializable {
         Singleton singleton = Singleton.getInstance();
         userService = new UserService();
 
-        for (Object user : singleton.getOnlineUsers()
-        ) {
-            userDtoList.add((UserDto) user);
-        }
 
         btnBack.setOnAction(event -> System.out.println("Clicked"));
 
-//        userDtoList.add(new UserDto("Dafro", 10, 5, 3, true));
-//        userDtoList.add(new UserDto("MO", 30, 2, 10, true));
-//        userDtoList.add(new UserDto("Ahmed", 15, 13, 20, true));
-//        userDtoList.add(new UserDto("mohamed", 15, 13, 20, true));
+        while (singleton.getOnlineUsers() == null) {
+            System.out.println("loading online users");
+        }
+
+        userDtoList.addAll(singleton.getOnlineUsers());
+        singleton.setOnlineUsers(null);
 
         col_username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         col_wins.setCellValueFactory(new PropertyValueFactory<>("wins"));
@@ -85,7 +83,6 @@ public class OnlineModeController implements Initializable {
         };
 
         col_challenge.setCellFactory(cellFactory);
-        users_table.getColumns().add(col_challenge);
         users_table.setItems(userDtoList);
     }
 }

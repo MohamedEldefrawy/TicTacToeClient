@@ -4,9 +4,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import model.Dtos.gameDtos.GameInvitationDto;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
 import model.Dtos.userDtos.RegisterUserDto;
+import model.Dtos.userDtos.UserDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +40,32 @@ public class JsonBuilder {
         return logoutRequest.toString();
     }
 
+    public static String sendInvitation(GameInvitationDto gameInvitationDto) {
+        JsonObject sendInvitation = new JsonObject();
+        sendInvitation.addProperty("operation", RequestTypes.invitation.toString());
+        sendInvitation.addProperty("user", gameInvitationDto.getUserName());
+        sendInvitation.addProperty("player2", gameInvitationDto.getOpponentUserName());
+        return sendInvitation.toString();
+    }
+
     //  handle request
     public static JsonObject toJsonObject(String jsonString) {
         return JsonParser.parseString(jsonString).getAsJsonObject();
     }
 
+
     // mapping jasonArray to List
-    public static List<Object> toList(JsonArray jsonElements) {
-        List<Object> list = new ArrayList<>();
+    public static List<UserDto> toUsersDtoList(JsonArray jsonElements) {
+        List<UserDto> userDtoList = new ArrayList<>();
         for (JsonElement element : jsonElements) {
-            list.add(element);
+            UserDto tempUserDto = new UserDto();
+            tempUserDto.setUserName(element.getAsJsonObject().get("userName").getAsString());
+            tempUserDto.setWins(element.getAsJsonObject().get("wins").getAsInt());
+            tempUserDto.setLosses(element.getAsJsonObject().get("losses").getAsInt());
+            tempUserDto.setDraws(element.getAsJsonObject().get("draws").getAsInt());
+            tempUserDto.setLoggedIn(element.getAsJsonObject().get("status").getAsBoolean());
+            userDtoList.add(tempUserDto);
         }
-        return list;
+        return userDtoList;
     }
 }

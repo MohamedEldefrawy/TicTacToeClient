@@ -1,6 +1,7 @@
 package utilities;
 
 import connections.ConnectionHandler;
+import model.Dtos.userDtos.UserDto;
 
 import java.util.List;
 
@@ -12,7 +13,8 @@ public class Singleton {
     private boolean createUserResponse;
     private boolean serverStatus;
     private String currentUser;
-    private List<Object> onlineUsers;
+    private List<UserDto> onlineUsers;
+    private String senderName;
 
 
     private Singleton() {
@@ -66,11 +68,19 @@ public class Singleton {
         this.serverStatus = serverStatus;
     }
 
-    public List<Object> getOnlineUsers() {
+    public List<UserDto> getOnlineUsers() {
         return onlineUsers;
     }
 
-    public void setOnlineUsers(List<Object> onlineUsers) {
+    public void setOnlineUsers(List<UserDto> onlineUsers) {
         this.onlineUsers = onlineUsers;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 }

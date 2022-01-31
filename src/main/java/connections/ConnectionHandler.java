@@ -1,9 +1,11 @@
 package connections;
 
 import com.google.gson.JsonObject;
+import model.Dtos.gameDtos.GameInvitationDto;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
 import model.Dtos.userDtos.RegisterUserDto;
+import services.GameService;
 import services.UserService;
 import utilities.JsonBuilder;
 import utilities.Singleton;
@@ -20,10 +22,12 @@ public class ConnectionHandler {
     private DataInputStream reader;
     private DataOutputStream writer;
     private final UserService userService;
+    private final GameService gameService;
     private final Singleton singleton = Singleton.getInstance();
 
     public ConnectionHandler() {
         userService = new UserService();
+        gameService = new GameService();
         establishConnection();
         new ServerListener().start();
     }
@@ -41,6 +45,7 @@ public class ConnectionHandler {
             singleton.setServerStatus(false);
             System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
         }
+        System.out.println("current user " + singleton.getCurrentUser());
     }
 
     public void refreshConnection() {
@@ -67,6 +72,12 @@ public class ConnectionHandler {
         }
     }
 
+    public void sendGameInvitation(GameInvitationDto gameInvitationDto) {
+        if (socket.isConnected()) {
+            gameService.sendGameInvitation(gameInvitationDto, writer);
+        }
+    }
+
     private void responseHandler(String jsonString) {
         JsonObject response = JsonBuilder.toJsonObject(jsonString);
         Singleton singleton = Singleton.getInstance();
@@ -75,10 +86,13 @@ public class ConnectionHandler {
         switch (response.get("operation").getAsString()) {
             case "login" -> {
                 singleton.setLoginStatus(response.get("result").getAsBoolean());
-                singleton.setOnlineUsers(JsonBuilder.toList(response.get("onlineUsers").getAsJsonArray()));
             }
             case "signUp" -> singleton.setCreateUserResponse(response.get("result").getAsBoolean());
-            case "logout" -> singleton.setOnlineUsers(JsonBuilder.toList(response.get("onlineUsers").getAsJsonArray()));
+            case "refreshUsers" -> singleton.setOnlineUsers(JsonBuilder.toUsersDtoList(response.get("onlineUsers").getAsJsonArray()));
+            case "gameRequest" -> {
+                singleton.setSenderName(response.get("playerReqName").getAsString());
+                System.out.println(response.get("playerReqName").getAsString());
+            }
         }
     }
 
