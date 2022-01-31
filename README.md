@@ -47,6 +47,7 @@ We are using normal java naming convention for declaring
 - Client Side Features:
     - login.
     - SignUp.
+    - logout.
 
 [//]: # (  - play with pc with 3 difficulty levels)
 
