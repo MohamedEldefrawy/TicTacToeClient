@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import model.Dtos.userDtos.UserDto;
 import services.UserService;
+import utilities.Singleton;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,10 +19,8 @@ public class OnlineModeController implements Initializable {
     public ListView<String> lstOnlinePlayers;
 
     ObservableList<UserDto> userDtoList = FXCollections.observableArrayList();
-
     UserService userService;
     public Button btnBack;
-
     @FXML
     public TableView<UserDto> users_table;
     @FXML
@@ -37,13 +36,20 @@ public class OnlineModeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Singleton singleton = Singleton.getInstance();
         userService = new UserService();
+
+        for (Object user : singleton.getOnlineUsers()
+        ) {
+            userDtoList.add((UserDto) user);
+        }
+
         btnBack.setOnAction(event -> System.out.println("Clicked"));
 
-        userDtoList.add(new UserDto("Dafro", 10, 5, 3, true));
-        userDtoList.add(new UserDto("MO", 30, 2, 10, true));
-        userDtoList.add(new UserDto("Ahmed", 15, 13, 20, true));
-        userDtoList.add(new UserDto("mohamed", 15, 13, 20, true));
+//        userDtoList.add(new UserDto("Dafro", 10, 5, 3, true));
+//        userDtoList.add(new UserDto("MO", 30, 2, 10, true));
+//        userDtoList.add(new UserDto("Ahmed", 15, 13, 20, true));
+//        userDtoList.add(new UserDto("mohamed", 15, 13, 20, true));
 
         col_username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         col_wins.setCellValueFactory(new PropertyValueFactory<>("wins"));
