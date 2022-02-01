@@ -45,7 +45,6 @@ public class ConnectionHandler {
             singleton.setServerStatus(false);
             System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
         }
-        System.out.println("current user " + singleton.getCurrentUser());
     }
 
     public void refreshConnection() {
@@ -91,7 +90,7 @@ public class ConnectionHandler {
             case "refreshUsers" -> singleton.setOnlineUsers(JsonBuilder.toUsersDtoList(response.get("onlineUsers").getAsJsonArray()));
             case "gameRequest" -> {
                 singleton.setSenderName(response.get("playerReqName").getAsString());
-                System.out.println(response.get("playerReqName").getAsString());
+                System.out.println(singleton.getCurrentUser() + " inviting" + response.get("playerReqName").getAsString());
             }
         }
     }

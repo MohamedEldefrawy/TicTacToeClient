@@ -8,11 +8,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+import model.Dtos.gameDtos.GameInvitationDto;
 import model.Dtos.userDtos.UserDto;
 import services.UserService;
 import utilities.Singleton;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class OnlineModeController implements Initializable {
@@ -46,7 +48,8 @@ public class OnlineModeController implements Initializable {
             System.out.println("loading online users");
         }
 
-        userDtoList.addAll(singleton.getOnlineUsers());
+        List<UserDto> result = singleton.getOnlineUsers().stream().filter(userDto -> !(userDto.getUserName().equals(singleton.getCurrentUser()))).toList();
+        userDtoList.addAll(result);
         singleton.setOnlineUsers(null);
 
         col_username.setCellValueFactory(new PropertyValueFactory<>("userName"));
@@ -65,7 +68,13 @@ public class OnlineModeController implements Initializable {
                         request.setOnAction((ActionEvent event) -> {
                             UserDto playerData = getTableView().getItems().get(getIndex());
                             String user = playerData.getUserName();
+                            GameInvitationDto gameInvitationDto = new GameInvitationDto();
+                            gameInvitationDto.setOpponentUserName(user);
+                            gameInvitationDto.setUserName(singleton.getCurrentUser());
                             System.out.println("username: " + user);
+
+                            singleton.getConnectionHandler().sendGameInvitation(gameInvitationDto);
+
                         });
                     }
 
