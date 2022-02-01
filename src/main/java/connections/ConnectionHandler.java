@@ -90,7 +90,10 @@ public class ConnectionHandler {
             case "refreshUsers" -> singleton.setOnlineUsers(JsonBuilder.toUsersDtoList(response.get("onlineUsers").getAsJsonArray()));
             case "gameRequest" -> {
                 singleton.setSenderName(response.get("playerReqName").getAsString());
-                System.out.println(singleton.getCurrentUser() + " inviting" + response.get("playerReqName").getAsString());
+            }
+            case "player2Response" -> {
+                singleton.setGameInvitationAnswer(response.get("answer").getAsBoolean());
+                System.out.println("Game invitation answer");
             }
         }
     }

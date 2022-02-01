@@ -15,6 +15,7 @@ public class Singleton {
     private String currentUser;
     private List<UserDto> onlineUsers;
     private String senderName;
+    private Boolean gameInvitationAnswer = null;
 
 
     private Singleton() {
@@ -83,4 +84,13 @@ public class Singleton {
     public void setSenderName(String senderName) {
         this.senderName = senderName;
     }
+
+    public Boolean getGameInvitationAnswer() {
+        return gameInvitationAnswer;
+    }
+
+    public void setGameInvitationAnswer(Boolean gameInvitationAnswer) {
+        this.gameInvitationAnswer = gameInvitationAnswer;
+    }
+
 }
