@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
@@ -44,7 +42,7 @@
             </Text>
             <Text fx:id="symbol1" fill="#ebe121" layoutX="33.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                <font>
-                  <Font name="Cooper Black" size="25.0" />
+                  <Font name="Cooper Black" size="22.0" />
                </font>
             </Text>
          </children>
@@ -58,22 +56,12 @@
             </Text>
             <Text fx:id="symbol2" fill="#ebe121" layoutX="38.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                <font>
-                  <Font name="Cooper Black" size="25.0" />
+                  <Font name="Cooper Black" size="22.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Button fx:id="record" defaultButton="true" layoutX="200.0" layoutY="36.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="102.0" style="-fx-background-color: ebe121;" text="Record" textOverrun="CENTER_ELLIPSIS" wrapText="true">
-         <font>
-            <Font name="Cooper Black" size="14.0" />
-         </font>
-      </Button>
-      <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="282.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/record.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="surrender" defaultButton="true" layoutX="323.0" layoutY="36.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="102.0" style="-fx-background-color: ebe121;" text="Surrender" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+      <Button fx:id="surrender" defaultButton="true" layoutX="249.0" layoutY="36.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="102.0" style="-fx-background-color: ebe121;" text="Surrender" textOverrun="CENTER_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Cooper Black" size="14.0" />
          </font>
