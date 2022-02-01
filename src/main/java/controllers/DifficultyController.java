@@ -13,6 +13,7 @@ public class DifficultyController implements Initializable {
     public Button mediumBtn;
     public Button hardBtn;
     public Button btnEasy;
+    public Button backBtn1;
 
     public void hardBtnOnClick(ActionEvent e)
     {
@@ -41,12 +42,21 @@ public class DifficultyController implements Initializable {
             ex.printStackTrace();
         }
     }
+    public void backBtnOnClick(ActionEvent e)
+    {
+     /*   HelloApplication obj=new HelloApplication();
+        try {
+           //obj.start();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }*/
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btnEasy.setOnAction(actionEvent -> btnEasyOnClick(actionEvent));
         mediumBtn.setOnAction(actionEvent -> mediumBtnOnClick(actionEvent));
         hardBtn.setOnAction(actionEvent -> hardBtnOnClick(actionEvent));
-
+        backBtn1.setOnAction(actionEvent -> backBtnOnClick(actionEvent));
     }
 }

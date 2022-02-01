@@ -77,6 +77,25 @@ public class HelloApplication extends Application {
         st.show();
     }
 
+    public void switchToWin(ActionEvent e) throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/win.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        currentStage = st;
+        st.setScene(gameBoardScene);
+        st.show();
+    }
+
+    public void switchToLose(ActionEvent e) throws IOException {
+
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/losee.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        currentStage = st;
+        st.setScene(gameBoardScene);
+        st.show();
+    }
+
 
     public static void main(String[] args) {
         launch();
