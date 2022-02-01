@@ -44,13 +44,19 @@ public class OnlineModeController implements Initializable {
 
         btnBack.setOnAction(event -> System.out.println("Clicked"));
 
-        while (singleton.getOnlineUsers() == null) {
-            System.out.println("loading online users");
-        }
+        new Thread(() -> {
+            int prevOnlinePlayers = 0;
+            while (true) {
+                if (singleton.getOnlineUsers().size() != prevOnlinePlayers) {
+                    List<UserDto> result = singleton.getOnlineUsers().stream().filter(userDto -> !(userDto.getUserName().equals(singleton.getCurrentUser()))).toList();
+                    userDtoList.clear();
+                    userDtoList.addAll(result);
+                    prevOnlinePlayers = singleton.getOnlineUsers().size();
+                }
+                users_table.refresh();
+            }
+        }).start();
 
-        List<UserDto> result = singleton.getOnlineUsers().stream().filter(userDto -> !(userDto.getUserName().equals(singleton.getCurrentUser()))).toList();
-        userDtoList.addAll(result);
-        singleton.setOnlineUsers(null);
 
         col_username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         col_wins.setCellValueFactory(new PropertyValueFactory<>("wins"));
