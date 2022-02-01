@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.threads.TableRefresher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +15,6 @@ import services.UserService;
 import utilities.Singleton;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class OnlineModeController implements Initializable {
@@ -40,22 +40,14 @@ public class OnlineModeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         Singleton singleton = Singleton.getInstance();
         userService = new UserService();
+        TableRefresher tableRefresher = new TableRefresher();
 
 
         btnBack.setOnAction(event -> System.out.println("Clicked"));
 
-        new Thread(() -> {
-            int prevOnlinePlayers = 0;
-            while (true) {
-                if (singleton.getOnlineUsers().size() != prevOnlinePlayers) {
-                    List<UserDto> result = singleton.getOnlineUsers().stream().filter(userDto -> !(userDto.getUserName().equals(singleton.getCurrentUser()))).toList();
-                    userDtoList.clear();
-                    userDtoList.addAll(result);
-                    prevOnlinePlayers = singleton.getOnlineUsers().size();
-                }
-                users_table.refresh();
-            }
-        }).start();
+        tableRefresher.setUserDtoList(userDtoList);
+        tableRefresher.setUsers_table(users_table);
+        Thread runningThread = tableRefresher.getTableRefreshThread();
 
 
         col_username.setCellValueFactory(new PropertyValueFactory<>("userName"));
