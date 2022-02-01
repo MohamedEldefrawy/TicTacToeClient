@@ -44,12 +44,12 @@ public class DifficultyController implements Initializable {
     }
     public void backBtnOnClick(ActionEvent e)
     {
-     /*   HelloApplication obj=new HelloApplication();
+        HelloApplication obj = new HelloApplication();
         try {
-           //obj.start();
+            obj.switchToMainMenu(e);
         } catch (IOException ex) {
             ex.printStackTrace();
-        }*/
+        }
     }
 
     @Override
