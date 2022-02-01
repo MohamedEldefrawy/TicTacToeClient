@@ -1,5 +1,6 @@
 package services;
 
+import model.Dtos.gameDtos.GameInvitationAnswerDto;
 import model.Dtos.gameDtos.GameInvitationDto;
 import utilities.JsonBuilder;
 
@@ -10,6 +11,15 @@ public class GameService {
 
     public void sendGameInvitation(GameInvitationDto gameInvitationDto, DataOutputStream writer) {
         String request = JsonBuilder.sendInvitation(gameInvitationDto);
+        try {
+            writer.writeUTF(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendGameInvitationAnswer(GameInvitationAnswerDto gameInvitationAnswerDto, DataOutputStream writer) {
+        String request = JsonBuilder.sendInvitationAnswer(gameInvitationAnswerDto);
         try {
             writer.writeUTF(request);
         } catch (IOException e) {

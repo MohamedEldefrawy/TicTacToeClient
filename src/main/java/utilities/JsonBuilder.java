@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import model.Dtos.gameDtos.GameInvitationAnswerDto;
 import model.Dtos.gameDtos.GameInvitationDto;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
@@ -67,5 +68,12 @@ public class JsonBuilder {
             userDtoList.add(tempUserDto);
         }
         return userDtoList;
+    }
+
+    public static String sendInvitationAnswer(GameInvitationAnswerDto gameInvitationAnswerDto) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("operation", "invResponse");
+        jsonObject.addProperty("answer", gameInvitationAnswerDto.getAnswer());
+        return jsonObject.toString();
     }
 }
