@@ -1,7 +1,9 @@
 package connections;
 
 import com.google.gson.JsonObject;
+import model.Dtos.gameDtos.GameInvitationAnswerDto;
 import model.Dtos.gameDtos.GameInvitationDto;
+import model.Dtos.gameDtos.ReceiveGameInvitationDto;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
 import model.Dtos.userDtos.RegisterUserDto;
@@ -77,6 +79,12 @@ public class ConnectionHandler {
         }
     }
 
+    public void sendGameInvitationAnswer(GameInvitationAnswerDto gameInvitationAnswerDto) {
+        if (socket.isConnected()) {
+            gameService.sendGameInvitationAnswer(gameInvitationAnswerDto, writer);
+        }
+    }
+
     private void responseHandler(String jsonString) {
         JsonObject response = JsonBuilder.toJsonObject(jsonString);
         Singleton singleton = Singleton.getInstance();
@@ -88,9 +96,15 @@ public class ConnectionHandler {
             }
             case "signUp" -> singleton.setCreateUserResponse(response.get("result").getAsBoolean());
             case "refreshUsers" -> singleton.setOnlineUsers(JsonBuilder.toUsersDtoList(response.get("onlineUsers").getAsJsonArray()));
-            case "gameRequest" -> {
-                singleton.setSenderName(response.get("playerReqName").getAsString());
-                System.out.println(singleton.getCurrentUser() + " inviting" + response.get("playerReqName").getAsString());
+            case "player2Response" -> {
+                singleton.setGameInvitationAnswer(response.get("answer").getAsBoolean());
+                System.out.println("Game invitation answer");
+            }
+            case "receiveInvitation" -> {
+                ReceiveGameInvitationDto gameInvitationDto = new ReceiveGameInvitationDto();
+                gameInvitationDto.setOpponentName(response.get("opponentName").getAsString());
+                singleton.setGameInvitationDto(gameInvitationDto);
+                System.out.println("opponent name = : " + gameInvitationDto.getOpponentName());
             }
         }
     }

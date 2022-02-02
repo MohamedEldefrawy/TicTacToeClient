@@ -1,6 +1,7 @@
 package utilities;
 
 import connections.ConnectionHandler;
+import model.Dtos.gameDtos.ReceiveGameInvitationDto;
 import model.Dtos.userDtos.UserDto;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public class Singleton {
     private String currentUser;
     private List<UserDto> onlineUsers;
     private String senderName;
+    private ReceiveGameInvitationDto gameInvitationDto;
+    private Boolean gameInvitationAnswer = null;
 
 
     private Singleton() {
@@ -25,6 +28,15 @@ public class Singleton {
             singleton = new Singleton();
         return singleton;
     }
+
+    public ReceiveGameInvitationDto getGameInvitationDto() {
+        return gameInvitationDto;
+    }
+
+    public void setGameInvitationDto(ReceiveGameInvitationDto gameInvitationDto) {
+        this.gameInvitationDto = gameInvitationDto;
+    }
+
 
     public ConnectionHandler getConnectionHandler() {
         return connectionHandler;
@@ -83,4 +95,13 @@ public class Singleton {
     public void setSenderName(String senderName) {
         this.senderName = senderName;
     }
+
+    public Boolean getGameInvitationAnswer() {
+        return gameInvitationAnswer;
+    }
+
+    public void setGameInvitationAnswer(Boolean gameInvitationAnswer) {
+        this.gameInvitationAnswer = gameInvitationAnswer;
+    }
+
 }

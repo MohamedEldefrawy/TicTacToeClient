@@ -22,9 +22,14 @@ public class HelloApplication extends Application {
         currentStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/Main.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("TicTacToe");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void switchToMainMenu(ActionEvent e) throws IOException {
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        start(st);
     }
 
     public void switchToLoginScene(ActionEvent e) throws IOException {
@@ -33,14 +38,6 @@ public class HelloApplication extends Application {
         Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
         currentStage = st;
         st.setScene(loginScene);
-    }
-
-    public void switchToGameFirstScene(ActionEvent e) throws IOException {
-        FXMLLoader gameFirstFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/gameFirstScene.fxml"));
-        Scene gameFirstScene = new Scene(gameFirstFxmlLoader.load());
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        currentStage = st;
-        st.setScene(gameFirstScene);
     }
 
     public void switchToSignUpScene(ActionEvent e) throws IOException {
@@ -65,7 +62,7 @@ public class HelloApplication extends Application {
         Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
         currentStage = st;
         st.setScene(difiicultScene);
-        st.show();
+//        st.show();
     }
 
     public void switchToGameBoard(ActionEvent e) throws IOException {
@@ -74,7 +71,30 @@ public class HelloApplication extends Application {
         Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
         currentStage = st;
         st.setScene(gameBoardScene);
-        st.show();
+    }
+
+    public void switchToEasyGameBoard(ActionEvent e) throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/easyGameboard.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        currentStage = st;
+        st.setScene(gameBoardScene);
+    }
+
+    public void switchToMediumGameBoard(ActionEvent e) throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/mediumGameboard.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        currentStage = st;
+        st.setScene(gameBoardScene);
+    }
+
+    public void switchToHardGameBoard(ActionEvent e) throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/hardGameboard.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        currentStage = st;
+        st.setScene(gameBoardScene);
     }
 
     public void switchToWin(ActionEvent e) throws IOException {
@@ -83,7 +103,6 @@ public class HelloApplication extends Application {
         Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
         currentStage = st;
         st.setScene(gameBoardScene);
-        st.show();
     }
 
     public void switchToLose(ActionEvent e) throws IOException {
@@ -93,7 +112,6 @@ public class HelloApplication extends Application {
         Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
         currentStage = st;
         st.setScene(gameBoardScene);
-        st.show();
     }
 
 

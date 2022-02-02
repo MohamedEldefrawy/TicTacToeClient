@@ -28,4 +28,19 @@ public class AlertsGenerator {
         alertDialog.setHeaderText("Cannot connect to the server.....");
         return alertDialog;
     }
+
+    public static Alert createGameInvitationDialog(String opponentName) {
+        Alert alertDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        alertDialog.setContentText("");
+        alertDialog.setTitle("Confirmation");
+        alertDialog.setHeaderText(opponentName + " is challenging you");
+
+        ButtonType buttonTypeYes = new ButtonType("Accept", ButtonBar.ButtonData.OK_DONE);
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alertDialog.getButtonTypes().setAll(buttonTypeYes, buttonTypeCancel);
+
+        return alertDialog;
+
+    }
 }
