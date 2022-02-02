@@ -104,6 +104,7 @@ public class ConnectionHandler {
                 ReceiveGameInvitationDto gameInvitationDto = new ReceiveGameInvitationDto();
                 gameInvitationDto.setOpponentName(response.get("opponentName").getAsString());
                 singleton.setGameInvitationDto(gameInvitationDto);
+                System.out.println("opponent name = : " + gameInvitationDto.getOpponentName());
             }
         }
     }

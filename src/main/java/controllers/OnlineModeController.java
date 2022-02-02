@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.threads.GameInvitationReceiver;
 import controllers.threads.TableRefresher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,13 +48,17 @@ public class OnlineModeController implements Initializable {
 
         tableRefresher.setUserDtoList(userDtoList);
         tableRefresher.setUsers_table(users_table);
-        Thread runningThread = tableRefresher.getTableRefreshThread();
 
+        Thread tableRefreshThread = tableRefresher.getTableRefreshThread();
 
         col_username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         col_wins.setCellValueFactory(new PropertyValueFactory<>("wins"));
         col_losses.setCellValueFactory(new PropertyValueFactory<>("losses"));
         col_draws.setCellValueFactory(new PropertyValueFactory<>("draws"));
+
+        GameInvitationReceiver gameInvitationReceiver = new GameInvitationReceiver();
+        gameInvitationReceiver.getGameInvitationReceiver().start();
+
 
         Callback<TableColumn<UserDto, Void>, TableCell<UserDto, Void>> cellFactory = new Callback<>() {
             @Override
