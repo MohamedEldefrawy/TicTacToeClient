@@ -4,33 +4,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" style="-fx-background-color: #2a0049; -fx-border-radius: 80%;"
-      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controllers.MainMenuController">
-   <JFXButton fx:id="btnSinglePlayer" layoutX="169.0" layoutY="56.0"
-              prefHeight="51.0" prefWidth="263.0" ripplerFill="#821919"
-              style="-fx-background-color: ebe121; -fx-background-radius: 10;" text="Single Player">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a0049; -fx-border-radius: 80%;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainMenuController">
+   <JFXButton fx:id="btnSinglePlayer" layoutX="169.0" layoutY="56.0" prefHeight="51.0" prefWidth="263.0" ripplerFill="#821919" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Single Player">
       <font>
-         <Font name="System Bold" size="18.0"/>
+         <Font name="System Bold" size="18.0" />
       </font>
    </JFXButton>
-   <JFXButton fx:id="btnMultiPlayer" layoutX="166.0" layoutY="143.0" prefHeight="51.0" prefWidth="269.0"
-              style="-fx-background-color: a71347; -fx-background-radius: 10;" text="Multi Player">
+   <JFXButton fx:id="btnMultiPlayer" layoutX="166.0" layoutY="143.0" prefHeight="51.0" prefWidth="269.0" style="-fx-background-color: a71347; -fx-background-radius: 30;" text="Multi Player">
       <font>
-         <Font name="System Bold" size="18.0"/>
+         <Font name="System Bold" size="18.0" />
       </font>
    </JFXButton>
-   <JFXButton fx:id="btnLoadGame" layoutX="166.0" layoutY="226.0" prefHeight="51.0" prefWidth="269.0"
-              ripplerFill="#821919" style="-fx-background-color: ebe121; -fx-background-radius: 10;" text="Load Game">
+   <JFXButton fx:id="btnLoadGame" layoutX="166.0" layoutY="226.0" prefHeight="51.0" prefWidth="269.0" ripplerFill="#821919" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Load Game">
       <font>
-         <Font name="System Bold" size="18.0"/>
+         <Font name="System Bold" size="18.0" />
       </font>
    </JFXButton>
-   <JFXButton fx:id="btnExit" layoutX="163.0" layoutY="306.0" prefHeight="51.0" prefWidth="269.0"
-              style="-fx-background-color: a71347; -fx-background-radius: 10;" text="Exit">
+   <JFXButton fx:id="btnExit" layoutX="163.0" layoutY="306.0" prefHeight="51.0" prefWidth="269.0" style="-fx-background-color: a71347; -fx-background-radius: 30;" text="Exit">
       <font>
-         <Font name="System Bold" size="18.0"/>
+         <Font name="System Bold" size="18.0" />
       </font>
    </JFXButton>
 </Pane>
