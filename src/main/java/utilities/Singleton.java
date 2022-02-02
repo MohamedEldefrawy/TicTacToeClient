@@ -1,9 +1,11 @@
 package utilities;
 
 import connections.ConnectionHandler;
+import model.Dtos.gameDtos.GameInvitationAnswerDto;
 import model.Dtos.gameDtos.ReceiveGameInvitationDto;
 import model.Dtos.userDtos.UserDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Singleton {
@@ -14,10 +16,18 @@ public class Singleton {
     private boolean createUserResponse;
     private boolean serverStatus;
     private String currentUser;
-    private List<UserDto> onlineUsers;
+    private List<UserDto> onlineUsers = new ArrayList<>();
     private String senderName;
     private ReceiveGameInvitationDto gameInvitationDto;
-    private Boolean gameInvitationAnswer = null;
+    private GameInvitationAnswerDto gameInvitationAnswerDto;
+
+    public GameInvitationAnswerDto getGameInvitationAnswerDto() {
+        return gameInvitationAnswerDto;
+    }
+
+    public void setGameInvitationAnswerDto(GameInvitationAnswerDto gameInvitationAnswerDto) {
+        this.gameInvitationAnswerDto = gameInvitationAnswerDto;
+    }
 
 
     private Singleton() {
@@ -95,13 +105,4 @@ public class Singleton {
     public void setSenderName(String senderName) {
         this.senderName = senderName;
     }
-
-    public Boolean getGameInvitationAnswer() {
-        return gameInvitationAnswer;
-    }
-
-    public void setGameInvitationAnswer(Boolean gameInvitationAnswer) {
-        this.gameInvitationAnswer = gameInvitationAnswer;
-    }
-
 }

@@ -97,8 +97,10 @@ public class ConnectionHandler {
             case "signUp" -> singleton.setCreateUserResponse(response.get("result").getAsBoolean());
             case "refreshUsers" -> singleton.setOnlineUsers(JsonBuilder.toUsersDtoList(response.get("onlineUsers").getAsJsonArray()));
             case "player2Response" -> {
-                singleton.setGameInvitationAnswer(response.get("answer").getAsBoolean());
-                System.out.println("Game invitation answer");
+                GameInvitationAnswerDto gameInvitationAnswerDto = new GameInvitationAnswerDto();
+                gameInvitationAnswerDto.setGameId(response.get("gameId").getAsInt());
+                gameInvitationAnswerDto.setAnswer(response.get("answer").getAsBoolean());
+                singleton.setGameInvitationAnswerDto(gameInvitationAnswerDto);
             }
             case "receiveInvitation" -> {
                 ReceiveGameInvitationDto gameInvitationDto = new ReceiveGameInvitationDto();
