@@ -37,4 +37,9 @@
          <Font name="System Bold" size="14.0" />
       </font>
    </JFXButton>
+   <JFXButton fx:id="btnhome" layoutX="14.0" layoutY="16.0" prefHeight="43.0" prefWidth="86.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Home">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+   </JFXButton>
 </Pane>

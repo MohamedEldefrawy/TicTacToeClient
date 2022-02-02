@@ -1,6 +1,7 @@
 package controllers;
 
 import com.client.client.HelloApplication;
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,6 +23,7 @@ public class LogInController implements Initializable {
     public TextField userTextField;
     public PasswordField passTextField;
     public Label checkLabel;
+    public JFXButton btnhome;
     private Singleton singleton;
 
 
@@ -30,11 +32,19 @@ public class LogInController implements Initializable {
         singleton = Singleton.getInstance();
         singleton.setConnectionHandler();
 
-
+        btnhome.setOnAction(actionEvent -> backBtnOnClick(actionEvent));
         btnSignIn.setOnAction(this::btnSignInClicked);
         btnSignUp.setOnAction(this::btnSignUpClicked);
     }
-
+    public void backBtnOnClick(ActionEvent e)
+    {
+        HelloApplication obj = new HelloApplication();
+        try {
+            obj.switchToMainMenu(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
     public void btnSignInClicked(ActionEvent e) {
         if (singleton.getConnectionHandler() != null)
             System.out.println("Singleton status from login" + singleton.getConnectionHandler());

@@ -3,6 +3,7 @@ package connections;
 import com.google.gson.JsonObject;
 import model.Dtos.gameDtos.GameInvitationAnswerDto;
 import model.Dtos.gameDtos.GameInvitationDto;
+import model.Dtos.gameDtos.PlayerMoveDto;
 import model.Dtos.gameDtos.ReceiveGameInvitationDto;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
@@ -78,6 +79,12 @@ public class ConnectionHandler {
             gameService.sendGameInvitation(gameInvitationDto, writer);
         }
     }
+    public void sendPlayerMove(PlayerMoveDto playerMoveDto) {
+        if (socket.isConnected()) {
+            gameService.sendPlayerMove(playerMoveDto, writer);
+        }
+    }
+
 
     public void sendGameInvitationAnswer(GameInvitationAnswerDto gameInvitationAnswerDto) {
         if (socket.isConnected()) {

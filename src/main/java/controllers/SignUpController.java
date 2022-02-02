@@ -1,6 +1,7 @@
 package controllers;
 
 import com.client.client.HelloApplication;
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -19,6 +20,7 @@ public class SignUpController implements Initializable {
     public Button btnSignup;
     public Hyperlink lnkHaveAccount;
     public Label txtError;
+    public JFXButton btnback1;
     private Singleton singleton;
 
     @Override
@@ -26,8 +28,17 @@ public class SignUpController implements Initializable {
 
         singleton = Singleton.getInstance();
         singleton.setConnectionHandler();
-
+        btnback1.setOnAction(actionEvent -> backBtnOnClick(actionEvent));
         btnSignup.setOnAction(this::btnSignUpClicked);
+    }
+    public void backBtnOnClick(ActionEvent e)
+    {
+        HelloApplication obj = new HelloApplication();
+        try {
+            obj.switchToLoginScene(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void btnSignUpClicked(ActionEvent event) {

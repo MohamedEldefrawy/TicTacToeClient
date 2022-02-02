@@ -4,5 +4,6 @@ public enum RequestTypes {
     login,
     logout,
     signUp,
-    invitation
+    invitation,
+    playerMove,
 }
