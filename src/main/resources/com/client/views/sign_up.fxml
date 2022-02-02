@@ -39,4 +39,9 @@
       </font>
    </JFXButton>
    <Label fx:id="txtError" layoutX="200.0" layoutY="283.0" prefHeight="17.0" prefWidth="201.0" text="Wrong input please enter valid input" textFill="#e80a0a" visible="false" />
+   <JFXButton fx:id="btnback1" layoutX="23.0" layoutY="18.0" prefHeight="43.0" prefWidth="86.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Back">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+   </JFXButton>
 </Pane>
