@@ -19,7 +19,12 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Text>
-      <JFXButton fx:id="btnhome" layoutX="24.0" layoutY="26.0" prefHeight="43.0" prefWidth="86.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Home">
+      <JFXButton fx:id="btnhome" layoutX="14.0" layoutY="26.0" prefHeight="43.0" prefWidth="86.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Home">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="replaybtn" layoutX="500.0" layoutY="26.0" prefHeight="43.0" prefWidth="86.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Replay">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

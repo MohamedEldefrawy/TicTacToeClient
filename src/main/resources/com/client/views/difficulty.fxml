@@ -46,7 +46,7 @@
                 <Image url="@../images/hard.png" />
             </image>
         </ImageView>
-      <Button fx:id="backBtn1" alignment="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="87.0" style="-fx-background-color: a71347; -fx-border-radius: 30;" text="Back">
+      <Button fx:id="backBtn1" alignment="CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="108.0" style="-fx-background-color: a71347; -fx-border-radius: 30;" text="Back">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
