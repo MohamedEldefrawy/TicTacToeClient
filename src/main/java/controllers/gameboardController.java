@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import model.levels.EasyLevel;
 
 
 import java.net.URL;
@@ -12,7 +13,6 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class gameboardController implements Initializable {
-
 
     public Button btn1;
     public Button btn2;

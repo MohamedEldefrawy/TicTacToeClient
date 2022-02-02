@@ -73,6 +73,30 @@ public class HelloApplication extends Application {
         st.setScene(gameBoardScene);
     }
 
+    public void switchToEasyGameBoard(ActionEvent e) throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/easyGameboard.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        currentStage = st;
+        st.setScene(gameBoardScene);
+    }
+
+    public void switchToMediumGameBoard(ActionEvent e) throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/mediumGameboard.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        currentStage = st;
+        st.setScene(gameBoardScene);
+    }
+
+    public void switchToHardGameBoard(ActionEvent e) throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/hardGameboard.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        currentStage = st;
+        st.setScene(gameBoardScene);
+    }
+
     public void switchToWin(ActionEvent e) throws IOException {
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/win.fxml"));
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());

@@ -19,7 +19,7 @@ public class DifficultyController implements Initializable {
     {
         HelloApplication obj=new HelloApplication();
         try {
-            obj.switchToGameBoard(e);
+            obj.switchToHardGameBoard(e);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -28,7 +28,7 @@ public class DifficultyController implements Initializable {
     {
         HelloApplication obj=new HelloApplication();
         try {
-            obj.switchToGameBoard(e);
+            obj.switchToMediumGameBoard(e);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -37,7 +37,7 @@ public class DifficultyController implements Initializable {
     {
         HelloApplication obj=new HelloApplication();
         try {
-            obj.switchToGameBoard(e);
+            obj.switchToEasyGameBoard(e);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
