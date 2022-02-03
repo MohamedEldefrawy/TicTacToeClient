@@ -42,11 +42,9 @@ public class GameInvitationReceiver implements Runnable {
             if (result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
                 gameInvitationAnswerDto.setAnswer(true);
                 singleton.getConnectionHandler().sendGameInvitationAnswer(gameInvitationAnswerDto);
-//                    singleton.setGameInvitationDto(null);
             } else {
                 gameInvitationAnswerDto.setAnswer(false);
                 singleton.getConnectionHandler().sendGameInvitationAnswer(gameInvitationAnswerDto);
-//                    singleton.setGameInvitationDto(null);
             }
         });
     }

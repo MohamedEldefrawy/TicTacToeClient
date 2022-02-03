@@ -1,6 +1,7 @@
 package utilities;
 
 import connections.ConnectionHandler;
+import model.Dtos.gameDtos.CreatedGameDto;
 import model.Dtos.gameDtos.GameInvitationAnswerDto;
 import model.Dtos.gameDtos.ReceiveGameInvitationDto;
 import model.Dtos.userDtos.UserDto;
@@ -20,6 +21,15 @@ public class Singleton {
     private String senderName;
     private ReceiveGameInvitationDto gameInvitationDto;
     private GameInvitationAnswerDto gameInvitationAnswerDto;
+    private CreatedGameDto createdGameDto;
+
+    public CreatedGameDto getCreatedGameDto() {
+        return createdGameDto;
+    }
+
+    public void setCreatedGameDto(CreatedGameDto createdGameDto) {
+        this.createdGameDto = createdGameDto;
+    }
 
     public GameInvitationAnswerDto getGameInvitationAnswerDto() {
         return gameInvitationAnswerDto;

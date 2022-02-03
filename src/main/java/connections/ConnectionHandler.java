@@ -1,10 +1,7 @@
 package connections;
 
 import com.google.gson.JsonObject;
-import model.Dtos.gameDtos.GameInvitationAnswerDto;
-import model.Dtos.gameDtos.GameInvitationDto;
-import model.Dtos.gameDtos.PlayerMoveDto;
-import model.Dtos.gameDtos.ReceiveGameInvitationDto;
+import model.Dtos.gameDtos.*;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
 import model.Dtos.userDtos.RegisterUserDto;
@@ -95,27 +92,38 @@ public class ConnectionHandler {
     private void responseHandler(String jsonString) {
         JsonObject response = JsonBuilder.toJsonObject(jsonString);
         Singleton singleton = Singleton.getInstance();
-        System.out.println(response.get("operation").getAsString());
+//        System.out.println(response.get("operation").getAsString());
 
-        switch (response.get("operation").getAsString()) {
-            case "login" -> {
-                singleton.setLoginStatus(response.get("result").getAsBoolean());
+        if (response.get("operation") != null)
+            switch (response.get("operation").getAsString()) {
+                case "login" -> {
+                    singleton.setLoginStatus(response.get("result").getAsBoolean());
+                }
+                case "signUp" -> singleton.setCreateUserResponse(response.get("result").getAsBoolean());
+                case "refreshUsers" -> singleton.setOnlineUsers(JsonBuilder.toUsersDtoList(response.get("onlineUsers").getAsJsonArray()));
+                case "player2Response" -> {
+                    GameInvitationAnswerDto gameInvitationAnswerDto = new GameInvitationAnswerDto();
+                    gameInvitationAnswerDto.setAnswer(response.get("answer").getAsBoolean());
+                    singleton.setGameInvitationAnswerDto(gameInvitationAnswerDto);
+                }
+                case "receiveInvitation" -> {
+                    ReceiveGameInvitationDto gameInvitationDto = new ReceiveGameInvitationDto();
+                    gameInvitationDto.setOpponentName(response.get("opponentName").getAsString());
+                    singleton.setGameInvitationDto(gameInvitationDto);
+                    System.out.println("opponent name = : " + gameInvitationDto.getOpponentName());
+                }
+
+                case "getCreatedGame" -> {
+                    CreatedGameDto createdGameDto = new CreatedGameDto();
+                    createdGameDto.setGameId(response.get("gameId").getAsInt());
+                    createdGameDto.setPlayerX(response.get("playerX").getAsString());
+                    createdGameDto.setPlayerY(response.get("playerY").getAsString());
+                    singleton.setCreatedGameDto(createdGameDto);
+
+                    System.out.println("Created Game Id = " + createdGameDto.getGameId() + " playerX = "
+                            + createdGameDto.getPlayerX() + " playerY=" + createdGameDto.getPlayerY());
+                }
             }
-            case "signUp" -> singleton.setCreateUserResponse(response.get("result").getAsBoolean());
-            case "refreshUsers" -> singleton.setOnlineUsers(JsonBuilder.toUsersDtoList(response.get("onlineUsers").getAsJsonArray()));
-            case "player2Response" -> {
-                GameInvitationAnswerDto gameInvitationAnswerDto = new GameInvitationAnswerDto();
-                gameInvitationAnswerDto.setGameId(response.get("gameId").getAsInt());
-                gameInvitationAnswerDto.setAnswer(response.get("answer").getAsBoolean());
-                singleton.setGameInvitationAnswerDto(gameInvitationAnswerDto);
-            }
-            case "receiveInvitation" -> {
-                ReceiveGameInvitationDto gameInvitationDto = new ReceiveGameInvitationDto();
-                gameInvitationDto.setOpponentName(response.get("opponentName").getAsString());
-                singleton.setGameInvitationDto(gameInvitationDto);
-                System.out.println("opponent name = : " + gameInvitationDto.getOpponentName());
-            }
-        }
     }
 
     public void closeConnection() {
