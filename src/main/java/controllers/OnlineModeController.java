@@ -70,9 +70,10 @@ public class OnlineModeController implements Initializable {
                     {
                         request.setOnAction((ActionEvent event) -> {
                             String user = singleton.getCurrentUser();
+                            String opponentName = getTableView().getItems().get(getIndex()).getUserName();
                             GameInvitationDto gameInvitationDto = new GameInvitationDto();
-                            gameInvitationDto.setOpponentUserName(user);
-                            gameInvitationDto.setUserName(singleton.getCurrentUser());
+                            gameInvitationDto.setOpponentUserName(opponentName);
+                            gameInvitationDto.setUserName(user);
                             System.out.println("username: " + user);
 
                             singleton.getConnectionHandler().sendGameInvitation(gameInvitationDto);
