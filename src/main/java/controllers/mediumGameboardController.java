@@ -1,10 +1,12 @@
 package controllers;
 
+import com.client.client.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,6 +15,7 @@ import model.levels.Move;
 import model.levels.NormalLevel;
 
 public class mediumGameboardController implements Initializable {
+    HelloApplication stage = new HelloApplication();
     NormalLevel Medium = new NormalLevel();
     public Button[][] board = new Button[3][3];
 
@@ -56,13 +59,28 @@ public class mediumGameboardController implements Initializable {
                 btn.addEventHandler(ActionEvent.ACTION, (ActionEvent event) -> {
                     if (!winner) {
                         btn.setText("X");
-                        check();
+                        try {
+                            check();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         btn.setMouseTransparent(true);
                         if (moveNum + 1 < 9 && winner==false) {
                             bestMove = Medium.findMove(board, "O");
                             board[bestMove.row][bestMove.col].setText("O");
-                            check();
+                            try {
+                                check();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             board[bestMove.row][bestMove.col].setMouseTransparent(true);
+                        }
+                        else if (moveNum>=8){
+                            try {
+                                stage.switchToDrawOffline();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                         moveNum += 2;
                     }
@@ -70,7 +88,7 @@ public class mediumGameboardController implements Initializable {
             }
         }
     }
-    public void check() {
+    public void check() throws IOException {
         //check for XWins
         if (btn1.getText()=="X" && btn2.getText()=="X" && btn3.getText()=="X" ) {
             xWins(btn1,btn2,btn3);
@@ -140,24 +158,23 @@ public class mediumGameboardController implements Initializable {
         }
     }
 
-    public void xWins(Button a,Button b,Button c)
+    public void xWins(Button a,Button b,Button c) throws IOException
     {
         winner=true;
-        //a.setBackground(Color.YELLOW);
-      /*  HelloApplication obj = new HelloApplication();
-        try{
-        obj.switchToWin();
+        try {
+            stage.switchToWinOffline();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-            catch (IOException ex){ex.printStackTrace();}*/
-    }
-    public void oWins(Button a,Button b,Button c)
+    public void oWins(Button a,Button b,Button c) throws IOException
     {
         computerWin=true;
-      /*  HelloApplication obj = new HelloApplication();
-        try{
-        obj.switchToWin();
-    }
-            catch (IOException ex){ex.printStackTrace();}*/
+        try {
+            stage.switchToLoseOffline();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void finish() {
         btn1.setDisable(true);

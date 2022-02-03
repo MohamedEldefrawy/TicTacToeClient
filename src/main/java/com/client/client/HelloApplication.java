@@ -3,6 +3,7 @@ package com.client.client;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -78,14 +79,20 @@ public class HelloApplication extends Application {
         currentStage.setScene(gameBoardScene);
     }
 
-    public void switchToWin(ActionEvent e) throws IOException {
-        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/win.fxml"));
+    public void switchToWinOffline() throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/winOffline.fxml"));
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
         currentStage.setScene(gameBoardScene);
     }
 
-    public void switchToLose(ActionEvent e) throws IOException {
-        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/losee.fxml"));
+    public void switchToLoseOffline() throws IOException {
+
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/loseOffline.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        currentStage.setScene(gameBoardScene);
+    }
+    public void switchToDrawOffline() throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/drawOffline.fxml"));
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
         currentStage.setScene(gameBoardScene);
     }
