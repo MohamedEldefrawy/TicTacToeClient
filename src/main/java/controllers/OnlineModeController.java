@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.threads.GameInvitationReceiver;
+import controllers.threads.GameStartThread;
 import controllers.threads.TableRefresher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -59,6 +60,9 @@ public class OnlineModeController implements Initializable {
         GameInvitationReceiver gameInvitationReceiver = new GameInvitationReceiver();
         gameInvitationReceiver.getGameInvitationReceiver().start();
 
+        GameStartThread gameStartThread = new GameStartThread();
+        gameStartThread.startThread();
+
 
         Callback<TableColumn<UserDto, Void>, TableCell<UserDto, Void>> cellFactory = new Callback<>() {
             @Override
@@ -77,7 +81,6 @@ public class OnlineModeController implements Initializable {
                             System.out.println("username: " + user);
 
                             singleton.getConnectionHandler().sendGameInvitation(gameInvitationDto);
-
                         });
                     }
 
