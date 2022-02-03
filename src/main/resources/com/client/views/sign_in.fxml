@@ -24,8 +24,8 @@
          <Font name="Cooper Black" size="48.0" />
       </font>
    </Text>
-   <TextField fx:id="userTextField" layoutX="165.0" layoutY="214.0" opacity="0.6" promptText="Username" />
-   <PasswordField fx:id="passTextField" layoutX="165.0" layoutY="270.0" opacity="0.6" promptText="password" />
+   <TextField fx:id="userTextField" layoutX="165.0" layoutY="214.0" opacity="0.6" promptText="Username" style="-fx-background-radius: 30;" />
+   <PasswordField fx:id="passTextField" layoutX="165.0" layoutY="270.0" opacity="0.6" promptText="password" style="-fx-background-radius: 30;" />
    <Label fx:id="checkLabel" layoutX="165.0" layoutY="284.0" prefHeight="21.0" prefWidth="178.0" text="Label" visible="false" />
    <JFXButton fx:id="btnSignIn" layoutX="143.0" layoutY="334.0" prefHeight="43.0" prefWidth="86.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Sign in">
       <font>

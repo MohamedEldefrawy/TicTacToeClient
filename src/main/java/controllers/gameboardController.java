@@ -1,11 +1,14 @@
 package controllers;
 
+import com.client.client.HelloApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import model.Dtos.gameDtos.CreatedGameDto;
 import utilities.Singleton;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -30,10 +33,13 @@ public class gameboardController implements Initializable {
     Singleton singleton = Singleton.getInstance();
     Random random = new Random();
     boolean player1Turn = true;
+    HelloApplication stage = new HelloApplication();
     //Button[] arrOfBtns ={btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        surrender.setOnAction(actionEvent -> btnsurrenderOnClick(actionEvent));
+
         CreatedGameDto createdGameDto = singleton.getCreatedGameDto();
         symbol1.setText("X");
         symbol2.setText("O");
@@ -220,6 +226,14 @@ public class gameboardController implements Initializable {
         btn7.setDisable(true);
         btn8.setDisable(true);
         btn9.setDisable(true);
+    }
+    public void btnsurrenderOnClick(ActionEvent e)
+    {
+        try {
+            stage.switchToLoseOffline();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     public void firstTurn()
     {

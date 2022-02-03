@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a0049;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.gameboardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a0049;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.gameboardController">
    <children>
       <GridPane alignment="BOTTOM_CENTER" layoutX="200.0" layoutY="174.0" prefHeight="200.0" prefWidth="201.0">
          <columnConstraints>
@@ -35,7 +35,7 @@
       </GridPane>
       <Pane layoutX="21.0" layoutY="14.0" opacity="0.68" prefHeight="119.0" prefWidth="122.0" style="-fx-background-color: #37145a;">
          <children>
-            <Text fx:id="player1" fill="#a71347" layoutX="29.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <Text fx:id="player1" fill="#a71347" layoutX="26.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                <font>
                   <Font name="Cooper Black" size="28.0" />
                </font>
@@ -54,19 +54,19 @@
                   <Font name="Cooper Black" size="28.0" />
                </font>
             </Text>
-            <Text fx:id="symbol2" fill="#ebe121" layoutX="38.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <Text fx:id="symbol2" fill="#ebe121" layoutX="36.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                <font>
                   <Font name="Cooper Black" size="22.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Button fx:id="record" defaultButton="true" layoutX="179.0" layoutY="36.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="102.0" style="-fx-background-color: ebe121;" text="Record" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+      <Button fx:id="record" defaultButton="true" layoutX="179.0" layoutY="36.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="102.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Record" textOverrun="CENTER_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Cooper Black" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="surrender" defaultButton="true" layoutX="313.0" layoutY="36.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="102.0" style="-fx-background-color: ebe121;" text="Surrender" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+      <Button fx:id="surrender" defaultButton="true" layoutX="313.0" layoutY="36.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="102.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Surrender" textOverrun="CENTER_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Cooper Black" size="14.0" />
          </font>
