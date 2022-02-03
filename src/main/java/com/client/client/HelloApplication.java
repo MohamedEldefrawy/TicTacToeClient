@@ -95,6 +95,18 @@ public class HelloApplication extends Application {
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
         currentStage.setScene(gameBoardScene);
     }
+    public void switchToLoseOnline() throws IOException {
+
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/lose alert.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        currentStage.setScene(gameBoardScene);
+    }
+    public void switchToWinOnline() throws IOException {
+
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/WIN ALERT.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        currentStage.setScene(gameBoardScene);
+    }
 
 
     public static void main(String[] args) {
