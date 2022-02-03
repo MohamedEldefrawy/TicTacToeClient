@@ -49,7 +49,8 @@ public class TableRefresher implements Runnable {
                 prevOnlinePlayers = singleton.getOnlineUsers().size();
             }
 
-            users_table.refresh();
+            if (users_table != null)
+                users_table.refresh();
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
