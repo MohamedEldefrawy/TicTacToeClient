@@ -65,7 +65,7 @@ public class mediumGameboardController implements Initializable {
                             e.printStackTrace();
                         }
                         btn.setMouseTransparent(true);
-                        if (moveNum + 1 < 9 && winner==false) {
+                        if (moveNum + 1 < 9 && winner == false) {
                             bestMove = Medium.findMove(board, "O");
                             board[bestMove.row][bestMove.col].setText("O");
                             try {
@@ -74,8 +74,7 @@ public class mediumGameboardController implements Initializable {
                                 e.printStackTrace();
                             }
                             board[bestMove.row][bestMove.col].setMouseTransparent(true);
-                        }
-                        else if (moveNum>=8){
+                        } else if (moveNum >= 8) {
                             try {
                                 stage.switchToDrawOffline();
                             } catch (IOException e) {
@@ -87,6 +86,21 @@ public class mediumGameboardController implements Initializable {
                 });
             }
         }
+        surrender.setOnAction(actionEvent -> btnsurrenderOnClick(actionEvent));
+    }
+    public void btnsurrenderOnClick(ActionEvent e)
+    {
+        try {
+            stage.switchToLoseOffline();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        /* HelloApplication obj = new HelloApplication();
+        try {
+            obj.switchToDifficulty(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }*/
     }
     public void check() throws IOException {
         //check for XWins
@@ -186,5 +200,6 @@ public class mediumGameboardController implements Initializable {
         btn7.setDisable(true);
         btn8.setDisable(true);
         btn9.setDisable(true);
+        surrender.setDisable(true);
     }
 }

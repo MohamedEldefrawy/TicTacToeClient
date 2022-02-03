@@ -87,6 +87,21 @@ public class easyGameboardController implements Initializable {
                 });
             }
         }
+        surrender.setOnAction(actionEvent -> btnsurrenderOnClick(actionEvent));
+    }
+    public void btnsurrenderOnClick(ActionEvent e)
+    {
+        try {
+            stage.switchToLoseOffline();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+      /*  HelloApplication obj = new HelloApplication();
+        try {
+            obj.switchToDifficulty(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }*/
     }
     public void check() throws IOException {
         //check for XWins
@@ -196,5 +211,6 @@ public class easyGameboardController implements Initializable {
         btn7.setDisable(true);
         btn8.setDisable(true);
         btn9.setDisable(true);
+        surrender.setDisable(true);
     }
 }

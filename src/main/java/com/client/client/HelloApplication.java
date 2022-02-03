@@ -84,7 +84,6 @@ public class HelloApplication extends Application {
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
         currentStage.setScene(gameBoardScene);
     }
-
     public void switchToLoseOffline() throws IOException {
 
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/loseOffline.fxml"));

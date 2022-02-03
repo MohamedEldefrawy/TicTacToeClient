@@ -299,7 +299,7 @@ public class gameboardController implements Initializable {
 
     public void xWins(Button a,Button b,Button c)
     {
-        //a.setBackground(Color.YELLOW);
+
       /*  HelloApplication obj = new HelloApplication();
         try{
         obj.switchToWin();
