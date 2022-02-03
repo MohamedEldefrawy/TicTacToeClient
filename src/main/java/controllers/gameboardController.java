@@ -1,12 +1,10 @@
 package controllers;
 
-import com.client.client.HelloApplication;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import model.levels.EasyLevel;
-
+import model.Dtos.gameDtos.CreatedGameDto;
+import utilities.Singleton;
 
 import java.net.URL;
 import java.util.Random;
@@ -29,32 +27,36 @@ public class gameboardController implements Initializable {
     public Text symbol1;
     public Text player1;
     public Text player2;
-    Random random=new Random();
-    boolean player1Turn=true;
+    Singleton singleton = Singleton.getInstance();
+    Random random = new Random();
+    boolean player1Turn = true;
     //Button[] arrOfBtns ={btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-     btn1.setOnAction(actionEvent ->{
-        if(player1Turn)
-        {
-            if(btn1.getText()=="")
-            {
-                btn1.setText("X");
-                player1Turn=false;
-                check();
+        CreatedGameDto createdGameDto = singleton.getCreatedGameDto();
+        symbol1.setText("X");
+        symbol2.setText("O");
+
+        player1.setText(createdGameDto.getPlayerX());
+        player2.setText(createdGameDto.getPlayerY());
+
+        btn1.setOnAction(actionEvent -> {
+            if (player1Turn) {
+                if (btn1.getText() == "") {
+                    btn1.setText("X");
+                    player1Turn = false;
+                    check();
+                }
+            } else {
+                if (btn1.getText() == "") {
+                    btn1.setText("O");
+                    player1Turn = true;
+                    check();
+                }
             }
-        }
-        else
-        {
-            if(btn1.getText()=="")
-            {
-                btn1.setText("O");
-                player1Turn=true;
-                   check();
-            }}
         });
-        btn2.setOnAction(actionEvent ->{
+        btn2.setOnAction(actionEvent -> {
             if(player1Turn)
             {
                 if(btn2.getText()=="")
@@ -221,13 +223,7 @@ public class gameboardController implements Initializable {
     }
     public void firstTurn()
     {
-        if(random.nextInt(2)==0)
-        {
-            player1Turn=true;
-        }
-        else{
-            player1Turn=false;
-        }
+        player1Turn = random.nextInt(2) == 0;
     }
 
 
