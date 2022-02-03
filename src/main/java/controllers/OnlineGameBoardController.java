@@ -1,22 +1,20 @@
 package controllers;
 
 import com.client.client.HelloApplication;
-import javafx.event.ActionEvent;
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import model.levels.EasyLevel;
-import model.levels.Move;
+import model.Dtos.gameDtos.CreatedGameDto;
+import utilities.Singleton;
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
-public class easyGameboardController implements Initializable {
-    HelloApplication stage = new HelloApplication();
-    EasyLevel easy = new EasyLevel();
-    public Button[][] board = new Button[3][3];
-
+public class OnlineGameBoardController implements Initializable {
 
     public Button btn1;
     public Button btn2;
@@ -27,81 +25,89 @@ public class easyGameboardController implements Initializable {
     public Button btn7;
     public Button btn8;
     public Button btn9;
-    public Button surrender;
-    public Button record;
     public Text symbol2;
     public Text symbol1;
     public Text player1;
     public Text player2;
-    private final String player = "X";
-    private boolean winner = false;
-    int moveNum = 0;
-    Move bestMove;
-    private Boolean computerWin = false;
+    public JFXButton btnSurrender;
+    public JFXButton btnRecord;
+    Singleton singleton = Singleton.getInstance();
+    Random random = new Random();
+    boolean player1Turn = true;
+    HelloApplication stage = new HelloApplication();
+    List<Button> buttons = new ArrayList<>();
 
+
+    private void checkPlayerTurn(Button boardButton) {
+
+        if (boardButton != null)
+            boardButton.setOnAction(actionEvent -> {
+                if (player1Turn) {
+                    if (boardButton.getText().isEmpty()) {
+                        boardButton.setText("X");
+                        player1Turn = false;
+                        check();
+                    }
+                } else {
+                    if (boardButton.getText().isEmpty()) {
+                        boardButton.setText("O");
+                        player1Turn = true;
+                        check();
+                    }
+                }
+            });
+    }
+
+    private void disableButtons(Button button) {
+        button.setDisable(true);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        board[0][0] = btn1;
-        board[0][1] = btn2;
-        board[0][2] = btn3;
-        board[1][0] = btn4;
-        board[1][1] = btn5;
-        board[1][2] = btn6;
-        board[2][0] = btn7;
-        board[2][1] = btn8;
-        board[2][2] = btn9;
 
-        for (Button[] btns : board) {
-            for (Button btn : btns) {
-                btn.addEventHandler(ActionEvent.ACTION, (ActionEvent event) -> {
-                    if (!winner) {
-                        btn.setText("X");
-                        try {
-                            check();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        btn.setMouseTransparent(true);
-                        if (moveNum + 1 < 9 && winner==false) {
-                            bestMove = easy.findMove(board, "O");
-                            board[bestMove.row][bestMove.col].setText("O");
-                            try {
-                                check();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            board[bestMove.row][bestMove.col].setMouseTransparent(true);
-                        }
-                        else if (moveNum>=8){
-                            try {
-                                stage.switchToDrawOffline();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        moveNum += 2;
-                    }
-                });
-            }
+        buttons.add(btn1);
+        buttons.add(btn2);
+        buttons.add(btn3);
+        buttons.add(btn4);
+        buttons.add(btn5);
+        buttons.add(btn6);
+        buttons.add(btn7);
+        buttons.add(btn8);
+        buttons.add(btn9);
+
+        CreatedGameDto createdGameDto = singleton.getCreatedGameDto();
+        symbol1.setText("X");
+        symbol2.setText("O");
+
+        player1.setText(createdGameDto.getPlayerX());
+        player2.setText(createdGameDto.getPlayerO());
+
+        for (Button button : buttons) {
+            checkPlayerTurn(button);
         }
-        surrender.setOnAction(actionEvent -> btnsurrenderOnClick(actionEvent));
+
+        btnSurrender.setOnAction(event -> {
+            System.out.println("surrender");
+        });
+
+        btnRecord.setOnAction(event -> {
+            System.out.println("record");
+        });
+
     }
-    public void btnsurrenderOnClick(ActionEvent e)
-    {
-        try {
-            stage.switchToLoseOffline();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+
+    public void finish() {
+        for (Button button : buttons) {
+            disableButtons(button);
         }
-      /*  HelloApplication obj = new HelloApplication();
-        try {
-            obj.switchToDifficulty(e);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }*/
     }
-    public void check() throws IOException {
+
+    public void firstTurn() {
+        player1Turn = random.nextInt(2) == 0;
+    }
+
+
+    public void check() {
         //check for XWins
         if (btn1.getText().equals("X") && btn2.getText().equals("X") && btn3.getText().equals("X")) {
             xWins(btn1, btn2, btn3);
@@ -141,7 +147,6 @@ public class easyGameboardController implements Initializable {
             oWins(btn1, btn2, btn3);
             finish();
         }
-
         if (btn4.getText().equals("O") && btn5.getText().equals("O") && btn6.getText().equals("O")) {
             oWins(btn4, btn5, btn6);
             finish();
@@ -172,44 +177,21 @@ public class easyGameboardController implements Initializable {
         }
     }
 
-    public void xWins(Button a,Button b,Button c)
-    {
-        winner=true;
-        try {
-            stage.switchToWinOffline();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //a.setBackground(Color.YELLOW);
+    public void xWins(Button a, Button b, Button c) {
+
       /*  HelloApplication obj = new HelloApplication();
         try{
         obj.switchToWin();
     }
             catch (IOException ex){ex.printStackTrace();}*/
     }
-    public void oWins(Button a,Button b,Button c) throws IOException {
-        computerWin=true;
-        try {
-            stage.switchToLoseOffline();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    public void oWins(Button a, Button b, Button c) {
+
       /*  HelloApplication obj = new HelloApplication();
         try{
         obj.switchToWin();
     }
             catch (IOException ex){ex.printStackTrace();}*/
-    }
-    public void finish() {
-        btn1.setDisable(true);
-        btn2.setDisable(true);
-        btn3.setDisable(true);
-        btn4.setDisable(true);
-        btn5.setDisable(true);
-        btn6.setDisable(true);
-        btn7.setDisable(true);
-        btn8.setDisable(true);
-        btn9.setDisable(true);
-        surrender.setDisable(true);
     }
 }

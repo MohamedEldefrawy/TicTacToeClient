@@ -117,7 +117,7 @@ public class ConnectionHandler {
                     CreatedGameDto createdGameDto = new CreatedGameDto();
                     createdGameDto.setGameId(response.get("gameId").getAsInt());
                     createdGameDto.setPlayerX(response.get("playerX").getAsString());
-                    createdGameDto.setPlayerY(response.get("playerY").getAsString());
+                    createdGameDto.setPlayerO(response.get("playerO").getAsString());
                     singleton.setCreatedGameDto(createdGameDto);
 
 //                    System.out.println("Created Game Id = " + createdGameDto.getGameId() + " playerX = "

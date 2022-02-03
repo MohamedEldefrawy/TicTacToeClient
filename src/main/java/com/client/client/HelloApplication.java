@@ -3,7 +3,6 @@ package com.client.client;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -55,12 +54,6 @@ public class HelloApplication extends Application {
         currentStage.setScene(difficultyScene);
     }
 
-    public void switchToGameBoard() throws IOException {
-        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/gameboard.fxml"));
-        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
-        currentStage.setScene(gameBoardScene);
-    }
-
     public void switchToEasyGameBoard(ActionEvent e) throws IOException {
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/easyGameboard.fxml"));
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
@@ -101,6 +94,7 @@ public class HelloApplication extends Application {
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
         currentStage.setScene(gameBoardScene);
     }
+
     public void switchToWinOnline() throws IOException {
 
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/WIN ALERT.fxml"));
@@ -108,6 +102,11 @@ public class HelloApplication extends Application {
         currentStage.setScene(gameBoardScene);
     }
 
+    public void switchToOnlineGameBoard() throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/onlinegameboard.fxml"));
+        Scene onlineGameBoardScene = new Scene(difficultFxmlLoader.load());
+        currentStage.setScene(onlineGameBoardScene);
+    }
 
     public static void main(String[] args) {
         launch();

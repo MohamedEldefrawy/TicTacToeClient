@@ -3,7 +3,7 @@ package model.Dtos.gameDtos;
 public class CreatedGameDto {
     private int gameId;
     private String playerX;
-    private String playerY;
+    private String playerO;
 
     public int getGameId() {
         return gameId;
@@ -21,11 +21,11 @@ public class CreatedGameDto {
         this.playerX = playerX;
     }
 
-    public String getPlayerY() {
-        return playerY;
+    public String getPlayerO() {
+        return playerO;
     }
 
-    public void setPlayerY(String playerY) {
-        this.playerY = playerY;
+    public void setPlayerO(String playerO) {
+        this.playerO = playerO;
     }
 }

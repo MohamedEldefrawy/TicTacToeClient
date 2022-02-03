@@ -29,7 +29,7 @@ public class GameStartThread implements Runnable {
         Platform.runLater(() -> {
             HelloApplication helloApplication = new HelloApplication();
             try {
-                helloApplication.switchToGameBoard();
+                helloApplication.switchToOnlineGameBoard();
             } catch (IOException e) {
                 e.printStackTrace();
             }
