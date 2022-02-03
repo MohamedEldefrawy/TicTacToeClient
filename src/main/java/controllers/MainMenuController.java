@@ -16,6 +16,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static javafx.application.Platform.exit;
+
 
 public class MainMenuController implements Initializable {
     public Button btnSinglePlayer;
@@ -78,7 +80,9 @@ public class MainMenuController implements Initializable {
                 e.printStackTrace();
             }
         });
-    }}
+    btnExit.setOnAction(actionEvent -> exit());
+    }
+}
 
    /*  btnExit.setOnAction(actionEvent -> {
             HelloApplication obj = new HelloApplication();
