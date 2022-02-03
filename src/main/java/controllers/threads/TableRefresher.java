@@ -40,6 +40,7 @@ public class TableRefresher implements Runnable {
     public void run() {
         int prevOnlinePlayers = 0;
         System.out.println("Refreshing table thread`");
+
         while (true) {
             if (singleton.getOnlineUsers().size() != prevOnlinePlayers) {
                 List<UserDto> result = singleton.getOnlineUsers().stream().filter(userDto -> !(userDto.getUserName().equals(singleton.getCurrentUser()))).toList();
@@ -47,6 +48,7 @@ public class TableRefresher implements Runnable {
                 userDtoList.addAll(result);
                 prevOnlinePlayers = singleton.getOnlineUsers().size();
             }
+
             users_table.refresh();
             try {
                 Thread.sleep(500);
@@ -54,8 +56,8 @@ public class TableRefresher implements Runnable {
                 e.printStackTrace();
             }
         }
-
     }
+
 
     public Thread getTableRefreshThread() {
         return tableRefreshThread;
