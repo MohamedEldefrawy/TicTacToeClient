@@ -39,7 +39,6 @@ public class AlertsGenerator {
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
         alertDialog.getButtonTypes().setAll(buttonTypeYes, buttonTypeCancel);
-
         return alertDialog;
 
     }

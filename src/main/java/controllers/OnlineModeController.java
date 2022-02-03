@@ -58,7 +58,7 @@ public class OnlineModeController implements Initializable {
         col_draws.setCellValueFactory(new PropertyValueFactory<>("draws"));
 
         GameInvitationReceiver gameInvitationReceiver = new GameInvitationReceiver();
-        gameInvitationReceiver.getGameInvitationReceiver().start();
+            gameInvitationReceiver.startThread();
 
         GameStartThread gameStartThread = new GameStartThread();
         gameStartThread.startThread();

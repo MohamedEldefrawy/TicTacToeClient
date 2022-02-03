@@ -39,11 +39,11 @@ public class ConnectionHandler {
             reader = new DataInputStream(socket.getInputStream());
             writer = new DataOutputStream(socket.getOutputStream());
             singleton.setServerStatus(true);
-            System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
+//            System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
         } catch (IOException e) {
 //            e.printStackTrace();
             singleton.setServerStatus(false);
-            System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
+//            System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
         }
     }
 
@@ -92,7 +92,7 @@ public class ConnectionHandler {
     private void responseHandler(String jsonString) {
         JsonObject response = JsonBuilder.toJsonObject(jsonString);
         Singleton singleton = Singleton.getInstance();
-//        System.out.println(response.get("operation").getAsString());
+//        System.out.println("from handler " + response.get("operation").getAsString());
 
         if (response.get("operation") != null)
             switch (response.get("operation").getAsString()) {
@@ -120,8 +120,8 @@ public class ConnectionHandler {
                     createdGameDto.setPlayerY(response.get("playerY").getAsString());
                     singleton.setCreatedGameDto(createdGameDto);
 
-                    System.out.println("Created Game Id = " + createdGameDto.getGameId() + " playerX = "
-                            + createdGameDto.getPlayerX() + " playerY=" + createdGameDto.getPlayerY());
+//                    System.out.println("Created Game Id = " + createdGameDto.getGameId() + " playerX = "
+//                            + createdGameDto.getPlayerX() + " playerY=" + createdGameDto.getPlayerY());
                 }
             }
     }
@@ -147,7 +147,7 @@ public class ConnectionHandler {
                 while (socket.isConnected()) {
                     try {
                         String response = reader.readUTF();
-                        System.out.println(response);
+                        System.out.println("from stream " + response);
                         responseHandler(response);
                     } catch (SocketException socketException) {
                         System.out.println("socket has been closed");

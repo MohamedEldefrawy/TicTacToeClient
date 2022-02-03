@@ -5,47 +5,67 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import model.Dtos.gameDtos.GameInvitationAnswerDto;
+import model.Dtos.gameDtos.ReceiveGameInvitationDto;
 import utilities.AlertsGenerator;
 import utilities.Singleton;
 
 import java.util.Optional;
 
-public class GameInvitationReceiver implements Runnable {
+public class GameInvitationReceiver {
     private final Singleton singleton;
-    private final Thread gameInvitationReceiver;
+    GameInvitationAnswerDto gameInvitationAnswerDto = new GameInvitationAnswerDto();
+    private Thread gameInvitationReceiver;
+    private ReceiveGameInvitationDto receiveGameInvitationDto;
 
 
     public GameInvitationReceiver() {
         singleton = Singleton.getInstance();
-        gameInvitationReceiver = new Thread(this);
     }
 
-    public Thread getGameInvitationReceiver() {
-        return gameInvitationReceiver;
+    private boolean exit = false;
+
+    public void startThread() {
+        exit = false;
+        initThread();
     }
 
-    @Override
-    public void run() {
-        GameInvitationAnswerDto gameInvitationAnswerDto = new GameInvitationAnswerDto();
-        while (singleton.getGameInvitationDto() == null) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    public void stopThread() {
+        exit = true;
+        gameInvitationReceiver.stop();
+    }
 
-        Platform.runLater(() -> {
-            Alert alert = AlertsGenerator
-                    .createGameInvitationDialog(singleton.getGameInvitationDto().getOpponentName());
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
-                gameInvitationAnswerDto.setAnswer(true);
-                singleton.getConnectionHandler().sendGameInvitationAnswer(gameInvitationAnswerDto);
-            } else {
-                gameInvitationAnswerDto.setAnswer(false);
-                singleton.getConnectionHandler().sendGameInvitationAnswer(gameInvitationAnswerDto);
+    private void initThread() {
+        gameInvitationReceiver = new Thread(() -> {
+            while (!exit) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (singleton.getGameInvitationDto() != null)
+                    Platform.runLater(() -> {
+                        Alert alert = AlertsGenerator
+                                .createGameInvitationDialog(singleton.getGameInvitationDto().getOpponentName());
+                        receiveGameInvitationDto = singleton.getGameInvitationDto();
+                        singleton.setGameInvitationDto(null);
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
+                            gameInvitationAnswerDto.setAnswer(true);
+                            singleton.getConnectionHandler().sendGameInvitationAnswer(gameInvitationAnswerDto);
+//                            stopThread();
+                            exit = true;
+                        } else {
+                            gameInvitationAnswerDto.setAnswer(false);
+//                            singleton.setGameInvitationDto(receiveGameInvitationDto);
+                            singleton.getConnectionHandler().sendGameInvitationAnswer(gameInvitationAnswerDto);
+                        }
+                    });
             }
         });
+        gameInvitationReceiver.start();
     }
+
+
 }
+
+
