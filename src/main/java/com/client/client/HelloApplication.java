@@ -3,7 +3,6 @@ package com.client.client;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -28,90 +27,67 @@ public class HelloApplication extends Application {
     }
 
     public void switchToMainMenu(ActionEvent e) throws IOException {
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        start(st);
+        start(currentStage);
     }
 
     public void switchToLoginScene(ActionEvent e) throws IOException {
         FXMLLoader loginFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/sign_in.fxml"));
         Scene loginScene = new Scene(loginFxmlLoader.load());
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        currentStage = st;
-        st.setScene(loginScene);
+        currentStage.setScene(loginScene);
     }
 
     public void switchToSignUpScene(ActionEvent e) throws IOException {
         FXMLLoader signUpFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/sign_up.fxml"));
         Scene signUpScene = new Scene(signUpFxmlLoader.load());
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        currentStage = st;
-        st.setScene(signUpScene);
+        currentStage.setScene(signUpScene);
     }
 
     public void switchToOnlineMenuScene(ActionEvent e) throws IOException {
         FXMLLoader onlineMenuFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/OnlinePlayingMenu.fxml"));
         Scene onlineMenuScene = new Scene(onlineMenuFxmlLoader.load());
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        currentStage = st;
-        st.setScene(onlineMenuScene);
+        currentStage.setScene(onlineMenuScene);
     }
 
     public void switchToDifficulty(ActionEvent e) throws IOException {
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/difficulty.fxml"));
-        Scene difiicultScene = new Scene(difficultFxmlLoader.load());
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        currentStage = st;
-        st.setScene(difiicultScene);
-//        st.show();
+        Scene difficultyScene = new Scene(difficultFxmlLoader.load());
+        currentStage.setScene(difficultyScene);
     }
 
-    public void switchToGameBoard(ActionEvent e) throws IOException {
+    public void switchToGameBoard() throws IOException {
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/gameboard.fxml"));
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        currentStage = st;
-        st.setScene(gameBoardScene);
+        currentStage.setScene(gameBoardScene);
     }
 
     public void switchToEasyGameBoard(ActionEvent e) throws IOException {
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/easyGameboard.fxml"));
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        currentStage = st;
-        st.setScene(gameBoardScene);
+        currentStage.setScene(gameBoardScene);
     }
 
     public void switchToMediumGameBoard(ActionEvent e) throws IOException {
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/mediumGameboard.fxml"));
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        currentStage = st;
-        st.setScene(gameBoardScene);
+        currentStage.setScene(gameBoardScene);
     }
 
     public void switchToHardGameBoard(ActionEvent e) throws IOException {
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/hardGameboard.fxml"));
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        currentStage = st;
-        st.setScene(gameBoardScene);
+        currentStage.setScene(gameBoardScene);
     }
 
     public void switchToWin(ActionEvent e) throws IOException {
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/win.fxml"));
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        currentStage = st;
-        st.setScene(gameBoardScene);
+        currentStage.setScene(gameBoardScene);
     }
 
     public void switchToLose(ActionEvent e) throws IOException {
-
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/losee.fxml"));
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
-        Stage st = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        currentStage = st;
-        st.setScene(gameBoardScene);
+        currentStage.setScene(gameBoardScene);
     }
 
 
