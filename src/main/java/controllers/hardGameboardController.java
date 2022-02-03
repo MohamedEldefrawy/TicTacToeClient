@@ -1,10 +1,12 @@
 package controllers;
 
+import com.client.client.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import model.levels.HardLevel;
@@ -12,6 +14,7 @@ import model.levels.Move;
 
 
 public class hardGameboardController implements Initializable {
+    HelloApplication stage = new HelloApplication();
     HardLevel Hard = new HardLevel();
     public Button[][] board = new Button[3][3];
 
@@ -55,13 +58,28 @@ public class hardGameboardController implements Initializable {
                 btn.addEventHandler(ActionEvent.ACTION, (ActionEvent event) -> {
                     if (!winner) {
                         btn.setText("X");
-                        check();
+                        try {
+                            check();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         btn.setMouseTransparent(true);
                         if (moveNum + 1 < 9 && winner==false) {
                             bestMove = Hard.findMove(board);
                             board[bestMove.row][bestMove.col].setText("O");
-                            check();
+                            try {
+                                check();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             board[bestMove.row][bestMove.col].setMouseTransparent(true);
+                        }
+                        else if (moveNum>=8){
+                            try {
+                                stage.switchToDrawOffline();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                         moveNum += 2;
                     }
@@ -69,7 +87,7 @@ public class hardGameboardController implements Initializable {
             }
         }
     }
-    public void check() {
+    public void check() throws IOException {
         //check for XWins
         if (btn1.getText()=="X" && btn2.getText()=="X" && btn3.getText()=="X" ) {
             xWins(btn1,btn2,btn3);
@@ -142,6 +160,11 @@ public class hardGameboardController implements Initializable {
     public void xWins(Button a,Button b,Button c)
     {
         winner=true;
+        try {
+            stage.switchToWinOffline();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //a.setBackground(Color.YELLOW);
       /*  HelloApplication obj = new HelloApplication();
         try{
@@ -149,9 +172,13 @@ public class hardGameboardController implements Initializable {
     }
             catch (IOException ex){ex.printStackTrace();}*/
     }
-    public void oWins(Button a,Button b,Button c)
-    {
+    public void oWins(Button a,Button b,Button c) throws IOException {
         computerWin=true;
+        try {
+            stage.switchToLoseOffline();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
       /*  HelloApplication obj = new HelloApplication();
         try{
         obj.switchToWin();
