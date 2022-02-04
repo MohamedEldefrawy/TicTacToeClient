@@ -1,6 +1,8 @@
 package connections;
 
 import com.google.gson.JsonObject;
+import javafx.application.Platform;
+import javafx.scene.control.Button;
 import model.Dtos.gameDtos.*;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
@@ -118,6 +120,11 @@ public class ConnectionHandler {
                     receivePlayerMove.setPosition(response.get("position").getAsString());
                     receivePlayerMove.setSign(response.get("sign").getAsString());
                     singleton.setReceivePlayerMoveDto(receivePlayerMove);
+                    Button selectedButton = singleton.getButtons().stream().filter(button ->
+                            button.getId().split("n")[1].equals(receivePlayerMove.getPosition())).findFirst().get();
+                    Platform.runLater(() -> {
+                        selectedButton.fire();
+                    });
                 }
             }
     }

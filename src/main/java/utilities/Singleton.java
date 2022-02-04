@@ -1,6 +1,7 @@
 package utilities;
 
 import connections.ConnectionHandler;
+import javafx.scene.control.Button;
 import model.Dtos.gameDtos.*;
 import model.Dtos.userDtos.UserDto;
 
@@ -22,6 +23,7 @@ public class Singleton {
     private CreatedGameDto createdGameDto;
     private PlayerMoveDto playerMoveDto;
     private ReceivePlayerMoveDto receivePlayerMoveDto;
+    private List<Button> buttons;
 
     public ReceivePlayerMoveDto getReceivePlayerMoveDto() {
         return receivePlayerMoveDto;
@@ -130,5 +132,13 @@ public class Singleton {
 
     public void setSenderName(String senderName) {
         this.senderName = senderName;
+    }
+
+    public List<Button> getButtons() {
+        return buttons;
+    }
+
+    public void setButtons(List<Button> buttons) {
+        this.buttons = buttons;
     }
 }
