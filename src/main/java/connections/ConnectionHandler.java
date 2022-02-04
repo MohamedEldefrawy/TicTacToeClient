@@ -35,7 +35,7 @@ public class ConnectionHandler {
     // Helpers
     private void establishConnection() {
         try {
-            socket = new Socket(InetAddress.getLocalHost(), 5005);
+            socket = new Socket(InetAddress.getLocalHost(), 2022);
             reader = new DataInputStream(socket.getInputStream());
             writer = new DataOutputStream(socket.getOutputStream());
             singleton.setServerStatus(true);
