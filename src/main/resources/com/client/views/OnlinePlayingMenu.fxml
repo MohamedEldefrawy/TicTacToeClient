@@ -2,27 +2,28 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17"
-            fx:controller="controllers.OnlineModeController">
-    <center>
-        <Pane style="-fx-background-color: #2a0049; -fx-border-radius: 80%;">
-            <Text fill="#ebe121" layoutX="94.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game"
-                  wrappingWidth="139.13671875">
-                <font>
-                    <Font name="Cooper Black" size="48.0"/>
-                </font>
-            </Text>
-            <Text fill="#a71347" layoutX="100.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode">
-                <font>
-                    <Font name="Cooper Black" size="48.0"/>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.OnlineModeController">
+   <center>
+      <Pane fx:id="tfDraws" style="-fx-background-color: #2a0049; -fx-border-radius: 80%;" BorderPane.alignment="CENTER">
+          <Text fill="#ebe121" layoutX="76.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game" wrappingWidth="139.13671875">
+              <font>
+                  <Font name="Cooper Black" size="48.0" />
               </font>
           </Text>
-          <Text fill="#a71347" layoutX="112.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PVP">
+          <Text fill="#a71347" layoutX="82.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode">
+              <font>
+                  <Font name="Cooper Black" size="48.0" />
+              </font>
+          </Text>
+          <Text fill="#a71347" layoutX="93.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PVP">
               <font>
                   <Font name="Cooper Black" size="48.0" />
               </font>
@@ -32,7 +33,7 @@
                  <Cursor fx:constant="HAND" />
              </cursor>
          </JFXListView>
-         <JFXButton fx:id="btnBack" layoutX="66.0" layoutY="460.0" prefHeight="62.0" prefWidth="196.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Back">
+         <JFXButton fx:id="btnBack" layoutX="76.0" layoutY="394.0" prefHeight="62.0" prefWidth="196.0" style="-fx-background-color: a71347; -fx-background-radius: 30;" text="Load">
             <font>
                <Font name="System Bold" size="18.0" />
             </font>
@@ -46,6 +47,51 @@
                <TableColumn fx:id="col_challenge" minWidth="0.0" prefWidth="136.0" text="Challenge" />
             </columns>
          </TableView>
+         <Text fill="#a71347" layoutX="29.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User name : ">
+            <font>
+               <Font name="Cooper Black" size="18.0" />
+            </font>
+         </Text>
+         <Text fill="#ebe121" layoutX="52.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wins        :">
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
+         </Text>
+         <Text fill="#a71347" layoutX="51.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="losses      :" textAlignment="CENTER">
+            <font>
+               <Font name="Cooper Black" size="18.0" />
+            </font>
+         </Text>
+         <Text fill="#ebe121" layoutX="51.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Draws      :">
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
+         </Text>
+         <JFXButton fx:id="btnBack1" layoutX="76.0" layoutY="470.0" prefHeight="62.0" prefWidth="196.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Back">
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
+         </JFXButton>
+         <Text fx:id="txUserName1" fill="#a71347" layoutX="142.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   null">
+            <font>
+               <Font name="Cooper Black" size="18.0" />
+            </font>
+         </Text>
+         <Text fx:id="txWins1" fill="#ebe121" layoutX="161.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="null">
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
+         </Text>
+         <Text fx:id="txLosses1" fill="#a71347" layoutX="154.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="null">
+            <font>
+               <Font name="Cooper Black" size="18.0" />
+            </font>
+         </Text>
+         <Text fx:id="txDraws1" fill="#ebe121" layoutX="154.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" text="null">
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
+         </Text>
       </Pane>
    </center>
 </BorderPane>
