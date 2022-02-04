@@ -200,6 +200,16 @@ public class easyGameboardController implements Initializable {
     }
             catch (IOException ex){ex.printStackTrace();}*/
     }
+    public void draw() throws IOException {
+       if (moveNum==9){
+           try {
+               stage.switchToDrawOffline();
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+       }
+    }
+
     public void finish() {
         btn1.setDisable(true);
         btn2.setDisable(true);
