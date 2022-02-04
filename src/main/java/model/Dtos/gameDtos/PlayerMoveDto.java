@@ -1,24 +1,15 @@
 package model.Dtos.gameDtos;
 
 public class PlayerMoveDto {
-    private Integer gameId;
-    private String name;
+    private String playerName;
     private String position;
 
-    public int getGameId() {
-        return gameId;
+    public String getPlayerName() {
+        return playerName;
     }
 
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public String getPosition() {

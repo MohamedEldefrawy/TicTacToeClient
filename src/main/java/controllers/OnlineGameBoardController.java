@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import model.Dtos.gameDtos.CreatedGameDto;
+import model.Dtos.gameDtos.PlayerMoveDto;
 import utilities.Singleton;
 
 import java.net.URL;
@@ -36,6 +37,7 @@ public class OnlineGameBoardController implements Initializable {
     boolean player1Turn = true;
     HelloApplication stage = new HelloApplication();
     List<Button> buttons = new ArrayList<>();
+    private PlayerMoveDto playerMoveDto;
 
 
     private void checkPlayerTurn(Button boardButton) {
@@ -45,15 +47,18 @@ public class OnlineGameBoardController implements Initializable {
                 if (player1Turn) {
                     if (boardButton.getText().isEmpty()) {
                         boardButton.setText("X");
+                        String position = boardButton.getId().split("n")[1];
+                        playerMoveDto.setPosition(position);
+                        singleton.getConnectionHandler().sendPlayerMove(playerMoveDto);
                         player1Turn = false;
                         check();
                     }
-                } else {
-                    if (boardButton.getText().isEmpty()) {
-                        boardButton.setText("O");
-                        player1Turn = true;
-                        check();
-                    }
+//                } else {
+//                    if (boardButton.getText().isEmpty()) {
+//                        boardButton.setText("O");
+//                        player1Turn = true;
+//                        check();
+//                    }
                 }
             });
     }
@@ -75,12 +80,15 @@ public class OnlineGameBoardController implements Initializable {
         buttons.add(btn8);
         buttons.add(btn9);
 
-        CreatedGameDto createdGameDto = singleton.getCreatedGameDto();
         symbol1.setText("X");
         symbol2.setText("O");
 
+        CreatedGameDto createdGameDto = singleton.getCreatedGameDto();
         player1.setText(createdGameDto.getPlayerX());
         player2.setText(createdGameDto.getPlayerO());
+
+        playerMoveDto = new PlayerMoveDto();
+        playerMoveDto.setPlayerName(singleton.getCurrentUser());
 
         for (Button button : buttons) {
             checkPlayerTurn(button);
