@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" style="-fx-background-color: #2a0049;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" style="-fx-background-color: #2a0049;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RecordController">
    <children>
       <TableView layoutX="8.0" layoutY="6.0" prefHeight="386.0" prefWidth="500.0">
         <columns>
@@ -18,12 +17,12 @@
             <TableColumn fx:id="loadGame" prefWidth="100.0" text="Load Game" />
         </columns>
       </TableView>
-      <JFXButton layoutX="528.0" layoutY="326.0" prefHeight="51.0" prefWidth="108.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Back">
+      <JFXButton fx:id="backBtn" layoutX="528.0" layoutY="326.0" prefHeight="51.0" prefWidth="108.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Back">
          <font>
             <Font name="Cooper Black" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="528.0" layoutY="254.0" prefHeight="51.0" prefWidth="108.0" style="-fx-background-color: a71347; -fx-background-radius: 30;" text="Home">
+      <JFXButton fx:id="homeBtn" layoutX="528.0" layoutY="254.0" prefHeight="51.0" prefWidth="108.0" style="-fx-background-color: a71347; -fx-background-radius: 30;" text="Home">
          <font>
             <Font name="Cooper Black" size="18.0" />
          </font>
