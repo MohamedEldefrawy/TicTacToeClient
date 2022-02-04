@@ -1,7 +1,7 @@
 package model.Dtos.gameDtos;
 
-public class PlayerMoveDto {
-    private String playerName;
+public class ReceivePlayerMoveDto {
+    private String userName;
     private String position;
     private String sign;
 
@@ -13,12 +13,12 @@ public class PlayerMoveDto {
         this.sign = sign;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPosition() {

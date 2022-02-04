@@ -2,13 +2,14 @@ package controllers;
 
 import com.client.client.HelloApplication;
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import model.Dtos.gameDtos.CreatedGameDto;
 import model.Dtos.gameDtos.PlayerMoveDto;
 import utilities.Singleton;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,35 +33,53 @@ public class OnlineGameBoardController implements Initializable {
     public Text player2;
     public JFXButton btnSurrender;
     public JFXButton btnRecord;
-    Singleton singleton = Singleton.getInstance();
-    Random random = new Random();
-    boolean player1Turn = true;
-    HelloApplication stage = new HelloApplication();
-    List<Button> buttons = new ArrayList<>();
+    private final Random random = new Random();
+    private final Singleton singleton = Singleton.getInstance();
+    private final HelloApplication stage = new HelloApplication();
+    private final List<Button> buttons = new ArrayList<>();
+    private boolean myTurn = false;
+    private boolean opponentTurn = false;
     private PlayerMoveDto playerMoveDto;
-
+    private String mySign;
+    private String opponentSign;
 
     private void checkPlayerTurn(Button boardButton) {
 
-        if (boardButton != null)
-            boardButton.setOnAction(actionEvent -> {
-                if (player1Turn) {
-                    if (boardButton.getText().isEmpty()) {
-                        boardButton.setText("X");
-                        String position = boardButton.getId().split("n")[1];
-                        playerMoveDto.setPosition(position);
-                        singleton.getConnectionHandler().sendPlayerMove(playerMoveDto);
-                        player1Turn = false;
-                        check();
-                    }
-//                } else {
-//                    if (boardButton.getText().isEmpty()) {
-//                        boardButton.setText("O");
-//                        player1Turn = true;
-//                        check();
-//                    }
+        boardButton.setOnAction(actionEvent -> {
+            if (myTurn) {
+                if (boardButton.getText().isEmpty()) {
+                    boardButton.setText(mySign);
+                    String position = boardButton.getId().split("n")[1];
+                    playerMoveDto.setPosition(position);
+                    playerMoveDto.setPlayerName(player1.getText());
+                    singleton.getConnectionHandler().sendPlayerMove(playerMoveDto);
+
+                    myTurn = false;
+                    opponentTurn = true;
+                    check();
                 }
+            } else {
+                opponentTurn();
+            }
+        });
+
+    }
+
+    private void opponentTurn() {
+        Platform.runLater(() -> {
+            Button btnPressed = buttons.stream().filter(button -> button.getId().split("n")[1]
+                            .equals(singleton.getReceivePlayerMoveDto().getPosition()))
+                    .findFirst().get();
+            btnPressed.setOnAction(event -> {
+                Platform.runLater(() -> {
+                    btnPressed.setText(opponentSign);
+                });
+                check();
             });
+            btnPressed.fire();
+            opponentTurn = false;
+            myTurn = true;
+        });
     }
 
     private void disableButtons(Button button) {
@@ -69,6 +88,29 @@ public class OnlineGameBoardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        new Thread(() -> {
+            while (singleton.getReceivePlayerMoveDto() == null) {
+
+            }
+        }).start();
+
+
+        if (singleton.getCreatedGameDto().getPlayerX().equals(singleton.getCurrentUser())) {
+            mySign = "X";
+            symbol1.setText(mySign);
+            player1.setText(singleton.getCurrentUser());
+            opponentSign = "O";
+            symbol2.setText(opponentSign);
+            player2.setText(singleton.getCreatedGameDto().getPlayerO());
+        } else {
+            mySign = "O";
+            symbol1.setText(mySign);
+            player1.setText(singleton.getCreatedGameDto().getPlayerO());
+            opponentSign = "X";
+            symbol2.setText(opponentSign);
+            player2.setText(singleton.getCurrentUser());
+        }
+
 
         buttons.add(btn1);
         buttons.add(btn2);
@@ -80,15 +122,6 @@ public class OnlineGameBoardController implements Initializable {
         buttons.add(btn8);
         buttons.add(btn9);
 
-        symbol1.setText("X");
-        symbol2.setText("O");
-
-        CreatedGameDto createdGameDto = singleton.getCreatedGameDto();
-        player1.setText(createdGameDto.getPlayerX());
-        player2.setText(createdGameDto.getPlayerO());
-
-        playerMoveDto = new PlayerMoveDto();
-        playerMoveDto.setPlayerName(singleton.getCurrentUser());
 
         for (Button button : buttons) {
             checkPlayerTurn(button);
@@ -110,9 +143,9 @@ public class OnlineGameBoardController implements Initializable {
         }
     }
 
-    public void firstTurn() {
-        player1Turn = random.nextInt(2) == 0;
-    }
+//    public void firstTurn() {
+//        xTicTurn = random.nextInt(2) == 0;
+//    }
 
 
     public void check() {
@@ -124,14 +157,17 @@ public class OnlineGameBoardController implements Initializable {
         if (btn4.getText().equals("X") && btn5.getText().equals("X") && btn6.getText().equals("X")) {
             xWins(btn4, btn5, btn6);
             finish();
+
         }
         if (btn7.getText().equals("X") && btn8.getText().equals("X") && btn9.getText().equals("X")) {
             xWins(btn7, btn8, btn9);
             finish();
+
         }
         if (btn1.getText().equals("X") && btn4.getText().equals("X") && btn7.getText().equals("X")) {
             xWins(btn1, btn4, btn7);
             finish();
+
         }
         if (btn2.getText().equals("X") && btn5.getText().equals("X") && btn8.getText().equals("X")) {
             xWins(btn2, btn5, btn8);
@@ -186,20 +222,19 @@ public class OnlineGameBoardController implements Initializable {
     }
 
     public void xWins(Button a, Button b, Button c) {
-
-      /*  HelloApplication obj = new HelloApplication();
-        try{
-        obj.switchToWin();
-    }
-            catch (IOException ex){ex.printStackTrace();}*/
+        try {
+            stage.switchToWinOffline();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void oWins(Button a, Button b, Button c) {
-
-      /*  HelloApplication obj = new HelloApplication();
-        try{
-        obj.switchToWin();
-    }
-            catch (IOException ex){ex.printStackTrace();}*/
+        try {
+            stage.switchToWinOffline();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
+

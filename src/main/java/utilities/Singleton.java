@@ -1,9 +1,7 @@
 package utilities;
 
 import connections.ConnectionHandler;
-import model.Dtos.gameDtos.CreatedGameDto;
-import model.Dtos.gameDtos.GameInvitationAnswerDto;
-import model.Dtos.gameDtos.ReceiveGameInvitationDto;
+import model.Dtos.gameDtos.*;
 import model.Dtos.userDtos.UserDto;
 
 import java.util.ArrayList;
@@ -22,6 +20,24 @@ public class Singleton {
     private ReceiveGameInvitationDto gameInvitationDto;
     private GameInvitationAnswerDto gameInvitationAnswerDto;
     private CreatedGameDto createdGameDto;
+    private PlayerMoveDto playerMoveDto;
+    private ReceivePlayerMoveDto receivePlayerMoveDto;
+
+    public ReceivePlayerMoveDto getReceivePlayerMoveDto() {
+        return receivePlayerMoveDto;
+    }
+
+    public void setReceivePlayerMoveDto(ReceivePlayerMoveDto receivePlayerMoveDto) {
+        this.receivePlayerMoveDto = receivePlayerMoveDto;
+    }
+
+    public PlayerMoveDto getPlayerMoveDto() {
+        return playerMoveDto;
+    }
+
+    public void setPlayerMoveDto(PlayerMoveDto playerMoveDto) {
+        this.playerMoveDto = playerMoveDto;
+    }
 
     public CreatedGameDto getCreatedGameDto() {
         return createdGameDto;

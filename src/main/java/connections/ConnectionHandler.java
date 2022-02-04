@@ -35,15 +35,13 @@ public class ConnectionHandler {
     // Helpers
     private void establishConnection() {
         try {
-            socket = new Socket(InetAddress.getLocalHost(), 2022);
+            socket = new Socket(InetAddress.getLocalHost(), 5005);
             reader = new DataInputStream(socket.getInputStream());
             writer = new DataOutputStream(socket.getOutputStream());
             singleton.setServerStatus(true);
-//            System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
         } catch (IOException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
             singleton.setServerStatus(false);
-//            System.out.println("Server status in establishConnection = " + singleton.getServerStatus());
         }
     }
 
@@ -82,7 +80,6 @@ public class ConnectionHandler {
         }
     }
 
-
     public void sendGameInvitationAnswer(GameInvitationAnswerDto gameInvitationAnswerDto) {
         if (socket.isConnected()) {
             gameService.sendGameInvitationAnswer(gameInvitationAnswerDto, writer);
@@ -92,13 +89,10 @@ public class ConnectionHandler {
     private void responseHandler(String jsonString) {
         JsonObject response = JsonBuilder.toJsonObject(jsonString);
         Singleton singleton = Singleton.getInstance();
-//        System.out.println("from handler " + response.get("operation").getAsString());
 
         if (response.get("operation") != null)
             switch (response.get("operation").getAsString()) {
-                case "login" -> {
-                    singleton.setLoginStatus(response.get("result").getAsBoolean());
-                }
+                case "login" -> singleton.setLoginStatus(response.get("result").getAsBoolean());
                 case "signUp" -> singleton.setCreateUserResponse(response.get("result").getAsBoolean());
                 case "refreshUsers" -> singleton.setOnlineUsers(JsonBuilder.toUsersDtoList(response.get("onlineUsers").getAsJsonArray()));
                 case "player2Response" -> {
@@ -110,18 +104,20 @@ public class ConnectionHandler {
                     ReceiveGameInvitationDto gameInvitationDto = new ReceiveGameInvitationDto();
                     gameInvitationDto.setOpponentName(response.get("opponentName").getAsString());
                     singleton.setGameInvitationDto(gameInvitationDto);
-                    System.out.println("opponent name = : " + gameInvitationDto.getOpponentName());
                 }
-
                 case "getCreatedGame" -> {
                     CreatedGameDto createdGameDto = new CreatedGameDto();
                     createdGameDto.setGameId(response.get("gameId").getAsInt());
                     createdGameDto.setPlayerX(response.get("playerX").getAsString());
                     createdGameDto.setPlayerO(response.get("playerO").getAsString());
                     singleton.setCreatedGameDto(createdGameDto);
-
-//                    System.out.println("Created Game Id = " + createdGameDto.getGameId() + " playerX = "
-//                            + createdGameDto.getPlayerX() + " playerY=" + createdGameDto.getPlayerY());
+                }
+                case "playerMove" -> {
+                    ReceivePlayerMoveDto receivePlayerMove = new ReceivePlayerMoveDto();
+                    receivePlayerMove.setUserName(response.get("playerName").getAsString());
+                    receivePlayerMove.setPosition(response.get("position").getAsString());
+                    receivePlayerMove.setSign(response.get("sign").getAsString());
+                    singleton.setReceivePlayerMoveDto(receivePlayerMove);
                 }
             }
     }
