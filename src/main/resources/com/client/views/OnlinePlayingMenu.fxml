@@ -33,7 +33,7 @@
                  <Cursor fx:constant="HAND" />
              </cursor>
          </JFXListView>
-         <JFXButton fx:id="btnBack" layoutX="76.0" layoutY="394.0" prefHeight="62.0" prefWidth="196.0" style="-fx-background-color: a71347; -fx-background-radius: 30;" text="Load">
+         <JFXButton fx:id="btnload" layoutX="76.0" layoutY="394.0" prefHeight="62.0" prefWidth="196.0" style="-fx-background-color: a71347; -fx-background-radius: 30;" text="Load">
             <font>
                <Font name="System Bold" size="18.0" />
             </font>

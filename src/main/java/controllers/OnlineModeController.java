@@ -1,5 +1,7 @@
 package controllers;
 
+import com.client.client.HelloApplication;
+import com.jfoenix.controls.JFXButton;
 import controllers.threads.GameInvitationReceiver;
 import controllers.threads.GameStartThread;
 import controllers.threads.TableRefresher;
@@ -17,6 +19,7 @@ import model.Dtos.userDtos.UserDto;
 import services.UserService;
 import utilities.Singleton;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,7 +29,7 @@ public class OnlineModeController implements Initializable {
     public Text txWins;
     public Text txLosses;
     public Text txDraws;
-
+    public JFXButton btnload;
 
 
     ObservableList<UserDto> userDtoList = FXCollections.observableArrayList();
@@ -74,6 +77,14 @@ public class OnlineModeController implements Initializable {
         GameStartThread gameStartThread = new GameStartThread();
         gameStartThread.startThread();
 
+        btnload.setOnAction(actionEvent -> {
+            HelloApplication obj = new HelloApplication();
+            try{
+                obj.switchToRecordScene(actionEvent);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         Callback<TableColumn<UserDto, Void>, TableCell<UserDto, Void>> cellFactory = new Callback<>() {
             @Override
