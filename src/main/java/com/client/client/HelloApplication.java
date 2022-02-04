@@ -66,7 +66,16 @@ public class HelloApplication extends Application {
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
         currentStage.setScene(gameBoardScene);
     }
-
+    public void switchToRecordScene(ActionEvent e) throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/recordScene.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        currentStage.setScene(gameBoardScene);
+    }
+    public void switchToOnlinePVP(ActionEvent e) throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/OnlinePlayingMenu.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        currentStage.setScene(gameBoardScene);
+    }
     public void switchToHardGameBoard(ActionEvent e) throws IOException {
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/hardGameboard.fxml"));
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
