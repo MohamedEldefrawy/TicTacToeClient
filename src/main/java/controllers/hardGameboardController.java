@@ -1,6 +1,7 @@
 package controllers;
 
 import com.client.client.HelloApplication;
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -28,8 +29,7 @@ public class hardGameboardController implements Initializable {
     public Button btn7;
     public Button btn8;
     public Button btn9;
-    public Button surrender;
-    public Button record;
+    public JFXButton btnSurrender;
     public Text symbol2;
     public Text symbol1;
     public Text player1;
@@ -86,7 +86,7 @@ public class hardGameboardController implements Initializable {
                 });
             }
         }
-        surrender.setOnAction(actionEvent -> btnsurrenderOnClick(actionEvent));
+        btnSurrender.setOnAction(actionEvent -> btnsurrenderOnClick(actionEvent));
     }
     public void btnsurrenderOnClick(ActionEvent e)
     {
@@ -210,6 +210,6 @@ public class hardGameboardController implements Initializable {
         btn7.setDisable(true);
         btn8.setDisable(true);
         btn9.setDisable(true);
-        surrender.setDisable(true);
+        btnSurrender.setDisable(true);
     }
 }
