@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import model.Dtos.gameDtos.GameInvitationDto;
 import model.Dtos.userDtos.UserDto;
@@ -21,6 +22,12 @@ import java.util.ResourceBundle;
 
 public class OnlineModeController implements Initializable {
     public ListView<String> lstOnlinePlayers;
+    public Text txUserName;
+    public Text txWins;
+    public Text txLosses;
+    public Text txDraws;
+
+
 
     ObservableList<UserDto> userDtoList = FXCollections.observableArrayList();
     UserService userService;
@@ -43,7 +50,11 @@ public class OnlineModeController implements Initializable {
         Singleton singleton = Singleton.getInstance();
         userService = new UserService();
         TableRefresher tableRefresher = new TableRefresher();
-
+        UserDto currentUser = singleton.getOnlineUsers().stream().filter(userDto -> userDto.getUserName().equals(singleton.getCurrentUser())).findFirst().get();
+        txUserName.setText(currentUser.getUserName());
+        txWins.setText(currentUser.getUserName());
+        txLosses.setText(currentUser.getUserName());
+        txDraws.setText(currentUser.getUserName());
 
         btnBack.setOnAction(event -> System.out.println("Clicked"));
 
