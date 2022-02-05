@@ -83,6 +83,7 @@ public class ConnectionHandler {
             gameService.sendGameInvitation(gameInvitationDto, writer);
         }
     }
+
     public void sendPlayerMove(PlayerMoveDto playerMoveDto) {
         if (socket.isConnected()) {
             gameService.sendPlayerMove(playerMoveDto, writer);
@@ -92,6 +93,12 @@ public class ConnectionHandler {
     public void sendGameInvitationAnswer(GameInvitationAnswerDto gameInvitationAnswerDto) {
         if (socket.isConnected()) {
             gameService.sendGameInvitationAnswer(gameInvitationAnswerDto, writer);
+        }
+    }
+
+    public void sendFinishGameRequest(FinishGameDto finishGameDto) {
+        if (socket.isConnected()) {
+            gameService.sendFinishGame(finishGameDto, writer);
         }
     }
 

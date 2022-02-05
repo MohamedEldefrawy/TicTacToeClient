@@ -47,7 +47,6 @@ public class OnlineGameBoardController implements Initializable {
     private String opponentSign;
 
     private void checkPlayerTurn(Button boardButton) {
-
         boardButton.setOnAction(actionEvent -> {
             if (isMyTurn && gameState) {
                 if (boardButton.getText().isEmpty()) {
@@ -57,7 +56,6 @@ public class OnlineGameBoardController implements Initializable {
                     playerMoveDto.setPosition(position);
                     playerMoveDto.setPlayerName(player1.getText());
                     playerMoveDto.setSign(mySign);
-//                    check();
                     playerMoveDto.setGameState(gameState);
                     singleton.getConnectionHandler().sendPlayerMove(playerMoveDto);
                     isMyTurn = false;
@@ -80,7 +78,6 @@ public class OnlineGameBoardController implements Initializable {
                 });
             });
             btnPressed.fire();
-//            check();
             isOpponentTurn = false;
             isMyTurn = true;
         });
@@ -102,6 +99,7 @@ public class OnlineGameBoardController implements Initializable {
                 }
             }
         }).start();
+
         singleton = Singleton.getInstance();
         gameState = true;
         PlayerMoveListener playerMoveListener = new PlayerMoveListener();
@@ -122,7 +120,6 @@ public class OnlineGameBoardController implements Initializable {
             player2.setText(singleton.getCreatedGameDto().getPlayerO());
             isMyTurn = true;
             isOpponentTurn = false;
-            enableAllButtons();
         } else {
             mySign = "O";
             symbol1.setText(mySign);
@@ -132,7 +129,6 @@ public class OnlineGameBoardController implements Initializable {
             player2.setText(singleton.getCreatedGameDto().getPlayerX());
             isMyTurn = false;
             isOpponentTurn = true;
-            disableAllButtons();
         }
 
         buttons.add(btn1);
@@ -149,6 +145,7 @@ public class OnlineGameBoardController implements Initializable {
         for (Button button : buttons) {
             checkPlayerTurn(button);
         }
+
         singleton.setButtons(buttons);
 
         btnSurrender.setOnAction(event -> {

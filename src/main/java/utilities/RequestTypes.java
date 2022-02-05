@@ -7,4 +7,5 @@ public enum RequestTypes {
     invitation,
     playerMove,
     saveGame,
+    gameFinished
 }

@@ -4,10 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import model.Dtos.gameDtos.GameInvitationAnswerDto;
-import model.Dtos.gameDtos.GameInvitationDto;
-import model.Dtos.gameDtos.PlayerMoveDto;
-import model.Dtos.gameDtos.SaveGameDto;
+import model.Dtos.gameDtos.*;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
 import model.Dtos.userDtos.RegisterUserDto;
@@ -60,15 +57,20 @@ public class JsonBuilder {
         return sendPlayerMove.toString();
     }
 
-
     public static String sendSaveGame(SaveGameDto saveGameDto) {
-
-        JsonObject jsonObject =new JsonObject();
+        JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("operation", RequestTypes.saveGame.toString());
         jsonObject.addProperty("requesterName", saveGameDto.getUsername());
         jsonObject.addProperty("gameId", saveGameDto.getGameId());
         return jsonObject.toString();
+    }
 
+    public static String finishGameRequest(FinishGameDto finishGameDto) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("operation", RequestTypes.gameFinished.toString());
+        jsonObject.addProperty("isFinished", finishGameDto.isFinished());
+        jsonObject.addProperty("winner", finishGameDto.getWinnerName());
+        return jsonObject.toString();
     }
 
     //  handle request
