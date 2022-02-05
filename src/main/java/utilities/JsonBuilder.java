@@ -56,6 +56,7 @@ public class JsonBuilder {
         sendPlayerMove.addProperty("playerName", playerMoveDto.getPlayerName());
         sendPlayerMove.addProperty("position", playerMoveDto.getPosition());
         sendPlayerMove.addProperty("sign", playerMoveDto.getSign());
+        sendPlayerMove.addProperty("gameState", playerMoveDto.getGameState());
         return sendPlayerMove.toString();
     }
 

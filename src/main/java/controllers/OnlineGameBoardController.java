@@ -39,8 +39,9 @@ public class OnlineGameBoardController implements Initializable {
     private static final List<Button> buttons = new ArrayList<>();
     private final HelloApplication stage = new HelloApplication();
     private Singleton singleton;
-    private boolean isMyTurn = false;
-    private boolean isOpponentTurn = false;
+    private boolean isMyTurn;
+    private boolean isOpponentTurn;
+    private boolean gameState;
     private PlayerMoveDto playerMoveDto;
     private String mySign;
     private String opponentSign;
@@ -48,8 +49,7 @@ public class OnlineGameBoardController implements Initializable {
     private void checkPlayerTurn(Button boardButton) {
 
         boardButton.setOnAction(actionEvent -> {
-            if (isMyTurn) {
-                enableAllButtons();
+            if (isMyTurn && gameState) {
                 if (boardButton.getText().isEmpty()) {
                     playerMoveDto = new PlayerMoveDto();
                     boardButton.setText(mySign);
@@ -57,13 +57,13 @@ public class OnlineGameBoardController implements Initializable {
                     playerMoveDto.setPosition(position);
                     playerMoveDto.setPlayerName(player1.getText());
                     playerMoveDto.setSign(mySign);
+//                    check();
+                    playerMoveDto.setGameState(gameState);
                     singleton.getConnectionHandler().sendPlayerMove(playerMoveDto);
                     isMyTurn = false;
                     isOpponentTurn = true;
                 }
-                check();
             } else {
-                disableAllButtons();
                 opponentTurn();
             }
         });
@@ -80,23 +80,30 @@ public class OnlineGameBoardController implements Initializable {
                 });
             });
             btnPressed.fire();
-            check();
+//            check();
             isOpponentTurn = false;
             isMyTurn = true;
         });
     }
 
-    private void disableButton(Button button) {
-        button.setDisable(true);
-    }
-    private void enableButton(Button button) {
-        button.setDisable(true);
-    }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        new Thread(() -> {
+            while (true) {
+                Platform.runLater(() -> {
+                    check();
+                });
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
         singleton = Singleton.getInstance();
+        gameState = true;
         PlayerMoveListener playerMoveListener = new PlayerMoveListener();
         playerMoveListener.startThread();
         btnRecord.setOnAction(actionEvent -> {
@@ -115,6 +122,7 @@ public class OnlineGameBoardController implements Initializable {
             player2.setText(singleton.getCreatedGameDto().getPlayerO());
             isMyTurn = true;
             isOpponentTurn = false;
+            enableAllButtons();
         } else {
             mySign = "O";
             symbol1.setText(mySign);
@@ -124,8 +132,8 @@ public class OnlineGameBoardController implements Initializable {
             player2.setText(singleton.getCreatedGameDto().getPlayerX());
             isMyTurn = false;
             isOpponentTurn = true;
+            disableAllButtons();
         }
-
 
         buttons.add(btn1);
         buttons.add(btn2);
@@ -154,25 +162,18 @@ public class OnlineGameBoardController implements Initializable {
     }
     public void disableAllButtons() {
         for (Button button : buttons) {
-            disableButton(button);
+            button.setDisable(true);
         }
     }
     public void enableAllButtons() {
         for (Button button : buttons) {
-            enableButton(button);
+            button.setDisable(false);
         }
     }
 
     public void finish() {
-        for (Button button : buttons) {
-            disableButton(button);
-        }
+        disableAllButtons();
     }
-
-//    public void firstTurn() {
-//        xTicTurn = random.nextInt(2) == 0;
-//    }
-
 
     public void check() {
         //check for playerWins
@@ -255,6 +256,7 @@ public class OnlineGameBoardController implements Initializable {
 
     private void playersDraw() {
         try {
+            gameState = false;
             stage.switchToDrawOnline();
         } catch (IOException e) {
             e.printStackTrace();
@@ -263,6 +265,7 @@ public class OnlineGameBoardController implements Initializable {
 
     public void playerWins() {
         try {
+            gameState = false;
             stage.switchToWinOnline();
         } catch (IOException e) {
             e.printStackTrace();
@@ -272,6 +275,7 @@ public class OnlineGameBoardController implements Initializable {
     public void opponentWins() {
         try {
             stage.switchToLoseOnline();
+            gameState = false;
         } catch (IOException e) {
             e.printStackTrace();
         }
