@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import model.Dtos.gameDtos.FinishGameDto;
 import model.Dtos.gameDtos.PlayerMoveDto;
 import model.Dtos.gameDtos.SaveGameDto;
 import utilities.Singleton;
@@ -45,6 +46,7 @@ public class OnlineGameBoardController implements Initializable {
     private PlayerMoveDto playerMoveDto;
     private String mySign;
     private String opponentSign;
+    private FinishGameDto finishGameDto;
 
     private void checkPlayerTurn(Button boardButton) {
         boardButton.setOnAction(actionEvent -> {
@@ -177,78 +179,100 @@ public class OnlineGameBoardController implements Initializable {
         if (btn1.getText().equals(mySign) && btn2.getText().equals(mySign) && btn3.getText().equals(mySign)) {
             playerWins();
             finish();
+            sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn4.getText().equals(mySign) && btn5.getText().equals(mySign) && btn6.getText().equals(mySign)) {
             playerWins();
             finish();
-
+            sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn7.getText().equals(mySign) && btn8.getText().equals(mySign) && btn9.getText().equals(mySign)) {
             playerWins();
             finish();
-
+            sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn1.getText().equals(mySign) && btn4.getText().equals(mySign) && btn7.getText().equals(mySign)) {
             playerWins();
             finish();
-
+            sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn2.getText().equals(mySign) && btn5.getText().equals(mySign) && btn8.getText().equals(mySign)) {
             playerWins();
             finish();
+            sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn3.getText().equals(mySign) && btn6.getText().equals(mySign) && btn9.getText().equals(mySign)) {
             playerWins();
             finish();
+            sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn1.getText().equals(mySign) && btn5.getText().equals(mySign) && btn9.getText().equals(mySign)) {
             playerWins();
             finish();
+            sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn3.getText().equals(mySign) && btn5.getText().equals(mySign) && btn7.getText().equals(mySign)) {
             playerWins();
             finish();
+            sendWinnerRequest(singleton.getCurrentUser());
         }
 
         //check for opponentWins
         if (btn1.getText().equals(opponentSign) && btn2.getText().equals(opponentSign) && btn3.getText().equals(opponentSign)) {
             opponentWins();
             finish();
+            sendWinnerRequest(player2.getText());
+
         }
         if (btn4.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn6.getText().equals(opponentSign)) {
             opponentWins();
             finish();
+            sendWinnerRequest(player2.getText());
         }
         if (btn7.getText().equals(opponentSign) && btn8.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
             opponentWins();
             finish();
+            sendWinnerRequest(player2.getText());
         }
         if (btn1.getText().equals(opponentSign) && btn4.getText().equals(opponentSign) && btn7.getText().equals(opponentSign)) {
             opponentWins();
             finish();
+            sendWinnerRequest(player2.getText());
         }
         if (btn2.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn8.getText().equals(opponentSign)) {
             opponentWins();
             finish();
+            sendWinnerRequest(player2.getText());
         }
         if (btn3.getText().equals(opponentSign) && btn6.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
             opponentWins();
             finish();
+            sendWinnerRequest(player2.getText());
         }
         if (btn1.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
             opponentWins();
             finish();
+            sendWinnerRequest(player2.getText());
         }
         if (btn3.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn7.getText().equals(opponentSign)) {
             opponentWins();
             finish();
+            sendWinnerRequest(player2.getText());
         }
         //check for draw
-        if(!btn1.getText().equals("") && !btn2.getText().equals("") && !btn3.getText().equals("") && !btn4.getText().equals("")
-                && !btn5.getText().equals("") && !btn6.getText().equals("")&& !btn7.getText().equals("")
-                && !btn8.getText().equals("") && !btn9.getText().equals("")){
+        if (!btn1.getText().equals("") && !btn2.getText().equals("") && !btn3.getText().equals("") && !btn4.getText().equals("")
+                && !btn5.getText().equals("") && !btn6.getText().equals("") && !btn7.getText().equals("")
+                && !btn8.getText().equals("") && !btn9.getText().equals("")) {
             playersDraw();
+            sendWinnerRequest("draw");
         }
+    }
+
+    private void sendWinnerRequest(String playerName) {
+        finishGameDto = new FinishGameDto();
+        finishGameDto.setFinished(true);
+        finishGameDto.setWinnerName(playerName);
+        singleton.getConnectionHandler().sendFinishGameRequest(finishGameDto);
     }
 
     private void playersDraw() {
