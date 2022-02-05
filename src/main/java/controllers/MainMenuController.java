@@ -1,7 +1,6 @@
 package controllers;
 
 import com.client.client.HelloApplication;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -52,6 +51,7 @@ public class MainMenuController implements Initializable {
             singleton = Singleton.getInstance();
 
             HelloApplication.getStage().setOnCloseRequest(event -> {
+                event.consume();
                 Alert alertDialog;
                 alertDialog = AlertsGenerator.createConfirmationDialog();
                 Optional<ButtonType> result = alertDialog.showAndWait();
