@@ -54,6 +54,7 @@ public class OnlineGameBoardController implements Initializable {
                     String position = boardButton.getId().split("n")[1];
                     playerMoveDto.setPosition(position);
                     playerMoveDto.setPlayerName(player1.getText());
+                    playerMoveDto.setSign(mySign);
                     singleton.getConnectionHandler().sendPlayerMove(playerMoveDto);
                     isMyTurn = false;
                     isOpponentTurn = true;
@@ -66,10 +67,12 @@ public class OnlineGameBoardController implements Initializable {
     }
 
     private void opponentTurn() {
+
         Platform.runLater(() -> {
             Button btnPressed = buttons.stream().filter(button -> button.getId().split("n")[1]
                             .equals(singleton.getReceivePlayerMoveDto().getPosition()))
                     .findFirst().get();
+
             btnPressed.setOnAction(event -> {
                 Platform.runLater(() -> {
                     btnPressed.setText(opponentSign);

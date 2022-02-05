@@ -51,13 +51,20 @@ public class OnlineModeController implements Initializable {
         Singleton singleton = Singleton.getInstance();
         userService = new UserService();
         TableRefresher tableRefresher = new TableRefresher();
-        UserDto currentUser = singleton.getOnlineUsers().stream().
-                filter(userDto -> userDto.getUserName().equals(singleton.getCurrentUser())).findFirst().get();
 
-        txtUserName.setText(currentUser.getUserName());
-        txtWins.setText(String.valueOf(currentUser.getWins()));
-        txtLosses.setText(String.valueOf(currentUser.getLosses()));
-        txtDraws.setText(String.valueOf(currentUser.getDraws()));
+//        UserDto currentUser = null;
+
+//        while (singleton.getOnlineUsers() == null) {
+//
+//        }
+//
+//        currentUser = singleton.getOnlineUsers().stream().
+//                filter(userDto -> userDto.getUserName().equals(singleton.getCurrentUser())).findFirst().get();
+////
+//        txtUserName.setText(currentUser.getUserName());
+//        txtWins.setText(String.valueOf(currentUser.getWins()));
+//        txtLosses.setText(String.valueOf(currentUser.getLosses()));
+//        txtDraws.setText(String.valueOf(currentUser.getDraws()));
 
         btnBack.setOnAction(event -> System.out.println("Clicked"));
 
