@@ -1,6 +1,7 @@
 package controllers;
 
 import com.client.client.HelloApplication;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,28 +28,33 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnMultiPlayer.setOnAction(actionEvent -> {
-            singleton.setConnectionHandler();
 
-            if (!singleton.getServerStatus()) {
-                singleton.getConnectionHandler().refreshConnection();
-            }
+        Platform.runLater(() -> {
+            btnMultiPlayer.setOnAction(actionEvent -> {
 
-            if (singleton.getServerStatus()) {
-                HelloApplication obj = new HelloApplication();
-                try {
-                    obj.switchToLoginScene(actionEvent);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+                singleton.setConnectionHandler();
+
+                if (!singleton.getServerStatus()) {
+                    singleton.getConnectionHandler().refreshConnection();
                 }
-                singleton.setServerStatus(true);
-            } else {
-                AlertsGenerator.createWarningDialog().show();
-                singleton.setServerStatus(false);
-            }
+
+                if (singleton.getServerStatus()) {
+                    HelloApplication obj = new HelloApplication();
+                    try {
+                        obj.switchToLoginScene(actionEvent);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    singleton.setServerStatus(true);
+                } else {
+                    AlertsGenerator.createWarningDialog().show();
+                    singleton.setServerStatus(false);
+                }
+            });
         });
 
-            singleton = Singleton.getInstance();
+
+        singleton = Singleton.getInstance();
 
             HelloApplication.getStage().setOnCloseRequest(event -> {
                 event.consume();
