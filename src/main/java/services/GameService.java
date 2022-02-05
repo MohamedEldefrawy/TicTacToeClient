@@ -3,6 +3,7 @@ package services;
 import model.Dtos.gameDtos.GameInvitationAnswerDto;
 import model.Dtos.gameDtos.GameInvitationDto;
 import model.Dtos.gameDtos.PlayerMoveDto;
+import model.Dtos.gameDtos.SaveGameDto;
 import utilities.JsonBuilder;
 
 import java.io.DataOutputStream;
@@ -31,6 +32,15 @@ public class GameService {
 
     public void sendPlayerMove (PlayerMoveDto playerMoveDto, DataOutputStream writer) {
         String request = JsonBuilder.sendPlayerMove(playerMoveDto);
+        try {
+            writer.writeUTF(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendSaveGame (SaveGameDto saveGameDto, DataOutputStream writer) {
+        String request = JsonBuilder.sendSaveGame(saveGameDto);
         try {
             writer.writeUTF(request);
         } catch (IOException e) {

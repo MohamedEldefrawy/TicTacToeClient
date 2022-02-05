@@ -65,6 +65,13 @@ public class ConnectionHandler {
         }
     }
 
+    public void sendSaveGame(SaveGameDto saveGameDto) {
+        if (socket.isConnected()) {
+            gameService.sendSaveGame(saveGameDto, writer);
+        }
+    }
+
+
     public void sendLogoutRequest(LogoutUserDto logoutUserDto) {
         if (socket.isConnected()) {
             userService.logoutRequest(logoutUserDto, writer);

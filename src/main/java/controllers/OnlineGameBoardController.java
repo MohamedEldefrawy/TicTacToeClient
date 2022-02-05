@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import model.Dtos.gameDtos.PlayerMoveDto;
+import model.Dtos.gameDtos.SaveGameDto;
 import utilities.Singleton;
 
 import java.io.IOException;
@@ -98,6 +99,13 @@ public class OnlineGameBoardController implements Initializable {
         singleton = Singleton.getInstance();
         PlayerMoveListener playerMoveListener = new PlayerMoveListener();
         playerMoveListener.startThread();
+        btnRecord.setOnAction(actionEvent -> {
+            SaveGameDto saveGameDto = new SaveGameDto();
+            saveGameDto.setUsername(singleton.getCurrentUser());
+            saveGameDto.setGameId(singleton.getCreatedGameDto().getGameId());
+            singleton.getConnectionHandler().sendSaveGame(saveGameDto);
+
+        });
         if (singleton.getCreatedGameDto().getPlayerX().equals(singleton.getCurrentUser())) {
             mySign = "X";
             symbol1.setText(mySign);

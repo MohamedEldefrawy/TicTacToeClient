@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import model.Dtos.gameDtos.GameInvitationAnswerDto;
 import model.Dtos.gameDtos.GameInvitationDto;
 import model.Dtos.gameDtos.PlayerMoveDto;
+import model.Dtos.gameDtos.SaveGameDto;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
 import model.Dtos.userDtos.RegisterUserDto;
@@ -58,6 +59,17 @@ public class JsonBuilder {
         return sendPlayerMove.toString();
     }
 
+
+    public static String sendSaveGame(SaveGameDto saveGameDto) {
+
+        JsonObject jsonObject =new JsonObject();
+        jsonObject.addProperty("operation", RequestTypes.saveGame.toString());
+        jsonObject.addProperty("requesterName", saveGameDto.getUsername());
+        jsonObject.addProperty("gameId", saveGameDto.getGameId());
+        return jsonObject.toString();
+
+    }
+
     //  handle request
     public static JsonObject toJsonObject(String jsonString) {
         return JsonParser.parseString(jsonString).getAsJsonObject();
@@ -85,4 +97,5 @@ public class JsonBuilder {
         jsonObject.addProperty("answer", gameInvitationAnswerDto.getAnswer());
         return jsonObject.toString();
     }
+
 }
