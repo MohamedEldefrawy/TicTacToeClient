@@ -73,7 +73,7 @@ public class easyGameboardController implements Initializable {
                             }
                             board[bestMove.row][bestMove.col].setMouseTransparent(true);
                         }
-                        else if (moveNum>=8){
+                        else if (moveNum>=8&&!(winner|computerWin)){
                             try {
                                 stage.switchToDrawOffline();
                             } catch (IOException e) {
