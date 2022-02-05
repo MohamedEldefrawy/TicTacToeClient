@@ -111,6 +111,11 @@ public class HelloApplication extends Application {
         Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
         currentStage.setScene(gameBoardScene);
     }
+    public void switchToDrawOnline() throws IOException {
+        FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/drawOnline.fxml"));
+        Scene gameBoardScene = new Scene(difficultFxmlLoader.load());
+        currentStage.setScene(gameBoardScene);
+    }
 
     public void switchToOnlineGameBoard() throws IOException {
         FXMLLoader difficultFxmlLoader = new FXMLLoader(getClass().getResource("/com/client/views/onlinegameboard.fxml"));
@@ -118,7 +123,10 @@ public class HelloApplication extends Application {
         currentStage.setScene(onlineGameBoardScene);
     }
 
+
     public static void main(String[] args) {
         launch();
     }
+
+
 }

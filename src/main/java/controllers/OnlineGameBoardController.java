@@ -58,8 +58,8 @@ public class OnlineGameBoardController implements Initializable {
                     singleton.getConnectionHandler().sendPlayerMove(playerMoveDto);
                     isMyTurn = false;
                     isOpponentTurn = true;
-                    check();
                 }
+                check();
             } else {
                 opponentTurn();
             }
@@ -67,19 +67,17 @@ public class OnlineGameBoardController implements Initializable {
     }
 
     private void opponentTurn() {
-
         Platform.runLater(() -> {
             Button btnPressed = buttons.stream().filter(button -> button.getId().split("n")[1]
                             .equals(singleton.getReceivePlayerMoveDto().getPosition()))
                     .findFirst().get();
-
             btnPressed.setOnAction(event -> {
                 Platform.runLater(() -> {
                     btnPressed.setText(opponentSign);
                 });
-                check();
             });
             btnPressed.fire();
+            check();
             isOpponentTurn = false;
             isMyTurn = true;
         });
@@ -153,79 +151,93 @@ public class OnlineGameBoardController implements Initializable {
 
 
     public void check() {
-        //check for XWins
-        if (btn1.getText().equals("X") && btn2.getText().equals("X") && btn3.getText().equals("X")) {
-            xWins(btn1, btn2, btn3);
+        //check for playerWins
+        if (btn1.getText().equals(mySign) && btn2.getText().equals(mySign) && btn3.getText().equals(mySign)) {
+            playerWins();
             finish();
         }
-        if (btn4.getText().equals("X") && btn5.getText().equals("X") && btn6.getText().equals("X")) {
-            xWins(btn4, btn5, btn6);
+        if (btn4.getText().equals(mySign) && btn5.getText().equals(mySign) && btn6.getText().equals(mySign)) {
+            playerWins();
             finish();
 
         }
-        if (btn7.getText().equals("X") && btn8.getText().equals("X") && btn9.getText().equals("X")) {
-            xWins(btn7, btn8, btn9);
+        if (btn7.getText().equals(mySign) && btn8.getText().equals(mySign) && btn9.getText().equals(mySign)) {
+            playerWins();
             finish();
 
         }
-        if (btn1.getText().equals("X") && btn4.getText().equals("X") && btn7.getText().equals("X")) {
-            xWins(btn1, btn4, btn7);
+        if (btn1.getText().equals(mySign) && btn4.getText().equals(mySign) && btn7.getText().equals(mySign)) {
+            playerWins();
             finish();
 
         }
-        if (btn2.getText().equals("X") && btn5.getText().equals("X") && btn8.getText().equals("X")) {
-            xWins(btn2, btn5, btn8);
+        if (btn2.getText().equals(mySign) && btn5.getText().equals(mySign) && btn8.getText().equals(mySign)) {
+            playerWins();
             finish();
         }
-        if (btn3.getText().equals("X") && btn6.getText().equals("X") && btn9.getText().equals("X")) {
-            xWins(btn3, btn6, btn9);
+        if (btn3.getText().equals(mySign) && btn6.getText().equals(mySign) && btn9.getText().equals(mySign)) {
+            playerWins();
             finish();
         }
-        if (btn1.getText().equals("X") && btn5.getText().equals("X") && btn9.getText().equals("X")) {
-            xWins(btn1, btn5, btn9);
+        if (btn1.getText().equals(mySign) && btn5.getText().equals(mySign) && btn9.getText().equals(mySign)) {
+            playerWins();
             finish();
         }
-        if (btn3.getText().equals("X") && btn5.getText().equals("X") && btn7.getText().equals("X")) {
-            xWins(btn3, btn5, btn7);
+        if (btn3.getText().equals(mySign) && btn5.getText().equals(mySign) && btn7.getText().equals(mySign)) {
+            playerWins();
             finish();
         }
 
-        //check for OWins
-        if (btn1.getText().equals("O") && btn2.getText().equals("O") && btn3.getText().equals("O")) {
-            oWins(btn1, btn2, btn3);
+        //check for opponentWins
+        if (btn1.getText().equals(opponentSign) && btn2.getText().equals(opponentSign) && btn3.getText().equals(opponentSign)) {
+            opponentWins();
             finish();
         }
-        if (btn4.getText().equals("O") && btn5.getText().equals("O") && btn6.getText().equals("O")) {
-            oWins(btn4, btn5, btn6);
+        if (btn4.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn6.getText().equals(opponentSign)) {
+            opponentWins();
             finish();
         }
-        if (btn7.getText().equals("O") && btn8.getText().equals("O") && btn9.getText().equals("O")) {
-            oWins(btn7, btn8, btn9);
+        if (btn7.getText().equals(opponentSign) && btn8.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
+            opponentWins();
             finish();
         }
-        if (btn1.getText().equals("O") && btn4.getText().equals("O") && btn7.getText().equals("O")) {
-            oWins(btn1, btn4, btn7);
+        if (btn1.getText().equals(opponentSign) && btn4.getText().equals(opponentSign) && btn7.getText().equals(opponentSign)) {
+            opponentWins();
             finish();
         }
-        if (btn2.getText().equals("O") && btn5.getText().equals("O") && btn8.getText().equals("O")) {
-            oWins(btn2, btn5, btn8);
+        if (btn2.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn8.getText().equals(opponentSign)) {
+            opponentWins();
             finish();
         }
-        if (btn3.getText().equals("O") && btn6.getText().equals("O") && btn9.getText().equals("O")) {
-            oWins(btn3, btn6, btn9);
+        if (btn3.getText().equals(opponentSign) && btn6.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
+            opponentWins();
             finish();
         }
-        if (btn1.getText().equals("O") && btn5.getText().equals("O") && btn9.getText().equals("O")) {
-            oWins(btn1, btn5, btn9);
+        if (btn1.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
+            opponentWins();
             finish();
         }
-        if (btn3.getText().equals("O") && btn5.getText().equals("O") && btn7.getText().equals("O")) {
-            oWins(btn3, btn5, btn7);
+        if (btn3.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn7.getText().equals(opponentSign)) {
+            opponentWins();
             finish();
+        }
+        //check for draw
+        if(!btn1.getText().equals("") && !btn2.getText().equals("") && !btn3.getText().equals("") && !btn4.getText().equals("")
+                && !btn5.getText().equals("") && !btn6.getText().equals("")&& !btn7.getText().equals("")
+                && !btn8.getText().equals("") && !btn9.getText().equals("")){
+            playersDraw();
         }
     }
 
-    public void xWins(Button a, Button b, Button c) {
+    private void playersDraw() {
+        try {
+            stage.switchToDrawOnline();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playerWins() {
         try {
             stage.switchToWinOnline();
         } catch (IOException e) {
@@ -233,9 +245,9 @@ public class OnlineGameBoardController implements Initializable {
         }
     }
 
-    public void oWins(Button a, Button b, Button c) {
+    public void opponentWins() {
         try {
-            stage.switchToWinOnline();
+            stage.switchToLoseOnline();
         } catch (IOException e) {
             e.printStackTrace();
         }
