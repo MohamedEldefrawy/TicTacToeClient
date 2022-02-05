@@ -47,6 +47,8 @@ public class OnlineGameBoardController implements Initializable {
     private String mySign;
     private String opponentSign;
     private FinishGameDto finishGameDto;
+    private Thread checkThread;
+
 
     private void checkPlayerTurn(Button boardButton) {
         boardButton.setOnAction(actionEvent -> {
@@ -89,7 +91,7 @@ public class OnlineGameBoardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        new Thread(() -> {
+        checkThread = new Thread(() -> {
             while (true) {
                 Platform.runLater(() -> {
                     check();
@@ -100,7 +102,8 @@ public class OnlineGameBoardController implements Initializable {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
+        checkThread.start();
 
         singleton = Singleton.getInstance();
         gameState = true;
@@ -273,6 +276,10 @@ public class OnlineGameBoardController implements Initializable {
         finishGameDto.setFinished(true);
         finishGameDto.setWinnerName(playerName);
         singleton.getConnectionHandler().sendFinishGameRequest(finishGameDto);
+        singleton.setGameInvitationDto(null);
+        singleton.setCreatedGameDto(null);
+        singleton.setGameInvitationAnswerDto(null);
+        checkThread.stop();
     }
 
     private void playersDraw() {
