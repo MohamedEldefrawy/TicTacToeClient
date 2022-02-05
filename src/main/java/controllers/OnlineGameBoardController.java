@@ -48,6 +48,7 @@ public class OnlineGameBoardController implements Initializable {
 
         boardButton.setOnAction(actionEvent -> {
             if (isMyTurn) {
+                enableAllButtons();
                 if (boardButton.getText().isEmpty()) {
                     playerMoveDto = new PlayerMoveDto();
                     boardButton.setText(mySign);
@@ -61,6 +62,7 @@ public class OnlineGameBoardController implements Initializable {
                 }
                 check();
             } else {
+                disableAllButtons();
                 opponentTurn();
             }
         });
@@ -83,9 +85,13 @@ public class OnlineGameBoardController implements Initializable {
         });
     }
 
-    private void disableButtons(Button button) {
+    private void disableButton(Button button) {
         button.setDisable(true);
     }
+    private void enableButton(Button button) {
+        button.setDisable(true);
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -138,10 +144,20 @@ public class OnlineGameBoardController implements Initializable {
         });
 
     }
+    public void disableAllButtons() {
+        for (Button button : buttons) {
+            disableButton(button);
+        }
+    }
+    public void enableAllButtons() {
+        for (Button button : buttons) {
+            enableButton(button);
+        }
+    }
 
     public void finish() {
         for (Button button : buttons) {
-            disableButtons(button);
+            disableButton(button);
         }
     }
 
