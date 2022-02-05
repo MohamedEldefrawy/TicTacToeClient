@@ -4,6 +4,15 @@ public class ReceivePlayerMoveDto {
     private String userName;
     private String position;
     private String sign;
+    private boolean gameState;
+
+    public boolean isGameState() {
+        return gameState;
+    }
+
+    public void setGameState(boolean gameState) {
+        this.gameState = gameState;
+    }
 
     public String getSign() {
         return sign;
