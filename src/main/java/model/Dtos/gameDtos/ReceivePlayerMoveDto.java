@@ -4,6 +4,8 @@ public class ReceivePlayerMoveDto {
     private String userName;
     private String position;
     private String sign;
+    private Integer gameId;
+
     private boolean gameState;
 
     public boolean isGameState() {
@@ -36,5 +38,13 @@ public class ReceivePlayerMoveDto {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public Integer getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(Integer gameId) {
+        this.gameId = gameId;
     }
 }

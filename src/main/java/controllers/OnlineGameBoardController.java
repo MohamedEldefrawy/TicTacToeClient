@@ -61,6 +61,7 @@ public class OnlineGameBoardController implements Initializable {
                     playerMoveDto.setPlayerName(player1.getText());
                     playerMoveDto.setSign(mySign);
                     playerMoveDto.setGameState(gameState);
+                    playerMoveDto.setGameId(singleton.getCreatedGameDto().getGameId());
                     singleton.getConnectionHandler().sendPlayerMove(playerMoveDto);
                     isMyTurn = false;
                     isOpponentTurn = true;

@@ -134,6 +134,7 @@ public class ConnectionHandler {
                     receivePlayerMove.setPosition(response.get("position").getAsString());
                     receivePlayerMove.setSign(response.get("sign").getAsString());
                     receivePlayerMove.setGameState(response.get("gameState").getAsBoolean());
+                    receivePlayerMove.setGameId(response.get("gameId").getAsInt());
                     singleton.setReceivePlayerMoveDto(receivePlayerMove);
                     Button selectedButton = singleton.getButtons().stream().filter(button ->
                             button.getId().split("n")[1].equals(receivePlayerMove.getPosition())).findFirst().get();
