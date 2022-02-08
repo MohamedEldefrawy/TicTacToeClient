@@ -1,8 +1,19 @@
 package model.Dtos.gameDtos;
 
 public class FinishGameDto {
+
+    private int gameId;
     private String winnerName;
     private boolean isFinished;
+
+
+    public int getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
+    }
 
     public String getWinnerName() {
         return winnerName;

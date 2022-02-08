@@ -19,11 +19,20 @@ public class GameStartThread implements Runnable {
         startGameThread.start();
     }
 
+    public void stopThread() {
+        startGameThread.stop();
+    }
+
 
     @Override
     public void run() {
+        System.out.println("Game start thread is running in peace");
         while (singleton.getCreatedGameDto() == null) {
-
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         Platform.runLater(() -> {

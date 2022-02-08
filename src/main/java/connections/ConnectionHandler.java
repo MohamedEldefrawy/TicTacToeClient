@@ -166,10 +166,8 @@ public class ConnectionHandler {
                 while (socket.isConnected()) {
                     try {
                         String response = reader.readUTF();
-                        System.out.println("from stream " + response);
                         responseHandler(response);
                     } catch (SocketException socketException) {
-                        System.out.println("socket has been closed");
                         break;
                     } catch (IOException exception) {
                         exception.printStackTrace();

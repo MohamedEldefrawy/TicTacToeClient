@@ -69,6 +69,7 @@ public class JsonBuilder {
     public static String finishGameRequest(FinishGameDto finishGameDto) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("operation", RequestTypes.gameFinished.toString());
+        jsonObject.addProperty("gameId", finishGameDto.getGameId());
         jsonObject.addProperty("isFinished", finishGameDto.isFinished());
         jsonObject.addProperty("winner", finishGameDto.getWinnerName());
         return jsonObject.toString();

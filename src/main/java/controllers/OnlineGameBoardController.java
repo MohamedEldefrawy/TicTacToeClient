@@ -41,7 +41,6 @@ public class OnlineGameBoardController implements Initializable {
     private final HelloApplication stage = new HelloApplication();
     private Singleton singleton;
     private boolean isMyTurn;
-    private boolean isOpponentTurn;
     private boolean gameState;
     private PlayerMoveDto playerMoveDto;
     private String mySign;
@@ -54,7 +53,6 @@ public class OnlineGameBoardController implements Initializable {
         boardButton.setOnAction(actionEvent -> {
             if (isMyTurn && gameState) {
                 if (boardButton.getText().isEmpty()) {
-                    playerMoveDto = new PlayerMoveDto();
                     boardButton.setText(mySign);
                     String position = boardButton.getId().split("n")[1];
                     playerMoveDto.setPosition(position);
@@ -64,7 +62,6 @@ public class OnlineGameBoardController implements Initializable {
                     playerMoveDto.setGameId(singleton.getCreatedGameDto().getGameId());
                     singleton.getConnectionHandler().sendPlayerMove(playerMoveDto);
                     isMyTurn = false;
-                    isOpponentTurn = true;
                 }
             } else {
                 opponentTurn();
@@ -83,7 +80,6 @@ public class OnlineGameBoardController implements Initializable {
                 });
             });
             btnPressed.fire();
-            isOpponentTurn = false;
             isMyTurn = true;
         });
     }
@@ -92,6 +88,7 @@ public class OnlineGameBoardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        playerMoveDto = new PlayerMoveDto();
         checkThread = new Thread(() -> {
             while (true) {
                 Platform.runLater(() -> {
@@ -125,7 +122,6 @@ public class OnlineGameBoardController implements Initializable {
             symbol2.setText(opponentSign);
             player2.setText(singleton.getCreatedGameDto().getPlayerO());
             isMyTurn = true;
-            isOpponentTurn = false;
         } else {
             mySign = "O";
             symbol1.setText(mySign);
@@ -134,7 +130,6 @@ public class OnlineGameBoardController implements Initializable {
             symbol2.setText(opponentSign);
             player2.setText(singleton.getCreatedGameDto().getPlayerX());
             isMyTurn = false;
-            isOpponentTurn = true;
         }
 
         buttons.add(btn1);
@@ -276,10 +271,13 @@ public class OnlineGameBoardController implements Initializable {
         finishGameDto = new FinishGameDto();
         finishGameDto.setFinished(true);
         finishGameDto.setWinnerName(playerName);
-        singleton.getConnectionHandler().sendFinishGameRequest(finishGameDto);
-        singleton.setGameInvitationDto(null);
-        singleton.setCreatedGameDto(null);
-        singleton.setGameInvitationAnswerDto(null);
+        if (singleton.getCreatedGameDto() != null) {
+            finishGameDto.setGameId(singleton.getCreatedGameDto().getGameId());
+            singleton.getConnectionHandler().sendFinishGameRequest(finishGameDto);
+            singleton.setCreatedGameDto(null);
+            singleton.setPlayerMoveDto(null);
+            singleton.setButtons(null);
+        }
         checkThread.stop();
     }
 
