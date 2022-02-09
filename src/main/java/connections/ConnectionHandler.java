@@ -138,9 +138,18 @@ public class ConnectionHandler {
                     singleton.setReceivePlayerMoveDto(receivePlayerMove);
                     Button selectedButton = singleton.getButtons().stream().filter(button ->
                             button.getId().split("n")[1].equals(receivePlayerMove.getPosition())).findFirst().get();
-                    System.out.println(receivePlayerMove.getSign() + "has been sent from " + receivePlayerMove.getUserName() + " to be played in position "
-                            + receivePlayerMove.getPosition());
-                    Platform.runLater(selectedButton::fire);
+                    Platform.runLater(() -> {
+                        System.out.println(receivePlayerMove.getSign() + "has been sent from " + receivePlayerMove.getUserName() + " to be played in position "
+                                + receivePlayerMove.getPosition());
+                        System.out.println("Before playing " + selectedButton.getText());
+                        selectedButton.setText(receivePlayerMove.getSign());
+                        System.out.println("Button text After " + selectedButton.getText());
+                        var buttons = singleton.getButtons();
+                        buttons.forEach(button -> {
+                            button.setDisable(false);
+                        });
+                        selectedButton.fire();
+                    });
                 }
             }
     }

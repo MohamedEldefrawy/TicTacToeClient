@@ -41,10 +41,12 @@ public class OnlineGameBoardController implements Initializable {
     private boolean isMyTurn;
     private final PlayerMoveDto playerMoveDto = new PlayerMoveDto();
     private boolean gameState;
-    private boolean opponentTurn;
     private String mySign;
     private String opponentSign;
     private Thread checkThread;
+
+    public OnlineGameBoardController() {
+    }
 
 
     private void checkPlayerTurn(Button boardButton) {
@@ -60,22 +62,13 @@ public class OnlineGameBoardController implements Initializable {
                     playerMoveDto.setGameId(singleton.getCreatedGameDto().getGameId());
                     singleton.getConnectionHandler().sendPlayerMove(playerMoveDto);
                     isMyTurn = false;
+                    disableAllButtons();
                 }
             } else {
-                opponentTurn();
+                isMyTurn = true;
             }
         });
     }
-
-    private void opponentTurn() {
-        Button btnPressed = buttons.stream().filter(button -> button.getId().split("n")[1]
-                        .equals(singleton.getReceivePlayerMoveDto().getPosition()))
-                .findFirst().get();
-        btnPressed.setOnAction(event -> btnPressed.setText(opponentSign));
-        btnPressed.fire();
-        isMyTurn = true;
-    }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -132,6 +125,9 @@ public class OnlineGameBoardController implements Initializable {
         buttons.add(btn7);
         buttons.add(btn8);
         buttons.add(btn9);
+        if (!isMyTurn) {
+            disableAllButtons();
+        }
 
 
         for (Button button : buttons) {
@@ -243,7 +239,6 @@ public class OnlineGameBoardController implements Initializable {
         singleton.setCreatedGameDto(null);
         singleton.setPlayerMoveDto(null);
         singleton.setGameInvitationDto(null);
-        singleton.setReceivePlayerMoveDto(null);
         singleton.setButtons(null);
         checkThread.stop();
     }
