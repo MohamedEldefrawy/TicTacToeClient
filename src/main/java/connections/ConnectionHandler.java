@@ -138,9 +138,9 @@ public class ConnectionHandler {
                     singleton.setReceivePlayerMoveDto(receivePlayerMove);
                     Button selectedButton = singleton.getButtons().stream().filter(button ->
                             button.getId().split("n")[1].equals(receivePlayerMove.getPosition())).findFirst().get();
-                    Platform.runLater(() -> {
-                        selectedButton.fire();
-                    });
+                    System.out.println(receivePlayerMove.getSign() + "has been sent from " + receivePlayerMove.getUserName() + " to be played in position "
+                            + receivePlayerMove.getPosition());
+                    Platform.runLater(selectedButton::fire);
                 }
             }
     }

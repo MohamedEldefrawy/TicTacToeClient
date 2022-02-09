@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class OnlineGameBoardController implements Initializable {
@@ -36,16 +35,15 @@ public class OnlineGameBoardController implements Initializable {
     public Text player2;
     public JFXButton btnSurrender;
     public JFXButton btnRecord;
-    private final Random random = new Random();
     private static final List<Button> buttons = new ArrayList<>();
     private final HelloApplication stage = new HelloApplication();
     private Singleton singleton;
     private boolean isMyTurn;
+    private final PlayerMoveDto playerMoveDto = new PlayerMoveDto();
     private boolean gameState;
-    private PlayerMoveDto playerMoveDto;
+    private boolean opponentTurn;
     private String mySign;
     private String opponentSign;
-    private FinishGameDto finishGameDto;
     private Thread checkThread;
 
 
@@ -70,32 +68,22 @@ public class OnlineGameBoardController implements Initializable {
     }
 
     private void opponentTurn() {
-        Platform.runLater(() -> {
-            Button btnPressed = buttons.stream().filter(button -> button.getId().split("n")[1]
-                            .equals(singleton.getReceivePlayerMoveDto().getPosition()))
-                    .findFirst().get();
-            btnPressed.setOnAction(event -> {
-                Platform.runLater(() -> {
-                    btnPressed.setText(opponentSign);
-                });
-            });
-            btnPressed.fire();
-            isMyTurn = true;
-        });
+        Button btnPressed = buttons.stream().filter(button -> button.getId().split("n")[1]
+                        .equals(singleton.getReceivePlayerMoveDto().getPosition()))
+                .findFirst().get();
+        btnPressed.setOnAction(event -> btnPressed.setText(opponentSign));
+        btnPressed.fire();
+        isMyTurn = true;
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        playerMoveDto = new PlayerMoveDto();
         checkThread = new Thread(() -> {
             while (true) {
-                Platform.runLater(() -> {
-                    check();
-                });
+                Platform.runLater(this::check);
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -105,8 +93,10 @@ public class OnlineGameBoardController implements Initializable {
 
         singleton = Singleton.getInstance();
         gameState = true;
+
         PlayerMoveListener playerMoveListener = new PlayerMoveListener();
         playerMoveListener.startThread();
+
         btnRecord.setOnAction(actionEvent -> {
             SaveGameDto saveGameDto = new SaveGameDto();
             saveGameDto.setUsername(singleton.getCurrentUser());
@@ -114,6 +104,7 @@ public class OnlineGameBoardController implements Initializable {
             singleton.getConnectionHandler().sendSaveGame(saveGameDto);
 
         });
+
         if (singleton.getCreatedGameDto().getPlayerX().equals(singleton.getCurrentUser())) {
             mySign = "X";
             symbol1.setText(mySign);
@@ -149,13 +140,7 @@ public class OnlineGameBoardController implements Initializable {
 
         singleton.setButtons(buttons);
 
-        btnSurrender.setOnAction(event -> {
-            System.out.println("surrender");
-        });
-
-        btnRecord.setOnAction(event -> {
-            System.out.println("record");
-        });
+        btnSurrender.setOnAction(event -> System.out.println("surrender"));
 
     }
     public void disableAllButtons() {
@@ -169,93 +154,73 @@ public class OnlineGameBoardController implements Initializable {
         }
     }
 
-    public void finish() {
-        disableAllButtons();
-    }
-
     public void check() {
         //check for playerWins
         if (btn1.getText().equals(mySign) && btn2.getText().equals(mySign) && btn3.getText().equals(mySign)) {
             playerWins();
-            finish();
             sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn4.getText().equals(mySign) && btn5.getText().equals(mySign) && btn6.getText().equals(mySign)) {
             playerWins();
-            finish();
             sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn7.getText().equals(mySign) && btn8.getText().equals(mySign) && btn9.getText().equals(mySign)) {
             playerWins();
-            finish();
             sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn1.getText().equals(mySign) && btn4.getText().equals(mySign) && btn7.getText().equals(mySign)) {
             playerWins();
-            finish();
             sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn2.getText().equals(mySign) && btn5.getText().equals(mySign) && btn8.getText().equals(mySign)) {
             playerWins();
-            finish();
             sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn3.getText().equals(mySign) && btn6.getText().equals(mySign) && btn9.getText().equals(mySign)) {
             playerWins();
-            finish();
             sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn1.getText().equals(mySign) && btn5.getText().equals(mySign) && btn9.getText().equals(mySign)) {
             playerWins();
-            finish();
             sendWinnerRequest(singleton.getCurrentUser());
         }
         if (btn3.getText().equals(mySign) && btn5.getText().equals(mySign) && btn7.getText().equals(mySign)) {
             playerWins();
-            finish();
             sendWinnerRequest(singleton.getCurrentUser());
         }
 
         //check for opponentWins
         if (btn1.getText().equals(opponentSign) && btn2.getText().equals(opponentSign) && btn3.getText().equals(opponentSign)) {
             opponentWins();
-            finish();
             sendWinnerRequest(player2.getText());
 
         }
         if (btn4.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn6.getText().equals(opponentSign)) {
             opponentWins();
-            finish();
             sendWinnerRequest(player2.getText());
         }
         if (btn7.getText().equals(opponentSign) && btn8.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
             opponentWins();
-            finish();
             sendWinnerRequest(player2.getText());
         }
         if (btn1.getText().equals(opponentSign) && btn4.getText().equals(opponentSign) && btn7.getText().equals(opponentSign)) {
             opponentWins();
-            finish();
             sendWinnerRequest(player2.getText());
         }
         if (btn2.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn8.getText().equals(opponentSign)) {
             opponentWins();
-            finish();
             sendWinnerRequest(player2.getText());
         }
         if (btn3.getText().equals(opponentSign) && btn6.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
             opponentWins();
-            finish();
             sendWinnerRequest(player2.getText());
         }
         if (btn1.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
             opponentWins();
-            finish();
             sendWinnerRequest(player2.getText());
         }
         if (btn3.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn7.getText().equals(opponentSign)) {
             opponentWins();
-            finish();
             sendWinnerRequest(player2.getText());
         }
         //check for draw
@@ -268,16 +233,18 @@ public class OnlineGameBoardController implements Initializable {
     }
 
     private void sendWinnerRequest(String playerName) {
-        finishGameDto = new FinishGameDto();
+        FinishGameDto finishGameDto = new FinishGameDto();
         finishGameDto.setFinished(true);
         finishGameDto.setWinnerName(playerName);
         if (singleton.getCreatedGameDto() != null) {
             finishGameDto.setGameId(singleton.getCreatedGameDto().getGameId());
             singleton.getConnectionHandler().sendFinishGameRequest(finishGameDto);
-            singleton.setCreatedGameDto(null);
-            singleton.setPlayerMoveDto(null);
-            singleton.setButtons(null);
         }
+        singleton.setCreatedGameDto(null);
+        singleton.setPlayerMoveDto(null);
+        singleton.setGameInvitationDto(null);
+        singleton.setReceivePlayerMoveDto(null);
+        singleton.setButtons(null);
         checkThread.stop();
     }
 

@@ -16,7 +16,15 @@ public class PlayerMoveListener implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("player move listener thread started peacefully");
+
         while (singleton.getReceivePlayerMoveDto() == null) {
+            System.out.println("receivePlayerMoveDto = null");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

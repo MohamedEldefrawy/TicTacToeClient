@@ -29,19 +29,9 @@ public class GameInvitationReceiver {
         initThread();
     }
 
-    public void stopThread() {
-        exit = true;
-        gameInvitationReceiver.stop();
-    }
-
     private void initThread() {
         gameInvitationReceiver = new Thread(() -> {
             while (!exit) {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 if (singleton.getGameInvitationDto() != null)
                     Platform.runLater(() -> {
                         Alert alert = AlertsGenerator
@@ -60,12 +50,16 @@ public class GameInvitationReceiver {
                             singleton.getConnectionHandler().sendGameInvitationAnswer(gameInvitationAnswerDto);
                         }
                     });
+
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
         gameInvitationReceiver.start();
     }
-
-
 }
 
 
