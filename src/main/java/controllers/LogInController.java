@@ -1,6 +1,7 @@
 package controllers;
 
 import com.client.client.HelloApplication;
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,6 +23,7 @@ public class LogInController implements Initializable {
     public TextField userTextField;
     public PasswordField passTextField;
     public Label checkLabel;
+    public JFXButton btnhome;
     private Singleton singleton;
 
 
@@ -30,11 +32,19 @@ public class LogInController implements Initializable {
         singleton = Singleton.getInstance();
         singleton.setConnectionHandler();
 
-
+        btnhome.setOnAction(actionEvent -> backBtnOnClick(actionEvent));
         btnSignIn.setOnAction(this::btnSignInClicked);
         btnSignUp.setOnAction(this::btnSignUpClicked);
     }
-
+    public void backBtnOnClick(ActionEvent e)
+    {
+        HelloApplication obj = new HelloApplication();
+        try {
+            obj.switchToMainMenu(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
     public void btnSignInClicked(ActionEvent e) {
         if (singleton.getConnectionHandler() != null)
             System.out.println("Singleton status from login" + singleton.getConnectionHandler());
@@ -55,7 +65,7 @@ public class LogInController implements Initializable {
 
         singleton.getConnectionHandler().sendLoginRequest(loginUserDto);
 
-        while (!singleton.getLoginStatus()) {
+        while (singleton.getLoginStatus() == null) {
             // Show Spinner
             System.out.println("Stuck!!!!!!");
         }
@@ -63,15 +73,17 @@ public class LogInController implements Initializable {
         if (singleton.getLoginStatus()) {
             HelloApplication obj = new HelloApplication();
             try {
-                obj.switchToGameFirstScene(e);
                 singleton.setCurrentUser(loginUserDto.getUserName());
                 singleton.setLoginStatus(true);
+                System.out.println("current user " + singleton.getCurrentUser());
+                obj.switchToOnlineMenuScene(e);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            singleton.setLoginStatus(null);
         } else {
             System.out.println("Wrong username or password");
-            singleton.setLoginStatus(false);
+            singleton.setLoginStatus(null);
         }
     }
 

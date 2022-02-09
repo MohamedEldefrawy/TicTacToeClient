@@ -10,9 +10,9 @@
 <?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a0049;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
-   <TextField fx:id="txtUserName" layoutX="226.0" layoutY="188.0" opacity="0.6" promptText="Username" />
-   <PasswordField fx:id="txtPassword" layoutX="225.0" layoutY="219.0" opacity="0.6" promptText="Password" />
-   <PasswordField fx:id="txtConfirmPassword" layoutX="226.0" layoutY="250.0" opacity="0.6" promptText="Confirm Password" />
+   <TextField fx:id="txtUserName" layoutX="226.0" layoutY="188.0" opacity="0.6" promptText="Username" style="-fx-background-radius: 30;" />
+   <PasswordField fx:id="txtPassword" layoutX="225.0" layoutY="219.0" opacity="0.6" promptText="Password" style="-fx-background-radius: 30;" />
+   <PasswordField fx:id="txtConfirmPassword" layoutX="226.0" layoutY="250.0" opacity="0.6" promptText="Confirm Password" style="-fx-background-radius: 30;" />
    <Text fill="#ebe121" layoutX="249.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic " wrappingWidth="76.13671875">
       <font>
          <Font name="Cooper Black" size="48.0" />
@@ -39,4 +39,9 @@
       </font>
    </JFXButton>
    <Label fx:id="txtError" layoutX="200.0" layoutY="283.0" prefHeight="17.0" prefWidth="201.0" text="Wrong input please enter valid input" textFill="#e80a0a" visible="false" />
+   <JFXButton fx:id="btnback1" layoutX="23.0" layoutY="18.0" prefHeight="43.0" prefWidth="86.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Back">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+   </JFXButton>
 </Pane>
