@@ -35,7 +35,7 @@ public class OnlineGameBoardController implements Initializable {
     public Text player2;
     public JFXButton btnSurrender;
     public JFXButton btnRecord;
-    private static final List<Button> buttons = new ArrayList<>();
+    private final List<Button> buttons = new ArrayList<>();
     private final HelloApplication stage = new HelloApplication();
     private Singleton singleton;
     private boolean isMyTurn;
@@ -139,11 +139,13 @@ public class OnlineGameBoardController implements Initializable {
         btnSurrender.setOnAction(event -> System.out.println("surrender"));
 
     }
+
     public void disableAllButtons() {
         for (Button button : buttons) {
             button.setDisable(true);
         }
     }
+
     public void enableAllButtons() {
         for (Button button : buttons) {
             button.setDisable(false);
@@ -153,78 +155,61 @@ public class OnlineGameBoardController implements Initializable {
     public void check() {
         //check for playerWins
         if (btn1.getText().equals(mySign) && btn2.getText().equals(mySign) && btn3.getText().equals(mySign)) {
-            playerWins();
-            sendWinnerRequest(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUser());
         }
         if (btn4.getText().equals(mySign) && btn5.getText().equals(mySign) && btn6.getText().equals(mySign)) {
-            playerWins();
-            sendWinnerRequest(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUser());
         }
         if (btn7.getText().equals(mySign) && btn8.getText().equals(mySign) && btn9.getText().equals(mySign)) {
-            playerWins();
-            sendWinnerRequest(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUser());
         }
         if (btn1.getText().equals(mySign) && btn4.getText().equals(mySign) && btn7.getText().equals(mySign)) {
-            playerWins();
-            sendWinnerRequest(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUser());
         }
         if (btn2.getText().equals(mySign) && btn5.getText().equals(mySign) && btn8.getText().equals(mySign)) {
-            playerWins();
-            sendWinnerRequest(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUser());
         }
         if (btn3.getText().equals(mySign) && btn6.getText().equals(mySign) && btn9.getText().equals(mySign)) {
-            playerWins();
-            sendWinnerRequest(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUser());
         }
         if (btn1.getText().equals(mySign) && btn5.getText().equals(mySign) && btn9.getText().equals(mySign)) {
-            playerWins();
-            sendWinnerRequest(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUser());
         }
         if (btn3.getText().equals(mySign) && btn5.getText().equals(mySign) && btn7.getText().equals(mySign)) {
-            playerWins();
-            sendWinnerRequest(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUser());
         }
 
         //check for opponentWins
         if (btn1.getText().equals(opponentSign) && btn2.getText().equals(opponentSign) && btn3.getText().equals(opponentSign)) {
-            opponentWins();
-            sendWinnerRequest(player2.getText());
+            opponentWins(player2.getText());
 
         }
         if (btn4.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn6.getText().equals(opponentSign)) {
-            opponentWins();
-            sendWinnerRequest(player2.getText());
+            opponentWins(player2.getText());
         }
         if (btn7.getText().equals(opponentSign) && btn8.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
-            opponentWins();
-            sendWinnerRequest(player2.getText());
+            opponentWins(player2.getText());
         }
         if (btn1.getText().equals(opponentSign) && btn4.getText().equals(opponentSign) && btn7.getText().equals(opponentSign)) {
-            opponentWins();
-            sendWinnerRequest(player2.getText());
+            opponentWins(player2.getText());
         }
         if (btn2.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn8.getText().equals(opponentSign)) {
-            opponentWins();
-            sendWinnerRequest(player2.getText());
+            opponentWins(player2.getText());
         }
         if (btn3.getText().equals(opponentSign) && btn6.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
-            opponentWins();
-            sendWinnerRequest(player2.getText());
+            opponentWins(player2.getText());
         }
         if (btn1.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn9.getText().equals(opponentSign)) {
-            opponentWins();
-            sendWinnerRequest(player2.getText());
+            opponentWins(player2.getText());
         }
         if (btn3.getText().equals(opponentSign) && btn5.getText().equals(opponentSign) && btn7.getText().equals(opponentSign)) {
-            opponentWins();
-            sendWinnerRequest(player2.getText());
+            opponentWins(player2.getText());
         }
         //check for draw
         if (!btn1.getText().equals("") && !btn2.getText().equals("") && !btn3.getText().equals("") && !btn4.getText().equals("")
                 && !btn5.getText().equals("") && !btn6.getText().equals("") && !btn7.getText().equals("")
                 && !btn8.getText().equals("") && !btn9.getText().equals("")) {
             playersDraw();
-            sendWinnerRequest("draw");
         }
     }
 
@@ -250,10 +235,12 @@ public class OnlineGameBoardController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        sendWinnerRequest("draw");
     }
 
-    public void playerWins() {
+    public void playerWins(String playerName) {
         try {
+            sendWinnerRequest(playerName);
             gameState = false;
             stage.switchToWinOnline();
         } catch (IOException e) {
@@ -261,8 +248,9 @@ public class OnlineGameBoardController implements Initializable {
         }
     }
 
-    public void opponentWins() {
+    public void opponentWins(String playerName) {
         try {
+            sendWinnerRequest(playerName);
             stage.switchToLoseOnline();
             gameState = false;
         } catch (IOException e) {
