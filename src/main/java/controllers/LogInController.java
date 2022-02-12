@@ -51,6 +51,7 @@ public class LogInController implements Initializable {
             System.out.println("Singleton status from login" + singleton.getConnectionHandler());
         else
             System.out.println("connectionHandler is null");
+
         LoginUserDto loginUserDto = new LoginUserDto();
         loginUserDto.setUserName(userTextField.getText());
         loginUserDto.setPassword(passTextField.getText());
@@ -66,25 +67,22 @@ public class LogInController implements Initializable {
 
         singleton.getConnectionHandler().sendLoginRequest(loginUserDto);
 
-        while (singleton.getLoginStatus() == null) {
+        while (singleton.getCurrentUserDto() == null) {
             // Show Spinner
             System.out.println("Stuck!!!!!!");
         }
 
-        if (singleton.getLoginStatus()) {
+        if (singleton.getCurrentUserDto().isLoggedIn()) {
             HelloApplication obj = new HelloApplication();
             try {
-                singleton.setCurrentUser(loginUserDto.getUserName());
-                singleton.setLoginStatus(true);
-                System.out.println("current user " + singleton.getCurrentUser());
+                singleton.getCurrentUserDto().setLoggedIn(true);
+                System.out.println("current user " + singleton.getCurrentUserDto().getUserName());
                 obj.switchToOnlineMenuScene();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            singleton.setLoginStatus(null);
         } else {
             System.out.println("Wrong username or password");
-            singleton.setLoginStatus(null);
         }
     }
 

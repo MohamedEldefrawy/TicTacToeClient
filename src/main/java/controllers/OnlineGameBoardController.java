@@ -92,16 +92,16 @@ public class OnlineGameBoardController implements Initializable {
 
         btnRecord.setOnAction(actionEvent -> {
             SaveGameDto saveGameDto = new SaveGameDto();
-            saveGameDto.setUsername(singleton.getCurrentUser());
+            saveGameDto.setUsername(singleton.getCurrentUserDto().getUserName());
             saveGameDto.setGameId(singleton.getCreatedGameDto().getGameId());
             singleton.getConnectionHandler().sendSaveGame(saveGameDto);
 
         });
 
-        if (singleton.getCreatedGameDto().getPlayerX().equals(singleton.getCurrentUser())) {
+        if (singleton.getCreatedGameDto().getPlayerX().equals(singleton.getCurrentUserDto().getUserName())) {
             mySign = "X";
             symbol1.setText(mySign);
-            player1.setText(singleton.getCurrentUser());
+            player1.setText(singleton.getCurrentUserDto().getUserName());
             opponentSign = "O";
             symbol2.setText(opponentSign);
             player2.setText(singleton.getCreatedGameDto().getPlayerO());
@@ -109,7 +109,7 @@ public class OnlineGameBoardController implements Initializable {
         } else {
             mySign = "O";
             symbol1.setText(mySign);
-            player1.setText(singleton.getCurrentUser());
+            player1.setText(singleton.getCurrentUserDto().getUserName());
             opponentSign = "X";
             symbol2.setText(opponentSign);
             player2.setText(singleton.getCreatedGameDto().getPlayerX());
@@ -155,28 +155,28 @@ public class OnlineGameBoardController implements Initializable {
     public void check() {
         //check for playerWins
         if (btn1.getText().equals(mySign) && btn2.getText().equals(mySign) && btn3.getText().equals(mySign)) {
-            playerWins(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUserDto().getUserName());
         }
         if (btn4.getText().equals(mySign) && btn5.getText().equals(mySign) && btn6.getText().equals(mySign)) {
-            playerWins(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUserDto().getUserName());
         }
         if (btn7.getText().equals(mySign) && btn8.getText().equals(mySign) && btn9.getText().equals(mySign)) {
-            playerWins(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUserDto().getUserName());
         }
         if (btn1.getText().equals(mySign) && btn4.getText().equals(mySign) && btn7.getText().equals(mySign)) {
-            playerWins(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUserDto().getUserName());
         }
         if (btn2.getText().equals(mySign) && btn5.getText().equals(mySign) && btn8.getText().equals(mySign)) {
-            playerWins(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUserDto().getUserName());
         }
         if (btn3.getText().equals(mySign) && btn6.getText().equals(mySign) && btn9.getText().equals(mySign)) {
-            playerWins(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUserDto().getUserName());
         }
         if (btn1.getText().equals(mySign) && btn5.getText().equals(mySign) && btn9.getText().equals(mySign)) {
-            playerWins(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUserDto().getUserName());
         }
         if (btn3.getText().equals(mySign) && btn5.getText().equals(mySign) && btn7.getText().equals(mySign)) {
-            playerWins(singleton.getCurrentUser());
+            playerWins(singleton.getCurrentUserDto().getUserName());
         }
 
         //check for opponentWins

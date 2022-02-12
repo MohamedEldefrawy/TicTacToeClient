@@ -12,10 +12,8 @@ public class Singleton {
     private static Singleton singleton = null;
 
     private ConnectionHandler connectionHandler;
-    private Boolean loginStatus = null;
     private boolean createUserResponse;
     private boolean serverStatus;
-    private String currentUser;
     private List<UserDto> onlineUsers = new ArrayList<>();
     private String senderName;
     private ReceiveGameInvitationDto gameInvitationDto;
@@ -24,6 +22,16 @@ public class Singleton {
     private PlayerMoveDto playerMoveDto;
     private ReceivePlayerMoveDto receivePlayerMoveDto;
     private List<Button> buttons;
+
+    public UserDto getCurrentUserDto() {
+        return currentUserDto;
+    }
+
+    public void setCurrentUserDto(UserDto currentUserDto) {
+        this.currentUserDto = currentUserDto;
+    }
+
+    private UserDto currentUserDto;
 
     public ReceivePlayerMoveDto getReceivePlayerMoveDto() {
         return receivePlayerMoveDto;
@@ -86,13 +94,13 @@ public class Singleton {
             connectionHandler = new ConnectionHandler();
     }
 
-    public Boolean getLoginStatus() {
-        return loginStatus;
-    }
+//    public Boolean getLoginStatus() {
+//        return loginStatus;
+//    }
 
-    public void setLoginStatus(Boolean loginStatus) {
-        this.loginStatus = loginStatus;
-    }
+//    public void setLoginStatus(Boolean loginStatus) {
+//        this.loginStatus = loginStatus;
+//    }
 
     public Boolean getCreateUserResponse() {
         return createUserResponse;
@@ -102,13 +110,6 @@ public class Singleton {
         this.createUserResponse = createUserResponse;
     }
 
-    public String getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(String currentUser) {
-        this.currentUser = currentUser;
-    }
 
     public boolean getServerStatus() {
         return serverStatus;

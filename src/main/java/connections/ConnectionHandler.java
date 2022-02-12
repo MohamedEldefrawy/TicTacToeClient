@@ -7,6 +7,7 @@ import model.Dtos.gameDtos.*;
 import model.Dtos.userDtos.LoginUserDto;
 import model.Dtos.userDtos.LogoutUserDto;
 import model.Dtos.userDtos.RegisterUserDto;
+import model.Dtos.userDtos.UserDto;
 import services.GameService;
 import services.UserService;
 import utilities.JsonBuilder;
@@ -108,7 +109,17 @@ public class ConnectionHandler {
 
         if (response.get("operation") != null)
             switch (response.get("operation").getAsString()) {
-                case "login" -> singleton.setLoginStatus(response.get("result").getAsBoolean());
+                case "login" -> {
+                    UserDto userDto = new UserDto();
+                    userDto.setLoggedIn(response.get("result").getAsBoolean());
+                    if (userDto.isLoggedIn()) {
+                        userDto.setUserName(response.get("userName").getAsString());
+                        userDto.setWins(response.get("wins").getAsInt());
+                        userDto.setLosses(response.get("losses").getAsInt());
+                        userDto.setDraws(response.get("draws").getAsInt());
+                    }
+                    singleton.setCurrentUserDto(userDto);
+                }
                 case "signUp" -> singleton.setCreateUserResponse(response.get("result").getAsBoolean());
                 case "refreshUsers" -> singleton.setOnlineUsers(JsonBuilder.toUsersDtoList(response.get("onlineUsers").getAsJsonArray()));
                 case "player2Response" -> {

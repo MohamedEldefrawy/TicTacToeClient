@@ -54,20 +54,6 @@ public class OnlineModeController implements Initializable {
         userService = new UserService();
         TableRefresher tableRefresher = new TableRefresher();
 
-//        UserDto currentUser = null;
-
-//        while (singleton.getOnlineUsers() == null) {
-//
-//        }
-//
-//        currentUser = singleton.getOnlineUsers().stream().
-//                filter(userDto -> userDto.getUserName().equals(singleton.getCurrentUser())).findFirst().get();
-////
-//        txtUserName.setText(currentUser.getUserName());
-//        txtWins.setText(String.valueOf(currentUser.getWins()));
-//        txtLosses.setText(String.valueOf(currentUser.getLosses()));
-//        txtDraws.setText(String.valueOf(currentUser.getDraws()));
-
         btnBack.setOnAction(event -> {
             HelloApplication helloApplication = new HelloApplication();
             try {
@@ -81,6 +67,10 @@ public class OnlineModeController implements Initializable {
         tableRefresher.setUsers_table(users_table);
 
         Thread tableRefreshThread = tableRefresher.getTableRefreshThread();
+        txtUserName.setText(singleton.getCurrentUserDto().getUserName());
+        txtWins.setText(String.valueOf(singleton.getCurrentUserDto().getWins()));
+        txtLosses.setText(String.valueOf(singleton.getCurrentUserDto().getLosses()));
+        txtDraws.setText(String.valueOf(singleton.getCurrentUserDto().getDraws()));
 
         col_username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         col_wins.setCellValueFactory(new PropertyValueFactory<>("wins"));
@@ -103,7 +93,7 @@ public class OnlineModeController implements Initializable {
 
                     {
                         request.setOnAction((ActionEvent event) -> {
-                            String user = singleton.getCurrentUser();
+                            String user = singleton.getCurrentUserDto().getUserName();
                             String opponentName = getTableView().getItems().get(getIndex()).getUserName();
                             GameInvitationDto gameInvitationDto = new GameInvitationDto();
                             gameInvitationDto.setOpponentUserName(opponentName);

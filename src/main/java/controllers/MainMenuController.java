@@ -65,9 +65,9 @@ public class MainMenuController implements Initializable {
             if (result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
                 LogoutUserDto logoutUserDto = new LogoutUserDto();
                 logoutUserDto.setStatus(false);
-                logoutUserDto.setUserName(singleton.getCurrentUser());
+                logoutUserDto.setUserName(singleton.getCurrentUserDto().getUserName());
 
-                if (singleton.getCurrentUser() != null) {
+                if (singleton.getCurrentUserDto() != null) {
                     singleton.getConnectionHandler().sendLogoutRequest(logoutUserDto);
                     singleton.getConnectionHandler().closeConnection();
                 }
