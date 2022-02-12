@@ -41,7 +41,7 @@ public class MainMenuController implements Initializable {
                 if (singleton.getServerStatus()) {
                     HelloApplication obj = new HelloApplication();
                     try {
-                        obj.switchToLoginScene(actionEvent);
+                        obj.switchToLoginScene();
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -56,37 +56,37 @@ public class MainMenuController implements Initializable {
 
         singleton = Singleton.getInstance();
 
-            HelloApplication.getStage().setOnCloseRequest(event -> {
-                event.consume();
-                Alert alertDialog;
-                alertDialog = AlertsGenerator.createConfirmationDialog();
-                Optional<ButtonType> result = alertDialog.showAndWait();
+        HelloApplication.getStage().setOnCloseRequest(event -> {
+            event.consume();
+            Alert alertDialog;
+            alertDialog = AlertsGenerator.createConfirmationDialog();
+            Optional<ButtonType> result = alertDialog.showAndWait();
 
-                if (result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
-                    LogoutUserDto logoutUserDto = new LogoutUserDto();
-                    logoutUserDto.setStatus(false);
-                    logoutUserDto.setUserName(singleton.getCurrentUser());
+            if (result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
+                LogoutUserDto logoutUserDto = new LogoutUserDto();
+                logoutUserDto.setStatus(false);
+                logoutUserDto.setUserName(singleton.getCurrentUser());
 
-                    if (singleton.getCurrentUser() != null) {
-                        singleton.getConnectionHandler().sendLogoutRequest(logoutUserDto);
-                        singleton.getConnectionHandler().closeConnection();
-                    }
-
-                    System.exit(0);
-                } else if (result.get().getButtonData() == ButtonBar.ButtonData.CANCEL_CLOSE) {
-                    alertDialog.close();
+                if (singleton.getCurrentUser() != null) {
+                    singleton.getConnectionHandler().sendLogoutRequest(logoutUserDto);
+                    singleton.getConnectionHandler().closeConnection();
                 }
-            });
+
+                System.exit(0);
+            } else if (result.get().getButtonData() == ButtonBar.ButtonData.CANCEL_CLOSE) {
+                alertDialog.close();
+            }
+        });
 
         btnSinglePlayer.setOnAction(actionEvent -> {
             HelloApplication obj = new HelloApplication();
-            try{
-                obj.switchToDifficulty(actionEvent);
+            try {
+                obj.switchToDifficulty();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-    btnExit.setOnAction(actionEvent -> exit());
+        btnExit.setOnAction(actionEvent -> exit());
     }
 }
 

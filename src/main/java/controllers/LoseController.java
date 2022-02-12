@@ -22,7 +22,7 @@ public class LoseController implements Initializable {
     {
         HelloApplication obj = new HelloApplication();
         try {
-            obj.switchToMainMenu(e);
+            obj.switchToMainMenu();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -31,7 +31,7 @@ public class LoseController implements Initializable {
     {
         HelloApplication obj = new HelloApplication();
         try {
-            obj.switchToDifficulty(e);
+            obj.switchToDifficulty();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

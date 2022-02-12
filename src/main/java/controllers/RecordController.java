@@ -28,7 +28,7 @@ public class RecordController implements Initializable {
     {
         HelloApplication obj=new HelloApplication();
         try {
-            obj.switchToOnlinePVP(e);
+            obj.switchToOnlinePVP();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class RecordController implements Initializable {
     {
         HelloApplication obj=new HelloApplication();
         try {
-            obj.switchToMainMenu(e);
+            obj.switchToMainMenu();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

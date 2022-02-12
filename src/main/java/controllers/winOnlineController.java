@@ -16,11 +16,11 @@ public class winOnlineController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btnHome.setOnAction(actionEvent -> btnHomeOnClick(actionEvent));
     }
-    public void btnHomeOnClick(ActionEvent e)
-    {
+
+    public void btnHomeOnClick(ActionEvent e) {
         HelloApplication obj = new HelloApplication();
         try {
-            obj.switchToOnlinePVP(e);
+            obj.switchToOnlinePVP();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

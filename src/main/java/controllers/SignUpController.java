@@ -35,7 +35,7 @@ public class SignUpController implements Initializable {
     {
         HelloApplication obj = new HelloApplication();
         try {
-            obj.switchToLoginScene(e);
+            obj.switchToLoginScene();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -76,7 +76,7 @@ public class SignUpController implements Initializable {
             if (singleton.getCreateUserResponse()) {
                 HelloApplication obj = new HelloApplication();
                 try {
-                    obj.switchToLoginScene(event);
+                    obj.switchToLoginScene();
                     singleton.setCreateUserResponse(true);
                 } catch (IOException ex) {
                     ex.printStackTrace();

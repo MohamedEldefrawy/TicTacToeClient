@@ -36,15 +36,16 @@ public class LogInController implements Initializable {
         btnSignIn.setOnAction(this::btnSignInClicked);
         btnSignUp.setOnAction(this::btnSignUpClicked);
     }
-    public void backBtnOnClick(ActionEvent e)
-    {
+
+    public void backBtnOnClick(ActionEvent e) {
         HelloApplication obj = new HelloApplication();
         try {
-            obj.switchToMainMenu(e);
+            obj.switchToMainMenu();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
+
     public void btnSignInClicked(ActionEvent e) {
         if (singleton.getConnectionHandler() != null)
             System.out.println("Singleton status from login" + singleton.getConnectionHandler());
@@ -76,7 +77,7 @@ public class LogInController implements Initializable {
                 singleton.setCurrentUser(loginUserDto.getUserName());
                 singleton.setLoginStatus(true);
                 System.out.println("current user " + singleton.getCurrentUser());
-                obj.switchToOnlineMenuScene(e);
+                obj.switchToOnlineMenuScene();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -90,7 +91,7 @@ public class LogInController implements Initializable {
     public void btnSignUpClicked(ActionEvent e) {
         HelloApplication obj = new HelloApplication();
         try {
-            obj.switchToSignUpScene(e);
+            obj.switchToSignUpScene();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

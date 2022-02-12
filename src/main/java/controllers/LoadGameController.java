@@ -31,11 +31,11 @@ public class LoadGameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backBtn.setOnAction(actionEvent -> btnBackOnClick(actionEvent));
     }
-    public void btnBackOnClick(ActionEvent e)
-    {
-        HelloApplication obj=new HelloApplication();
+
+    public void btnBackOnClick(ActionEvent e) {
+        HelloApplication obj = new HelloApplication();
         try {
-           obj.switchToRecordScene(e);
+            obj.switchToRecordScene();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

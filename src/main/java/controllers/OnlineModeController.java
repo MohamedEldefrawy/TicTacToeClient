@@ -1,5 +1,6 @@
 package controllers;
 
+import com.client.client.HelloApplication;
 import com.jfoenix.controls.JFXButton;
 import controllers.threads.GameInvitationReceiver;
 import controllers.threads.GameStartThread;
@@ -18,6 +19,7 @@ import model.Dtos.userDtos.UserDto;
 import services.UserService;
 import utilities.Singleton;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -66,7 +68,14 @@ public class OnlineModeController implements Initializable {
 //        txtLosses.setText(String.valueOf(currentUser.getLosses()));
 //        txtDraws.setText(String.valueOf(currentUser.getDraws()));
 
-        btnBack.setOnAction(event -> System.out.println("Clicked"));
+        btnBack.setOnAction(event -> {
+            HelloApplication helloApplication = new HelloApplication();
+            try {
+                helloApplication.switchToMainMenu();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         tableRefresher.setUserDtoList(userDtoList);
         tableRefresher.setUsers_table(users_table);
@@ -79,7 +88,7 @@ public class OnlineModeController implements Initializable {
         col_draws.setCellValueFactory(new PropertyValueFactory<>("draws"));
 
         GameInvitationReceiver gameInvitationReceiver = new GameInvitationReceiver();
-            gameInvitationReceiver.startThread();
+        gameInvitationReceiver.startThread();
 
         GameStartThread gameStartThread = new GameStartThread();
         gameStartThread.startThread();
