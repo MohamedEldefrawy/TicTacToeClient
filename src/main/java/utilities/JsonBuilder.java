@@ -47,6 +47,7 @@ public class JsonBuilder {
         sendInvitation.addProperty("player2", gameInvitationDto.getOpponentUserName());
         return sendInvitation.toString();
     }
+
     public static String sendPlayerMove(PlayerMoveDto playerMoveDto) {
         JsonObject sendPlayerMove = new JsonObject();
         sendPlayerMove.addProperty("operation", RequestTypes.playerMove.toString());
@@ -58,11 +59,17 @@ public class JsonBuilder {
         return sendPlayerMove.toString();
     }
 
-    public static String sendSaveGame(SaveGameDto saveGameDto) {
+    public static String sendSaveGame(SaveGameRequestDto saveGameDto) {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("operation", RequestTypes.saveGame.toString());
-        jsonObject.addProperty("requesterName", saveGameDto.getUsername());
-        jsonObject.addProperty("gameId", saveGameDto.getGameId());
+        jsonObject.addProperty("operation", RequestTypes.SaveGameInvitation.toString());
+        jsonObject.addProperty("opponentName", saveGameDto.getOpponentName());
+        return jsonObject.toString();
+    }
+
+    public static String sendSaveGameResponse(SaveGameResponseDto saveGameResponse) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("operation", RequestTypes.SaveGameInvitationResponse.toString());
+        jsonObject.addProperty("answer", saveGameResponse.isAnswer());
         return jsonObject.toString();
     }
 

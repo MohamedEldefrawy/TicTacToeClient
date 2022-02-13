@@ -31,17 +31,19 @@ public class GameInvitationReceiver {
                 if (singleton.getGameInvitationDto() != null) {
 
                     Platform.runLater(() -> {
-                        Alert alert = AlertsGenerator
-                                .createGameInvitationDialog(singleton.getGameInvitationDto().getOpponentName());
-                        singleton.setGameInvitationDto(null);
-                        Optional<ButtonType> result = alert.showAndWait();
-                        if (result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
-                            gameInvitationAnswerDto.setAnswer(true);
-                            singleton.getConnectionHandler().sendGameInvitationAnswer(gameInvitationAnswerDto);
-                            exit = true;
-                        } else {
-                            gameInvitationAnswerDto.setAnswer(false);
-                            singleton.getConnectionHandler().sendGameInvitationAnswer(gameInvitationAnswerDto);
+                        if (singleton.getGameInvitationDto() != null) {
+                            Alert alert = AlertsGenerator
+                                    .createGameInvitationDialog(singleton.getGameInvitationDto().getOpponentName());
+                            singleton.setGameInvitationDto(null);
+                            Optional<ButtonType> result = alert.showAndWait();
+                            if (result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
+                                gameInvitationAnswerDto.setAnswer(true);
+                                singleton.getConnectionHandler().sendGameInvitationAnswer(gameInvitationAnswerDto);
+                                exit = true;
+                            } else {
+                                gameInvitationAnswerDto.setAnswer(false);
+                                singleton.getConnectionHandler().sendGameInvitationAnswer(gameInvitationAnswerDto);
+                            }
                         }
                     });
                 }

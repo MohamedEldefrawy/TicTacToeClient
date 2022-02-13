@@ -66,12 +66,17 @@ public class ConnectionHandler {
         }
     }
 
-    public void sendSaveGame(SaveGameDto saveGameDto) {
+    public void sendSaveGame(SaveGameRequestDto saveGameDto) {
         if (socket.isConnected()) {
             gameService.sendSaveGame(saveGameDto, writer);
         }
     }
 
+    public void sendSaveGameResponse(SaveGameResponseDto saveGameResponseDto) {
+        if (socket.isConnected()) {
+            gameService.sendSaveGameResponse(saveGameResponseDto, writer);
+        }
+    }
 
     public void sendLogoutRequest(LogoutUserDto logoutUserDto) {
         if (socket.isConnected()) {
@@ -161,6 +166,11 @@ public class ConnectionHandler {
                         });
                         selectedButton.fire();
                     });
+                }
+                case "receiveSaveGameInvitation" -> {
+                    SaveGameRequestDto saveGameRequestDto = new SaveGameRequestDto();
+                    saveGameRequestDto.setOpponentName(response.get("opponentName").getAsString());
+                    singleton.setSaveGameRequestDto(saveGameRequestDto);
                 }
             }
     }

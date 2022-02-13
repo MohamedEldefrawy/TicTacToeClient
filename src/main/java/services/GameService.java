@@ -27,7 +27,7 @@ public class GameService {
     }
 
 
-    public void sendPlayerMove (PlayerMoveDto playerMoveDto, DataOutputStream writer) {
+    public void sendPlayerMove(PlayerMoveDto playerMoveDto, DataOutputStream writer) {
         String request = JsonBuilder.sendPlayerMove(playerMoveDto);
         try {
             writer.writeUTF(request);
@@ -36,8 +36,17 @@ public class GameService {
         }
     }
 
-    public void sendSaveGame(SaveGameDto saveGameDto, DataOutputStream writer) {
+    public void sendSaveGame(SaveGameRequestDto saveGameDto, DataOutputStream writer) {
         String request = JsonBuilder.sendSaveGame(saveGameDto);
+        try {
+            writer.writeUTF(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendSaveGameResponse(SaveGameResponseDto saveGameResponseDto, DataOutputStream writer) {
+        String request = JsonBuilder.sendSaveGameResponse(saveGameResponseDto);
         try {
             writer.writeUTF(request);
         } catch (IOException e) {

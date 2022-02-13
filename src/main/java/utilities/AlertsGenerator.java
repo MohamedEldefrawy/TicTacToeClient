@@ -42,4 +42,16 @@ public class AlertsGenerator {
         return alertDialog;
 
     }
+
+    public static Alert createSaveGameInvitationDialog(String opponentName) {
+        Alert alertDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        alertDialog.setContentText("");
+        alertDialog.setTitle("Confirmation");
+        alertDialog.setHeaderText(opponentName + " is request to record the game");
+        ButtonType buttonTypeYes = new ButtonType("Accept", ButtonBar.ButtonData.OK_DONE);
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alertDialog.getButtonTypes().setAll(buttonTypeYes, buttonTypeCancel);
+        return alertDialog;
+    }
 }

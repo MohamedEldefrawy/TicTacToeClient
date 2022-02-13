@@ -3,13 +3,14 @@ package controllers;
 import com.client.client.HelloApplication;
 import com.jfoenix.controls.JFXButton;
 import controllers.threads.PlayerMoveListener;
+import controllers.threads.SaveGameRequestReceiver;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import model.Dtos.gameDtos.FinishGameDto;
 import model.Dtos.gameDtos.PlayerMoveDto;
-import model.Dtos.gameDtos.SaveGameDto;
+import model.Dtos.gameDtos.SaveGameRequestDto;
 import utilities.Singleton;
 
 import java.io.IOException;
@@ -72,6 +73,9 @@ public class OnlineGameBoardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        SaveGameRequestReceiver saveGameRequestReceiver = new SaveGameRequestReceiver();
+        saveGameRequestReceiver.startThread();
+
         checkThread = new Thread(() -> {
             while (true) {
                 Platform.runLater(this::check);
@@ -91,11 +95,9 @@ public class OnlineGameBoardController implements Initializable {
         playerMoveListener.startThread();
 
         btnRecord.setOnAction(actionEvent -> {
-            SaveGameDto saveGameDto = new SaveGameDto();
-            saveGameDto.setUsername(singleton.getCurrentUserDto().getUserName());
-            saveGameDto.setGameId(singleton.getCreatedGameDto().getGameId());
+            SaveGameRequestDto saveGameDto = new SaveGameRequestDto();
+            saveGameDto.setOpponentName(singleton.getCurrentUserDto().getUserName());
             singleton.getConnectionHandler().sendSaveGame(saveGameDto);
-
         });
 
         if (singleton.getCreatedGameDto().getPlayerX().equals(singleton.getCurrentUserDto().getUserName())) {
@@ -217,6 +219,7 @@ public class OnlineGameBoardController implements Initializable {
         FinishGameDto finishGameDto = new FinishGameDto();
         finishGameDto.setFinished(true);
         finishGameDto.setWinnerName(playerName);
+
         if (singleton.getCreatedGameDto() != null) {
             finishGameDto.setGameId(singleton.getCreatedGameDto().getGameId());
             singleton.getConnectionHandler().sendFinishGameRequest(finishGameDto);
@@ -240,9 +243,11 @@ public class OnlineGameBoardController implements Initializable {
 
     public void playerWins(String playerName) {
         try {
-            sendWinnerRequest(playerName);
-            gameState = false;
-            stage.switchToWinOnline();
+            if (gameState) {
+                sendWinnerRequest(playerName);
+                gameState = false;
+                stage.switchToWinOnline();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -250,9 +255,12 @@ public class OnlineGameBoardController implements Initializable {
 
     public void opponentWins(String playerName) {
         try {
-            sendWinnerRequest(playerName);
-            stage.switchToLoseOnline();
-            gameState = false;
+            if (gameState) {
+                sendWinnerRequest(playerName);
+                stage.switchToLoseOnline();
+                gameState = false;
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

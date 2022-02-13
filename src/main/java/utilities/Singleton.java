@@ -18,6 +18,25 @@ public class Singleton {
     private String senderName;
     private ReceiveGameInvitationDto gameInvitationDto;
     private GameInvitationAnswerDto gameInvitationAnswerDto;
+    private SaveGameResponseDto saveGameResponseDto;
+    private SaveGameRequestDto saveGameRequestDto;
+
+    public SaveGameResponseDto getSaveGameResponseDto() {
+        return saveGameResponseDto;
+    }
+
+    public void setSaveGameResponseDto(SaveGameResponseDto saveGameResponseDto) {
+        this.saveGameResponseDto = saveGameResponseDto;
+    }
+
+    public SaveGameRequestDto getSaveGameRequestDto() {
+        return saveGameRequestDto;
+    }
+
+    public void setSaveGameRequestDto(SaveGameRequestDto saveGameRequestDto) {
+        this.saveGameRequestDto = saveGameRequestDto;
+    }
+
     private CreatedGameDto createdGameDto;
     private PlayerMoveDto playerMoveDto;
     private ReceivePlayerMoveDto receivePlayerMoveDto;
