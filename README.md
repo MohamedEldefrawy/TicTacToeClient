@@ -48,6 +48,9 @@ We are using normal java naming convention for declaring
     - login.
     - SignUp.
     - logout.
+    - Playing Offline vs Computer with three diffrent diffculties
+    - PVP mode
+    - Record game
 
 [//]: # (  - play with pc with 3 difficulty levels)
 
