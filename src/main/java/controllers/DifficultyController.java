@@ -13,12 +13,13 @@ public class DifficultyController implements Initializable {
     public Button mediumBtn;
     public Button hardBtn;
     public Button btnEasy;
+    public Button backBtn1;
 
     public void hardBtnOnClick(ActionEvent e)
     {
         HelloApplication obj=new HelloApplication();
         try {
-            obj.switchToGameBoard(e);
+            obj.switchToHardGameBoard();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -27,7 +28,7 @@ public class DifficultyController implements Initializable {
     {
         HelloApplication obj=new HelloApplication();
         try {
-            obj.switchToGameBoard(e);
+            obj.switchToMediumGameBoard();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -36,7 +37,16 @@ public class DifficultyController implements Initializable {
     {
         HelloApplication obj=new HelloApplication();
         try {
-            obj.switchToGameBoard(e);
+            obj.switchToEasyGameBoard();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void backBtnOnClick(ActionEvent e)
+    {
+        HelloApplication obj = new HelloApplication();
+        try {
+            obj.switchToMainMenu();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -47,6 +57,6 @@ public class DifficultyController implements Initializable {
         btnEasy.setOnAction(actionEvent -> btnEasyOnClick(actionEvent));
         mediumBtn.setOnAction(actionEvent -> mediumBtnOnClick(actionEvent));
         hardBtn.setOnAction(actionEvent -> hardBtnOnClick(actionEvent));
-
+        backBtn1.setOnAction(actionEvent -> backBtnOnClick(actionEvent));
     }
 }

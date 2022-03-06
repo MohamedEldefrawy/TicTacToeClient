@@ -5,9 +5,11 @@ module com.client.client {
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
     requires com.google.gson;
+    requires com.jfoenix;
 
     opens com.client.client to javafx.fxml;
     exports com.client.client;
     exports controllers;
+    exports model.Dtos.userDtos;
     opens controllers to javafx.fxml;
 }

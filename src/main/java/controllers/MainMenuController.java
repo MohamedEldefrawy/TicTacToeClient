@@ -1,7 +1,7 @@
 package controllers;
 
 import com.client.client.HelloApplication;
-import javafx.event.ActionEvent;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -16,9 +16,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static javafx.application.Platform.exit;
 
-public class MainMenuController implements Initializable
-{
+
+public class MainMenuController implements Initializable {
     public Button btnSinglePlayer;
     public Button btnMultiPlayer;
     public Button btnLoadGame;
@@ -27,19 +28,36 @@ public class MainMenuController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        singleton = Singleton.getInstance();
-        btnSinglePlayer.setOnAction(this::btnSinglePlayerClicked);
 
-        btnMultiPlayer.setOnAction(actionEvent -> {
-            HelloApplication obj = new HelloApplication();
-            try {
-                obj.switchToDifficulty(actionEvent);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        Platform.runLater(() -> {
+            btnMultiPlayer.setOnAction(actionEvent -> {
+
+                singleton.setConnectionHandler();
+
+                if (!singleton.getServerStatus()) {
+                    singleton.getConnectionHandler().refreshConnection();
+                }
+
+                if (singleton.getServerStatus()) {
+                    HelloApplication obj = new HelloApplication();
+                    try {
+                        obj.switchToLoginScene();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    singleton.setServerStatus(true);
+                } else {
+                    AlertsGenerator.createWarningDialog().show();
+                    singleton.setServerStatus(false);
+                }
+            });
         });
 
+
+        singleton = Singleton.getInstance();
+
         HelloApplication.getStage().setOnCloseRequest(event -> {
+            event.consume();
             Alert alertDialog;
             alertDialog = AlertsGenerator.createConfirmationDialog();
             Optional<ButtonType> result = alertDialog.showAndWait();
@@ -47,9 +65,9 @@ public class MainMenuController implements Initializable
             if (result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
                 LogoutUserDto logoutUserDto = new LogoutUserDto();
                 logoutUserDto.setStatus(false);
-                logoutUserDto.setUserName(singleton.getCurrentUser());
 
-                if (singleton.getCurrentUser() != null) {
+                if (singleton.getCurrentUserDto() != null) {
+                    logoutUserDto.setUserName(singleton.getCurrentUserDto().getUserName());
                     singleton.getConnectionHandler().sendLogoutRequest(logoutUserDto);
                     singleton.getConnectionHandler().closeConnection();
                 }
@@ -60,16 +78,19 @@ public class MainMenuController implements Initializable
             }
         });
 
-        /*btnLoadGame.setOnAction(actionEvent -> {
+        btnSinglePlayer.setOnAction(actionEvent -> {
             HelloApplication obj = new HelloApplication();
-            try{
-                obj.switchToOnlineMenuScene(actionEvent);
+            try {
+                obj.switchToDifficulty();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
+        btnExit.setOnAction(actionEvent -> exit());
+    }
+}
 
-        btnExit.setOnAction(actionEvent -> {
+   /*  btnExit.setOnAction(actionEvent -> {
             HelloApplication obj = new HelloApplication();
             try{
                 obj.switchToOnlineScene(actionEvent);
@@ -77,28 +98,8 @@ public class MainMenuController implements Initializable
                 e.printStackTrace();
             }
         });*/
-    }
-
-    public void btnSinglePlayerClicked(ActionEvent actionEvent) {
-        singleton.setConnectionHandler();
-
-        if (!singleton.getServerStatus()) {
-            singleton.getConnectionHandler().refreshConnection();
-        }
-
-        if (singleton.getServerStatus()) {
-            HelloApplication obj = new HelloApplication();
-            try {
-                obj.switchToLoginScene(actionEvent);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            singleton.setServerStatus(true);
-        } else {
-            AlertsGenerator.createWarningDialog().show();
-            singleton.setServerStatus(false);
-        }
-    }
 
 
-}
+
+
+

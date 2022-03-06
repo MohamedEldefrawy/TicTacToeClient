@@ -1,6 +1,7 @@
 package controllers;
 
 import com.client.client.HelloApplication;
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,6 +23,7 @@ public class LogInController implements Initializable {
     public TextField userTextField;
     public PasswordField passTextField;
     public Label checkLabel;
+    public JFXButton btnhome;
     private Singleton singleton;
 
 
@@ -30,9 +32,18 @@ public class LogInController implements Initializable {
         singleton = Singleton.getInstance();
         singleton.setConnectionHandler();
 
-
+        btnhome.setOnAction(actionEvent -> backBtnOnClick(actionEvent));
         btnSignIn.setOnAction(this::btnSignInClicked);
         btnSignUp.setOnAction(this::btnSignUpClicked);
+    }
+
+    public void backBtnOnClick(ActionEvent e) {
+        HelloApplication obj = new HelloApplication();
+        try {
+            obj.switchToMainMenu();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void btnSignInClicked(ActionEvent e) {
@@ -40,6 +51,7 @@ public class LogInController implements Initializable {
             System.out.println("Singleton status from login" + singleton.getConnectionHandler());
         else
             System.out.println("connectionHandler is null");
+
         LoginUserDto loginUserDto = new LoginUserDto();
         loginUserDto.setUserName(userTextField.getText());
         loginUserDto.setPassword(passTextField.getText());
@@ -55,30 +67,29 @@ public class LogInController implements Initializable {
 
         singleton.getConnectionHandler().sendLoginRequest(loginUserDto);
 
-        while (!singleton.getLoginStatus()) {
+        while (singleton.getCurrentUserDto() == null) {
             // Show Spinner
             System.out.println("Stuck!!!!!!");
         }
 
-        if (singleton.getLoginStatus()) {
+        if (singleton.getCurrentUserDto().isLoggedIn()) {
             HelloApplication obj = new HelloApplication();
             try {
-                obj.switchToGameFirstScene(e);
-                singleton.setCurrentUser(loginUserDto.getUserName());
-                singleton.setLoginStatus(true);
+                singleton.getCurrentUserDto().setLoggedIn(true);
+                System.out.println("current user " + singleton.getCurrentUserDto().getUserName());
+                obj.switchToOnlineMenuScene();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         } else {
             System.out.println("Wrong username or password");
-            singleton.setLoginStatus(false);
         }
     }
 
     public void btnSignUpClicked(ActionEvent e) {
         HelloApplication obj = new HelloApplication();
         try {
-            obj.switchToSignUpScene(e);
+            obj.switchToSignUpScene();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

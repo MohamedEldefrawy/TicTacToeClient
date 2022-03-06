@@ -3,5 +3,10 @@ package utilities;
 public enum RequestTypes {
     login,
     logout,
-    signUp
+    signUp,
+    invitation,
+    playerMove,
+    SaveGameInvitation,
+    SaveGameInvitationResponse,
+    gameFinished
 }

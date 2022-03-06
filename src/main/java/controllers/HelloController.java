@@ -20,8 +20,10 @@ public class HelloController implements Initializable {
         // welcomeText.setText("Hello World !!!!");
         HelloApplication obj = new HelloApplication();
         try {
-            obj.switchToLoginScene(e);
-        }catch (IOException ex){ex.printStackTrace();}
+            obj.switchToLoginScene();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override

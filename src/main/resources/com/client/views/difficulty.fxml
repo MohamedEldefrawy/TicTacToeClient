@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a0049;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DifficultyController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a0049;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DifficultyController">
     <children>
         <Text fill="WHITE" layoutX="158.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Dificulty">
             <font>
@@ -16,17 +16,17 @@
             </font>
         </Text>
         <Line endX="100.0" fill="#ebe121" layoutX="268.0" layoutY="124.0" startX="-100.0" stroke="#ebe121" />
-        <Button fx:id="btnEasy" alignment="CENTER" layoutX="154.0" layoutY="161.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="263.0" style="-fx-background-color: ebe121; -fx-border-radius: 30;" text="Easy ">
+        <Button fx:id="btnEasy" alignment="CENTER" layoutX="154.0" layoutY="161.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="263.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Easy ">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Button>
-        <Button fx:id="mediumBtn" alignment="CENTER" layoutX="154.0" layoutY="233.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="263.0" style="-fx-background-color: a71347; -fx-border-radius: 30;" text="Medium">
+        <Button fx:id="mediumBtn" alignment="CENTER" layoutX="154.0" layoutY="233.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="263.0" style="-fx-background-color: a71347; -fx-background-radius: 30;" text="Medium">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Button>
-        <Button fx:id="hardBtn" alignment="CENTER" layoutX="154.0" layoutY="309.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="263.0" style="-fx-background-color: ebe121; -fx-border-radius: 30;" text="Hard">
+        <Button fx:id="hardBtn" alignment="CENTER" layoutX="154.0" layoutY="309.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="263.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Hard">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
@@ -46,5 +46,10 @@
                 <Image url="@../images/hard.png" />
             </image>
         </ImageView>
+      <Button fx:id="backBtn1" alignment="CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="108.0" style="-fx-background-color: ebe121; -fx-background-radius: 30;" text="Back">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
     </children>
 </Pane>
