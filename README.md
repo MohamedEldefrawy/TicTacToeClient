@@ -8,6 +8,7 @@ TicTacToe Client project
     - [GIF](#GIF)
 - [My process](#my-process)
     - [Built with](#built-with)
+- [Features](#features)
 - [Author](#authors)
 
 ## Overview
@@ -35,11 +36,33 @@ TicTacToe Client project
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Built with
+## Features
 
+- Client Side Features:
+    - login.
+    - SignUp.
+    - logout.
+    - Playing Offline vs Computer with three diffrent diffculties
+    - PVP mode
+
+[//]: # (  - play with pc with 3 difficulty levels)
+
+[//]: # (  - play with online friends)
+
+[//]: # (  - chat while playing)
+
+[//]: # (  - have an avatar and score level)
+
+[//]: # (  - see who has the highest score in the game)
+
+[//]: # (  - see who is online offline or busy playing with someone else)
+
+## Built with
+
+- **[JafaFx](https://openjfx.io/)**
 - Material design library **[JFoenix](http://www.jfoenix.com/)**
 - Dependency manger **[Maven](https://maven.apache.org/)**
-- MySql  **[MySql](https://dev.mysql.com/downloads/connector/j/)**
+- **[MySql](https://dev.mysql.com/downloads/connector/j/)**
 - Java Serialization/Deserialization library **[Gson](https://github.com/google/gson)**
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -50,6 +73,3 @@ TicTacToe Client project
 * LinkedIn - [Mohamed Emad](https://www.linkedin.com/in/mohamed-emad-528570b1)
 * LinkedIn - [Mahitab Mohsen](https://www.linkedin.com/in/mahitab-mohsen-5446401bb/)
 * LinkedIn - [Abdorrahman Ramadan](https://www.linkedin.com/in/abdorrahman-ramadan-696498161/)
-*
-
-<p align="right">(<a href="#top">back to top</a>)</p>
