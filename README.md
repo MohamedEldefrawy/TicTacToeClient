@@ -31,6 +31,7 @@ TicTacToe Client project
     4. open cmd and type ```mvn --version``` to test maven
 3. open terminal in intellij and use ```mvn install```
 4. make sure you are using JDK17
+5. go to /src/main/resources/Deployment and run ``` java -jar Client.jar ```
 
 ## Development
 
@@ -45,7 +46,6 @@ TicTacToe Client project
     1. command ```git checkout Development```
 4. Lat step clone the Development branch to your local Development branch
     1. command ```git pull origin Development```
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Features
