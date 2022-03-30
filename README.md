@@ -55,7 +55,7 @@ TicTacToe Client project
     - SignUp.
     - logout.
     - Playing Offline vs Computer with three diffrent diffculties
-    - PVP mode
+    - PVP mode Via Network
 
 [//]: # (  - play with pc with 3 difficulty levels)
 
